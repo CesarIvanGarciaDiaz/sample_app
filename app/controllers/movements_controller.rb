@@ -25,10 +25,10 @@ class MovementsController < ApplicationController
 
     def update
       @movement=Movement.find(params[:id])
-      if @movement.update_attributes(account_params)
+      if @movement.update_attributes(movement_params)
       @movement.save
-        flash[:success] = "Account was successfully updated."
-        render 'home'
+        flash[:success] = "movement was successfully updated."
+      redirect_to user_account_movements_path
       else
         render 'edit'
       end
