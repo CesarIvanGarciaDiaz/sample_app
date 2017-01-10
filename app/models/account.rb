@@ -1,5 +1,6 @@
 class Account < ApplicationRecord
-  validates :name , presence: true
   has_many :movements
-  has_many :users,through: :movements
+  has_many :users, through: :movements
+
+  validates :name , presence: true
 end
