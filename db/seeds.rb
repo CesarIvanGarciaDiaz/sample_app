@@ -5,6 +5,10 @@ User.create!(name:  "Vlad Inquisidor",
              admin: true)
 
 
+  Category.create!(name: "inversion")
+  Account.create!(name: "Banco")
+  Account.create!(name: "Paypal")
+
 # 99.times do |n|
 #   name  = Faker::Name.name
 #   email = "example-#{n+1}@railstutorial.org"

@@ -18,7 +18,6 @@ class MovementsController < ApplicationController
       if @movement.save
         flash[:success] = "Creado Correctamente"
         redirect_to user_account_movements_path()
-
       else
         render 'new'
       end
