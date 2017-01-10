@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  concepto_de_pago: MyString
+  reference: MyString
+  date: 2017-01-10
+  detail: MyString
+
+two:
+  concepto_de_pago: MyString
+  reference: MyString
+  date: 2017-01-10
+  detail: MyString
