@@ -1,14 +1,65 @@
-<div class="center jumbotron">
-  <h1>Welcome to the Sample App</h1>
+<style media="screen">
+  body{
+  /*background-image: url("http://www.centrofacturador.com.mx/images/facturacion%20electronica.jpg");*/
+  background-size: cover;
+  padding-top: 4%;
+  }
+.jumbotron{
+font-family: sans-serif;
+background-color:#61AEDF!important;
+color: white;
+border-radius: 5px!important;
 
-  <h2>
-    This is the home page for the
-    <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
-<!-- <a href="#" class="btn btn-lg btn-primary">Sign up now!</a> -->
-   <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+}
+
+
+</style>
+
+<div class="center jumbotron">
+  <h1 style="">Sistema Contable CodeaCamp</h1>
+  <br>
+
 </div>
 
-<%= link_to image_tag("rails.png", alt: "Rails logo"),
-            'http://rubyonrails.org/' %>
+<script src="Chart.js"></script>
+
+<div id="canvas-holder" class="center"style="padding-top:15px;">
+
+<canvas id="chart-area4" width="350" height="100"></canvas>
+</div>
+<script>
+
+		var lineChartData = {
+			labels : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio"],
+			datasets : [
+				{
+					label: "Primera serie de datos",
+					fillColor : "rgba(220,220,220,0.2)",
+					strokeColor : "#6b9dfa",
+					pointColor : "#1e45d7",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(220,220,220,1)",
+					data : [90,30,10,80,15,5,15]
+				},
+				{
+					label: "Segunda serie de datos",
+					fillColor : "rgba(151,187,205,0.2)",
+					strokeColor : "#e9e225",
+          // amarillo
+					pointColor : "#faab12",
+          //naranja
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(151,187,205,1)",
+          //azul
+					data : [40,50,70,40,85,55,15]
+				}
+			]
+
+		}
+
+var ctx4 = document.getElementById("chart-area4").getContext("2d");
+
+window.myPie = new Chart(ctx4).Line(lineChartData, {responsive:true});
+</script>
