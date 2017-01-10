@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
-  has_many :movements
- has_many :accounts , through: :movements
+ has_many :movements
+ has_many :accounts, through: :movements
 
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
