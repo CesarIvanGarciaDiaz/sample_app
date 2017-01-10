@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+
+  resources :users do
+    resources :accounts
+#do
+      # resources :movements#, shallow: true
+    # end
+end
+
+  # post  'account',  to: 'accounts#index'
+  post  '/users/1/accounts/new',  to: 'accounts#create'
+  # get 'sessions/new'
+  post '/users/:user_id/accounts/:id/edit',  to: 'accounts#edit'
+
+
   get 'sessions/new'
 
   # get 'users/new'
