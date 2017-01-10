@@ -12,11 +12,21 @@ Account.create(name:"Banco")
 Account.create(name:"Caja Chica")
 Account.create(name:"Pagos")
 
-Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Abono de coppel", reference: "1212", date: "2012/06/12", detail: "Pago de deudas")
-Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Compra en amazon", reference: "1313", date: "2012/06/13", detail: "---")
+FinancialStatement.create(account_id: 1, withdrawal: 0, deposit: 100, balance: 100)
+# FinancialStatement.first.account
 
-Movement.create(user_id: 1, account_id: 2, concepto_de_pago: "Transferencia bancaria", reference: "Sin Referencia", date: "27/04/16", detail: "envio de dinero a Jose Jose")
-Movement.create(user_id: 1, account_id: 2, concepto_de_pago: "Compra en tienda digital", reference: "Sin Referencia", date: "05/05/16", detail: "unos discos")
+Category.create(name: "compras")
+Category.create(name: "transferencias")
+Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Abono de coppel", reference: "1212", date: "2012/06/12", detail: "Pago de deudas", category_id: 2)
+Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Fiesta en bar", reference: "1212", date: "2012/06/15", detail: "Pago por fiesta", category_id: 2)
+Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Compra en amazon", reference: "1313", date: "2012/06/13", detail: "---", category_id: 1)
+Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Compra en linio", reference: "1313", date: "2012/06/17", detail: "---", category_id: 1)
+
+Movement.create(user_id: 1, account_id: 2, concepto_de_pago: "Transferencia bancaria", reference: "Sin Referencia", date: "27/04/16", detail: "envio de dinero a Jose Jose", category_id: 2)
+Movement.create(user_id: 1, account_id: 2, concepto_de_pago: "Compra en tienda digital", reference: "Sin Referencia", date: "05/05/16", detail: "unos discos", category_id: 1)
+
+MovementDefined.create(movement_id: 1, detail: "Pago por tv 4k", total_amount: 90600, comission: 0)
+MovementDefined.create(movement_id: 1, detail: "Lavadora 19'", total_amount: 10300, comission: 0)
 
 # $ rails console
 # User.first.accounts.find(1)
@@ -37,8 +47,6 @@ Movement.create(user_id: 1, account_id: 2, concepto_de_pago: "Compra en tienda d
 # Account.first.movements
 	#<ActiveRecord::Associations::CollectionProxy [#<Movement id: 1, user_id: 1, account_id: 1, concepto_de_pago: "Abono de coppel", reference: "1212", date: "2012-06-12", detail: "Pago de deudas">,
 	#<Movement id: 2, user_id: 1, account_id: 1, concepto_de_pago: "Compra en amazon", reference: "1313", date: "2012-06-13", detail: "---">]>
-
-  # Category.create!(name: "inversion")
 
 
 # 99.times do |n|
