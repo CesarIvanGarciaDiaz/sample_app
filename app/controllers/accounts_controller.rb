@@ -28,7 +28,7 @@ class AccountsController < ApplicationController
     if @account.update_attributes(account_params)
     @account.save
       flash[:success] = "Account was successfully updated."
-      render 'home'
+    redirect_to user_accounts_path(session[:user_id])
     else
       render 'edit'
     end

@@ -26,8 +26,9 @@ h1{
 }
 </style>
 <p id="notice"><%= notice %></p>
-<h1>Movimientos de ...</h1>
 
+
+<h1>Movimientos de <%= params[:account_name]%></h1>
 <table class="table table-striped table-hover ">
   <thead>
     <tr class="success">
@@ -35,9 +36,8 @@ h1{
       <th>Reference</th>
       <th>Date</th>
       <th>Detail</th>
-      <th>Category</th>
       <th>Cuenta</th>
-<th>User ID</th>
+<th>User ID</th>  
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -51,7 +51,7 @@ h1{
         <td><%= movement.detail %></td>
         <td><%= movement.account_id %></td>
         <td><%= movement.user_id %></td>
-        <td><%= link_to 'Edit', edit_user_account_movement_path(session[:user_id],:account_id,movement.id) ,class:"btn btn-raised btn-info" %></td>
+        <td><%= link_to 'Edit', edit_user_account_movement_path(session[:user_id],params[:account_id],movement.id) ,class:"btn btn-raised btn-info" %></td>
         <td><%= link_to 'Destroy', user_account_movement_path(session[:user_id],:account_id,movement.id),class:"btn btn-raised btn-warning", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
 
