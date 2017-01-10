@@ -1,0 +1,2 @@
+class FinancialStatement < ApplicationRecord
+end
