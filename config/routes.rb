@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   post  '/users/:user_id/accounts/new',  to: 'accounts#create'
   post  '/users/:user_id/accounts/:account_id/movements/new',  to: 'movements#create'
   # get 'sessions/new'
-  post '/users/:user_id/accounts/:account_id/edit',  to: 'accounts#edit'
-post '/users/:user_id/accounts/:account_id/movements/:id/edit',  to: 'movements#edit'
+  # post '/users/:user_id/accounts/:account_id/movements/:id/edit',  to: 'accounts#edit'
+  #post '/users/:user_id/accounts/:account_id/movements/:id/edit',  to: 'movements#edit'
 
 
   get 'sessions/new'
