@@ -35,9 +35,10 @@ h1{
       <th>Concepto de pago</th>
       <th>Reference</th>
       <th>Date</th>
+      <th>Month</th>
       <th>Detail</th>
       <th>Cuenta</th>
-<th>User ID</th>  
+      <th>User ID</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -48,6 +49,8 @@ h1{
         <td><%= movement.concepto_de_pago %></td>
         <td><%= movement.reference %></td>
         <td><%= movement.date %></td>
+        <td><% t=movement.date %><%= t.strftime("%b")%>
+<%= t.strftime("%Y") %></td>
         <td><%= movement.detail %></td>
         <td><%= movement.account_id %></td>
         <td><%= movement.user_id %></td>
