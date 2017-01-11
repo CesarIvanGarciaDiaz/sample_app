@@ -16,7 +16,7 @@
 //= require bootstrap-material-design
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap-modal
+
 
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/core

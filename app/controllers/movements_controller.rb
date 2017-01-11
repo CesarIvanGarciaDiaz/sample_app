@@ -45,4 +45,13 @@ class MovementsController < ApplicationController
   private
   def movement_params
     params.require(:movement).permit(:account_id, :user_id, :concepto_de_pago, :reference, :date, :detail, :category_id)
-end
+  end
+
+  private
+
+  def require_login
+    unless current_user
+    flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
+  end
