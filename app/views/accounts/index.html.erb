@@ -12,14 +12,12 @@
 <div class="social">
 
 <div class='front'>
-<%= account.name%>
+ <%= render "row", account: account %>
 </div>
 <div class='back'>
-<%= link_to account.name, user_account_movements_path(session[:user_id],account.id),class:"btn btn",style:"width:200px;height:50px;margin-top:-3px;margin-left:0px;padding:15% 25%; background-color: white;"%>
-<%= link_to 'Edit',edit_user_account_path(session[:user_id],account.id) ,class:"btn btn-raised btn-success" %>
-<%= link_to 'Destroy',user_account_path(session[:user_id],account.id),class:"btn btn-raised btn-warning " ,style:"background-color: #F44336!important;", method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to account.name, user_account_movements_path(current_user,account.id),class:"btn btn",style:"width:200px;height:50px;margin-top:-3px;margin-left:0px;padding:15% 25%; background-color: white;"%>
+<%= link_to 'Edit',edit_user_account_path(current_user,account.id) ,remote: true,class:"btn btn-raised btn-success" %>
+<%= link_to 'Destroy',user_account_path(current_user,account.id),class:"btn btn-raised btn-warning " ,style:"background-color: #F44336!important;", method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
 </div>
 <% end %>
-
-<%= link_to 'New Account', new_user_account_path, class:'btn btn-info' %>
