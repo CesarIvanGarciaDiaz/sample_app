@@ -1,0 +1,9 @@
+<% if @movement.errors.empty? %>
+  // add the row to the table, show alert and hide modal
+  $('table tbody').append(' <%= j render "row", movement: @movement %>');
+  $('.alert-success').html("El Movimiento ha sido creado con éxito").show();
+  $('#movement-modal').modal('hide');
+<% else %>
+  // show first error
+  alert('<%= @movement.errors.full_messages[0] %>');
+<% end %>
