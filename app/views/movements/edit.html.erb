@@ -1,10 +1,4 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <div class="col-md-15">
   <div class="well bs-component">
 <%= form_for :movement, url: user_account_movement_path(@movement.id), method: :patch do |f| %>
@@ -20,11 +14,12 @@
   </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :concepto_de_pago %>
-    <%= f.text_field :concepto_de_pago ,class: 'form-control' %>
-  </div>
-  <div class="field">
+      <div class="field">
+        <%= f.label :concepto_de_pago %>
+        <%= f.text_field :concepto_de_pago ,class: 'form-control' %>
+      </div>
+
+      <div class="field">
         <%= f.label :reference %>
         <%= f.text_field :reference ,class: 'form-control' %>
       </div>
@@ -40,7 +35,10 @@
         <%= f.text_field :detail ,class: 'form-control' %>
       </div>
 
-
+    <div class="field">
+      <%= f.label "Categoria"%>
+      <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true, default: :name %>
+    </div>
 
       <div class="actions">
         <%= f.submit class: "btn btn-primary" ,value:"Guardar"%>

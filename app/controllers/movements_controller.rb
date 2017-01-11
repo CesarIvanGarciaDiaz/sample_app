@@ -1,7 +1,7 @@
 class MovementsController < ApplicationController
 
     def index
-      @movements = Movement.all
+      @movements = Account.find(params[:account_id]).movements
     end
 
     def new
@@ -44,5 +44,5 @@ class MovementsController < ApplicationController
 
   private
   def movement_params
-    params.require(:movement).permit(:concepto_de_pago, :reference, :date, :detail)
+    params.require(:movement).permit(:account_id, :user_id, :concepto_de_pago, :reference, :date, :detail, :category_id)
 end

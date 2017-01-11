@@ -1,0 +1,37 @@
+<% provide(:title, "Registro #{Time.now.year}") %>
+<h1>Resumen de movimientos realizados</h1>
+<h1><%= Time.now.strftime '%Y' %></h1>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr style="background-color: #01D59C!important;">
+      <th>Cuenta</th>
+      <th>Concepto de pago</th>
+      <th>Reference</th>
+      <th>Fecha de Pago</th>
+      <th>Mes</th>
+      <th>Category</th>
+      <th>Detalle</th>
+      <!-- mandar a llamar Financial Statement -->
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movements.each do |movement| %>
+      <tr>
+      	<td><%= Account.find(movement.account_id).name %></td>
+        <td><%= movement.concepto_de_pago %></td>
+        <td><%= movement.reference %></td>
+        <td><%= movement.date.strftime('%d/%m/%Y') %></td>
+        <!-- Esta fecha es la de cuando se registro -->
+        <td> <%= movement.date.strftime('%B %Y') %></td>
+        <!-- Crear espacio para fecha en que se reporto el retiro o deposito -->
+        <td><%= Category.find(movement.category_id).name %></td>
+        <td><%= movement.detail %></td>
+      	<!-- mandar a llamar Financial Statement -->
+
+	  </tr>
+    <% end %>
+  </tbody>
+</table>

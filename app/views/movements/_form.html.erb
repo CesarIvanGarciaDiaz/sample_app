@@ -14,23 +14,36 @@
      </ul>
    </div>
  <% end %>
-<div class="field">
-  <%= f.label :concepto_de_pago %>
-  <%= f.text_field :concepto_de_pago ,class: 'form-control' %>
-</div>
-<div class="field">
+    
+    <%= f.hidden_field :account_id, :value => params[:account_id] %>
+    <%= f.hidden_field :user_id, :value => params[:user_id] %>
+
+    <div class="field">
+      <%= f.label :concepto_de_pago %>
+      <%= f.text_field :concepto_de_pago ,class: 'form-control' %>
+    </div>
+
+    <div class="field">
       <%= f.label :reference %>
       <%= f.text_field :reference ,class: 'form-control' %>
     </div>
 
-    <div class="field">
+    <div class="input-group date">
       <%= f.label :date %>
-      <%= f.text_field :date, "data-provide" => "datepicker"%>
+
+      <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', 
+      "data-date-today-highlight" => true, "data-date-today-btn" => true %>
+
     </div>
 
     <div class="field">
       <%= f.label :detail %>
       <%= f.text_field :detail ,class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Categoria"%>
+      <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
     </div>
 
     <div class="actions">
