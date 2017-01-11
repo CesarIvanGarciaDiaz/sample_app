@@ -1,5 +1,10 @@
 class AccountsController < ApplicationController
+include SessionsHelper
 
+ before_filter :require_login
+
+
+  
   def index
     @accounts = Account.all
   end
@@ -46,10 +51,17 @@ end
     flash[:success] = "Account was successfully destroyed."
     redirect_to user_accounts_path(session[:user_id])
   end
-end
 
 private
 def account_params
   params.require(:account).permit(:name)
+end
+  
+def require_login
+  unless current_user
+  flash[:danger] = "Please log in."
+    redirect_to login_url
+  end
+end
 
 end

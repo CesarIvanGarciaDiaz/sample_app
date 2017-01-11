@@ -1,18 +1,21 @@
 Rails.application.routes.draw do
-  get 'history_movements/current_record'
-  get "/history_movements/previous_record", to: 'history_movements#previous_record'
-  get "/history_movements/previous_record/:year", to: 'history_movements#previous_record'
-  post '/history_movements/previous_record', to: 'history_movements#show'
-
-  get '/history_movements/download'
 
   resources :users do
-      resources :accounts do
-        resources :movements#, shallow: true
+    resources :accounts do
+      resources :movements
+    end
+  end
+
+  resources :users do
+    resources :history_movements do
+      collection do
+        get 'current_record'
+        get 'previous_record'
+        post 'previous_record'
       end
     end
+  end
 
-  get '/users/params[:user_id]/history', to: 'users#index'
   # post  'account',  to: 'accounts#index'
   post  '/users/:user_id/accounts/new',  to: 'accounts#create'
   post  '/users/:user_id/accounts/:account_id/movements/new',  to: 'movements#create'

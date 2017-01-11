@@ -5,56 +5,24 @@
 
 <div class="col-md-15">
 	<div class="well bs-component">
-		<%= form_for "/history_movements/previous_record" do |f| %>
+		<%= form_tag previous_record_user_history_movements_url do |f| %>
+    <!-- previous_record_user_history_movements_path -->
 
-			<%= f.label "Introduzca fechas"%>
+			<%= label_tag "Introduzca fechas"%>
 		<div class="input-group input-daterange">
-			<%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', 
-      "data-date-today-highlight" => true, "data-date-today-btn" => true, "data-date-orientation" => "bottom" %><div class="input-group-addon">to</div><%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', 
-      "data-date-today-highlight" => true, "data-date-today-btn" => true , "data-date-orientation" => "bottom"%>
+			<%= text_field_tag :year1, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true, "data-date-orientation" => "bottom"%>
+      <div class="input-group-addon">to</div>
+      <%= text_field_tag :year2, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true, "data-date-orientation" => "bottom"%>
 		</div>
+
 		<div class="actions">
-			<%= f.submit "Filtrar",class: "btn btn-primary" ,value:"Guardar"%>
+			<%= submit_tag "Filtrar",class: "btn btn-primary"%>
 		</div>
 		<% end %>
 	</div>
 </div>
-
-
-
- <h1><%= params[:year] %></h1>
-
-<table class="table table-striped table-hover ">
-  <thead>
-    <tr style="background-color: #01D59C!important;">
-      <th>Cuenta</th>
-      <th>Concepto de pago</th>
-      <th>Reference</th>
-      <th>Fecha de Pago</th>
-      <th>Mes</th>
-      <th>Category</th>
-      <th>Detalle</th>
-      
-      <!-- mandar a llamar Financial Statement -->
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movements.each do |movement| %>
-      <tr>
-      	<td><%= Account.find(movement.account_id).name %></td>
-        <td><%= movement.concepto_de_pago %></td>
-        <td><%= movement.reference %></td>
-        <td><%= movement.date.strftime('%d/%m/%Y') %></td>
- <!--        Esta fecha es la de cuando se registro -->
-        <td> <%= movement.date.strftime('%B %Y') %></td>
-        <!-- Crear espacio para fecha en que se reporto el retiro o deposito -->
-        <td><%= Category.find(movement.category_id).name %></td>
-        <td><%= movement.detail %></td>
-      	<!-- mandar a llamar Financial Statement -->
-
-	  </tr>
-    <% end %>
-  </tbody>
-</table>
- 
+<hr>
+<h1><%= params[:year1] %></h1>
+<h1>hola</h1>
+<h1><%= params[:previous_record] %></h1>
+<hr>
