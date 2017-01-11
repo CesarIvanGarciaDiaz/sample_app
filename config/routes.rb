@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users do 
+    resources :category 
+  end
+  
   resources :users do
     resources :history_movements do
       collection do
@@ -15,6 +19,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  
 
   # post  'account',  to: 'accounts#index'
   post  '/users/:user_id/accounts/new',  to: 'accounts#create'
