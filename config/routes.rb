@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+  get 'history_movements/index'
+
+  get 'history_movements/download'
+
   resources :users do
       resources :accounts do
         resources :movements#, shallow: true
       end
     end
 
+  get '/users/params[:user_id]/history', to: 'users#index'
   # post  'account',  to: 'accounts#index'
   post  '/users/:user_id/accounts/new',  to: 'accounts#create'
   post  '/users/:user_id/accounts/:account_id/movements/new',  to: 'movements#create'
