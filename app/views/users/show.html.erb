@@ -33,9 +33,9 @@
 <h1>Mas graficas</h1>
 <h1>Mas graficas</h1>
 <div class="center">
-<%= link_to "Resumen Año #{Time.now.strftime('%Y')}", history_movements_index_path, class: "btn btn-primary" %>
+<%= link_to "Resumen Año #{Time.now.strftime('%Y')}", history_movements_current_record_path, class: "btn btn-primary" %>
 
-<%= link_to "Registros  anteriores", history_movements_index_path, class: "btn btn-primary" %>
+<%= link_to "Registros  anteriores", history_movements_previous_record_path, class: "btn btn-primary" %>
 
   <%= link_to 'Crear Movimiento', user_accounts_path(@user), class: "btn btn-primary" %>
 </div>

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  get 'history_movements/index'
+  get 'history_movements/current_record'
+  get "/history_movements/previous_record", to: 'history_movements#previous_record'
+  get "/history_movements/previous_record/:year", to: 'history_movements#previous_record'
+  post '/history_movements/previous_record', to: 'history_movements#show'
 
-  get 'history_movements/download'
+  get '/history_movements/download'
 
   resources :users do
       resources :accounts do
