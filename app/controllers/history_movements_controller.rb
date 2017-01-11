@@ -6,8 +6,8 @@ class HistoryMovementsController < ApplicationController
   def previous_record
   	@movements = Movement.where('date BETWEEN ? AND ?', "#{params[:year]}-01-01", "#{params[:year]}-12-31").all
   end
-  
-  def show 
+
+  def show
 
   	@movements = Movement.where('date BETWEEN ? AND ?', "#{params[:year]}-01-01", "#{params[:year]}-12-31").all
   end

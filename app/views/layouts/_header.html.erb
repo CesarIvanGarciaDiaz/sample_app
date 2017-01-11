@@ -1,48 +1,68 @@
-<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#323131!important; >
-   <!-- style="background-color:#323131!important; -->
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <!-- <a class="navbar-brand" href="javascript:void(0)">Brand</a> -->
-<!-- <div class="" style="padding-top:0;padding-bottom:0;"> -->
-   <%= link_to image_tag("http://www.codealab.mx/assets/codeacamp_logo3-d00e28326ca4ba35c48d58af090ee7df.png", alt: "logo"), root_path, class: 'navbar-brand ' %>
+<div class="body-wrap">
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#323131!important;" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <%= link_to image_tag("http://www.codealab.mx/assets/codeacamp_logo3-d00e28326ca4ba35c48d58af090ee7df.png", alt: "logo"), root_path, class: 'navbar-brand ' %>
+                </div>
 
-<!-- <img style="width:60%;"src = "http://www.codealab.mx/assets/codeacamp_logo3-d00e28326ca4ba35c48d58af090ee7df.png" > -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <% if logged_in? %>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="material-icons" style="display: inline-flex; vertical-align: middle;font-size:33px;">account_circle</i>
+                                Cuentas Bancarias
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><%= link_to "Ver Cuentas", user_accounts_path(current_user) %></li>
+                                <li><%= link_to 'Añadir cuenta', new_user_account_path(current_user),remote: true %></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="material-icons" style="display: inline-flex; vertical-align: middle;font-size:33px;">account_circle</i>
+                                User
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><%= link_to "Profile", current_user %></li>
+                                <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                                <li class="divider"></li>
+                                <li>
+                                    <%= link_to "Log out", logout_path, method: "delete" %>
+                                </li>
+                            </ul>
+                        </li>
+
+                    <% else %>
+                        <li><%= link_to "Log in", login_path %></li>
+                        <% end %>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
     </div>
-    <div class="navbar-collapse collapse navbar-inverse-collapse">
-      <ul class="nav navbar-nav">
-        <!-- <li class="active"><a href="javascript:void(0)">Active</a></li> -->
-<!--           <li class="active"><%= link_to "Home", root_path%></li>
-        <li><a href="javascript:void(0)">Link</a></li>
-        <li><%= link_to "Help", help_path%></li> -->
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <!-- <li><a href="javascript:void(0)">Link</a></li> -->
-          <% if logged_in? %>
-
-      <li><%= link_to "Users", users_path %></li>
-        <li class="dropdown">
-
-          <a href="bootstrap-elements.html" data-target="#" style="padding-top:0;padding-bottom:0;" class="dropdown-toggle" data-toggle="dropdown"><img class=" img-circle"src="http://us.123rf.com/450wm/dxinerz/dxinerz1508/dxinerz150801860/43894805-administrador-gerente-supervisor-de-icono-vectorial-image-can-tambi-n-ser-utilizado-para-admin-salpi.jpg?ver=6">
-
-            <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Profile", current_user %></li>
-            <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-            <li class="divider"></li>
-            <li>
-              <%= link_to "Log out", logout_path, method: "delete" %>
-            </li>
-          </ul>
-        </li>
-        <% else %>
-          <li><%= link_to "Log in", login_path %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
 </div>
+
+<script type="text/javascript">
+    $('ul.nav li.dropdown').hover(function () {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+    }, function () {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+    });
+</script>

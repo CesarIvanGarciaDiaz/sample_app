@@ -15,23 +15,29 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(account_params)
-    if @account.save
-      flash[:success] = "Creado Correctamente"
-      redirect_to user_accounts_path(session[:user_id])
-    else
-      render 'new'
-    end
+     if @account.save
+     flash[:success] = "Creado Correctamente"
+     redirect_to user_accounts_path(session[:user_id])
+    # else
+    #   render 'new'
+      end
   end
 
   def update
-    @account=Account.find(params[:id])
-    if @account.update_attributes(account_params)
-    @account.save
-      flash[:success] = "Account was successfully updated."
-    redirect_to user_accounts_path(session[:user_id])
-    else
-      render 'edit'
-    end
+    # @account=Account.find(params[:id])
+    # if @account.update_attributes(account_params)
+    # @account.save
+    #   flash[:success] = "Account was successfully updated."
+    # redirect_to user_accounts_path(session[:user_id])
+    # else
+    #   render 'edit'
+    # end
+
+@account = Account.update(params[:id], account_params)
+if @account.save
+  flash[:success] = "Account was successfully updated."
+  redirect_to user_accounts_path(session[:user_id])
+end
   end
 
   def destroy

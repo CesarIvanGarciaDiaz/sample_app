@@ -14,23 +14,39 @@ class MovementsController < ApplicationController
     end
 
     def create
-      @movement = Movement.new(movement_params)
-      if @movement.save
-        flash[:success] = "Creado Correctamente"
-        redirect_to user_account_movements_path()
-      else
-        render 'new'
-      end
+      # @movement = Movement.new(movement_params)
+      # if @movement.save
+      #   flash[:success] = "Creado Correctamente"
+      #   redirect_to user_account_movements_path()
+      # else
+      #   render 'new'
+      # end
+
+
+      @movement =Movement.new(movement_params)
+       if @movement.save
+       flash[:success] = "Creado Correctamente"
+       redirect_to user_account_movements_path(current_user)
+      # else
+      #   render 'new'
+        end
     end
 
     def update
-      @movement=Movement.find(params[:id])
-      if @movement.update_attributes(movement_params)
-      @movement.save
-        flash[:success] = "movement was successfully updated."
-      redirect_to user_account_movements_path
-      else
-        render 'edit'
+      # @movement=Movement.find(params[:id])
+      # if @movement.update_attributes(movement_params)
+      # @movement.save
+      #   flash[:success] = "movement was successfully updated."
+      # redirect_to user_account_movements_path
+      # else
+      #   render 'edit'
+      # end
+
+
+      @movement = Movement.update(params[:id], movement_params)
+      if @movement.save
+        flash[:success] = "Movimiento a sido actualizado"
+        redirect_to user_account_movements_path(current_user)
       end
     end
 

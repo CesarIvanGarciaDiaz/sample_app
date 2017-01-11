@@ -16,7 +16,8 @@
 //= require bootstrap-material-design
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap-modal
+
+
 
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/core
@@ -37,4 +38,8 @@
     "checkboxElements": ".checkbox > label > input[type=checkbox]",
     "radioElements": ".radio > label > input[type=radio]"
 }
+});
+
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').focus()
 });
