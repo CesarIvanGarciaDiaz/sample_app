@@ -8,6 +8,9 @@ class CreateMovements < ActiveRecord::Migration[5.0]
       t.date :date
       t.string :detail
       t.belongs_to :category , index:true
+      t.integer :withdrawal, default: 0
+      t.integer :deposit, default: 0
+      # se debe calcular en la vista el balance 
     end
   end
 end
