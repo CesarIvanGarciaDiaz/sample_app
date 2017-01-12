@@ -18,7 +18,8 @@ Rails.application.routes.draw do
       end
     end
   end
-
+  
+  get '/download',  to: 'history_movements#download'
 
   # post  'account',  to: 'accounts#index'
   post  '/users/:user_id/accounts/new',  to: 'accounts#create'
@@ -46,7 +47,6 @@ Rails.application.routes.draw do
     get    '/login',   to: 'sessions#new'
     post   '/login',   to: 'sessions#create'
     delete '/logout',  to: 'sessions#destroy'
-
 
 
 end
