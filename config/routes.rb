@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-
   resources :users do
     resources :accounts do
       resources :movements
     end
   end
 
-  resources :users do 
-    resources :category 
+  resources :users do
+    resources :categories
   end
 
   resources :users do
@@ -24,7 +23,9 @@ Rails.application.routes.draw do
 
   # post  'account',  to: 'accounts#index'
   post  '/users/:user_id/accounts/new',  to: 'accounts#create'
+  post  '/users/:user_id/categories/new',  to: 'categories#create'
   post  '/users/:user_id/accounts/:account_id/movements/new',  to: 'movements#create'
+
   # get 'sessions/new'
   # post '/users/:user_id/accounts/:account_id/movements/:id/edit',  to: 'accounts#edit'
   #post '/users/:user_id/accounts/:account_id/movements/:id/edit',  to: 'movements#edit'

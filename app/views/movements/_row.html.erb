@@ -1,0 +1,13 @@
+<tr id="<%= movement.id %>">
+    <td><%= movement.concepto_de_pago %></td>
+    <td><%= movement.reference %></td>
+    <td><%= movement.date.strftime('%d/%m/%Y') %></td>
+    <td> <%= movement.date.strftime('%B %Y') %></td>
+    <td><%= movement.detail %></td>
+    <td><%= Category.find(movement.category_id).name %></td>
+
+    <td><%= link_to 'Editar', edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info" %></td>
+    <td><%= link_to 'Destruir', user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
+</tr>

@@ -1,5 +1,5 @@
 class MovementsController < ApplicationController
-
+ before_filter :require_login
     def index
       @movements = Account.find(params[:account_id]).movements
     end
@@ -14,14 +14,6 @@ class MovementsController < ApplicationController
     end
 
     def create
-      # @movement = Movement.new(movement_params)
-      # if @movement.save
-      #   flash[:success] = "Creado Correctamente"
-      #   redirect_to user_account_movements_path()
-      # else
-      #   render 'new'
-      # end
-
 
       @movement =Movement.new(movement_params)
        if @movement.save
@@ -33,16 +25,6 @@ class MovementsController < ApplicationController
     end
 
     def update
-      # @movement=Movement.find(params[:id])
-      # if @movement.update_attributes(movement_params)
-      # @movement.save
-      #   flash[:success] = "movement was successfully updated."
-      # redirect_to user_account_movements_path
-      # else
-      #   render 'edit'
-      # end
-
-
       @movement = Movement.update(params[:id], movement_params)
       if @movement.save
         flash[:success] = "Movimiento a sido actualizado"
@@ -62,8 +44,6 @@ class MovementsController < ApplicationController
   def movement_params
     params.require(:movement).permit(:account_id, :user_id, :concepto_de_pago, :reference, :date, :detail, :category_id)
   end
-
-  private
 
   def require_login
     unless current_user

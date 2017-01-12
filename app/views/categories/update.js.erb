@@ -1,0 +1,9 @@
+<% if @category.errors.empty? %>
+  // add the row to the table, show alert and hide modal
+  $('table tbody tr#<%= @category.id %>').replaceWith(' <%= j render "row", category: @category %>');
+  $('.alert-success').html("La categoria ha sido modificada con éxito").show();
+  $('#category-modal').modal('hide');
+<% else %>
+  // show first error
+  alert('<%= @category.errors.full_messages[0] %>');
+<% end %>
