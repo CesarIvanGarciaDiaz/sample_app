@@ -1,16 +1,26 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-
-<footer class="footer">
-  <small>
+<style media="screen">
+.footer {
+  position: fixed;
+  height: 4%;
+  bottom: 0;
+  width: 100%;
+color: white;
+background-color: #323131;
+}
+</style>
+<div class="footer navbar-fixed-bottom ">
+<div class="container center">
     Sistema Administrativo Contable</a>
     by love to the <i class="material-icons md-18">code</i> Code</a>
-  </small>
-  <nav>
-    <ul>
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "Contact", contact_path%></li>
-      <li><a href="http://google.com/">News</a></li>
-    </ul>
-  </nav>
-</footer>
+
+    <div class="navbar-right">
+
+
+    <%= link_to "About", about_path ,style:"color:white;margin:20px;"%></li>
+    <%= link_to "Contact", contact_path,style:"color:white;"%></li>
+
+  </div>
+</div>
+</div>
