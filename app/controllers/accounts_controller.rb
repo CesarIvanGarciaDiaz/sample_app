@@ -1,10 +1,8 @@
 class AccountsController < ApplicationController
-include SessionsHelper
-
  before_filter :require_login
 
 
-  
+
   def index
     @accounts = Account.all
   end
@@ -56,7 +54,7 @@ private
 def account_params
   params.require(:account).permit(:name)
 end
-  
+
 def require_login
   unless current_user
   flash[:danger] = "Please log in."

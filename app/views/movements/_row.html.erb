@@ -1,7 +1,7 @@
 <tr id="<%= movement.id %>">
     <td><%= movement.concepto_de_pago %></td>
     <td><%= movement.reference %></td>
-    <td><%= movement.date %></td>
+    <td><%= movement.date.strftime('%d/%m/%Y') %></td>
     <td> <%= movement.date.strftime('%B %Y') %></td>
     <td><%= movement.detail %></td>
     <td><%= Category.find(movement.category_id).name %></td>

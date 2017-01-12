@@ -1,0 +1,23 @@
+
+<p id="notice"><%= notice %></p>
+<h1>Seleccione la cuenta a administrar</h1>
+
+<div class="boton_creado">
+
+</div>
+
+<% @categories.each do |category| %>
+
+
+<div class="social">
+
+<div class='front'>
+ <%= render "row", category: category %>
+</div>
+<div class='back'>
+
+<%= link_to 'Edit',edit_user_category_path(current_user,category.id) ,remote: true,class:"btn btn-raised btn-success" %>
+<%= link_to 'Destroy',user_category_path(current_user,category.id),class:"btn btn-raised btn-warning " ,style:"background-color: #F44336!important;", method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+</div>
+<% end %>
