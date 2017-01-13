@@ -1,4 +1,4 @@
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 .btn{
@@ -60,11 +60,7 @@ h1{
 
   <div class="container">
   <div class="center">
-    
-  <%= link_to '<<Egreso Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>
 
-  <%= link_to '>>Ingreso Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>
-
-  <%= link_to '~ Neutro Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>
+<%= link_to 'Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>
   </div>
   </div>
