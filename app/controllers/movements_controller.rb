@@ -1,7 +1,7 @@
 class MovementsController < ApplicationController
  before_filter :require_login
     def index
-      @movements = Account.find(params[:account_id]).movements
+      @movements = Account.find(params[:account_id]).movements.order("date", "reference")
     end
 
     def new
@@ -14,6 +14,7 @@ class MovementsController < ApplicationController
     end
 
     def create
+      params[:movement][:reference] ||= "Sin refencia"
 
       @movement =Movement.new(movement_params)
        if @movement.save
@@ -42,7 +43,7 @@ class MovementsController < ApplicationController
 
   private
   def movement_params
-    params.require(:movement).permit(:account_id, :user_id, :concepto_de_pago, :reference, :date, :detail, :category_id)
+    params.require(:movement).permit(:account_id, :user_id, :concepto_de_pago, :reference, :date, :detail, :category_id, :withdrawal, :deposit )
   end
 
   def require_login

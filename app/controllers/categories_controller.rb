@@ -1,10 +1,12 @@
 class CategoriesController < ApplicationController
   before_filter :require_login
 
-
-
    def index
-     @categories = Category.all
+     # @categories = Category.all
+     # @categories = Category.where(nil)
+     # @categories = @categories.classification(params[:value]) if params[:value].present?
+     # @category = 
+     @categories = Category.egreso
    end
 
    def new
@@ -44,7 +46,7 @@ class CategoriesController < ApplicationController
 
  private
  def category_params
-   params.require(:category).permit(:name)
+   params.require(:category).permit(:name, :classification)
  end
 
  def require_login
