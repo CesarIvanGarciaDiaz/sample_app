@@ -1,23 +1,25 @@
-
+<style media="screen">
+.btn{
+  width: 10px;
+  height: 35px;
+  margin: 0 auto;
+}
+</style>
 <p id="notice"><%= notice %></p>
 <h1>Seleccione la cuenta a administrar</h1>
 
-<div class="boton_creado">
-
-</div>
-
 <% @categories.each do |category| %>
-
 
 <div class="social">
 
-<div class='front'>
- <%= render "row", category: category %>
-</div>
-<div class='back'>
+  <div class='front'>
+    <%= render "row", category: category %>
+  </div>
+  <div class='back'>
 
-<%= link_to 'Edit',edit_user_category_path(current_user,category.id) ,remote: true,class:"btn btn-raised btn-success" %>
-<%= link_to 'Destroy',user_category_path(current_user,category.id),class:"btn btn-raised btn-warning " ,style:"background-color: #F44336!important;", method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to raw("<i class='material-icons '>edit</i>"),edit_user_category_path(current_user,category.id)  ,remote: true,class:"btn btn-success center ",style:"display: inline-block; width:3em; padding:0!important; position:absolute; bottom:0; left:0;"%>
+  <%= link_to raw("<i class='material-icons '>delete_sweep</i>"),user_category_path(current_user,category.id),class:"btn btn-raised btn-warning center" ,style:"background-color: #FF3333!important;display: inline-block; width:3em; padding: 0!important; position:absolute; bottom:0; right:0;", method: :delete, data: { confirm: 'Are you sure?' } %>
+
 </div>
 </div>
 <% end %>
