@@ -1,4 +1,27 @@
-<tr id="<%= account.id %>">
-  <td style="font-size:90px;"><%= account.name %></td>
 
-</tr>
+
+
+<div id="container_account">
+<div class="social" >
+  <div class='front' >
+    <tr id="<%= account.id %>">
+      <td style="font-size:90px;">
+
+
+    <%= account.name %></td>
+
+    </tr>
+  </div>
+
+  <div class='back'>
+
+<%=link_to account.name, user_account_movements_path(current_user,account.id), class:"btn btn",style:"width:200px;height:90px;margin-top:-3px;margin-left:0px;margin-buttom:0;padding: 41% 30%;color: white;margin:none;box-shadow:none;font-size:1.3em;"%>
+<!-- ,style:"width:200px;height:50px;margin-top:-3px;margin-left:0px;margin-buttom:0;padding: 25%; background-color: white;" -->
+
+  <%= link_to raw("<i class='material-icons '>edit</i>"),edit_user_account_path(current_user,account.id) ,remote: true,class:"btn btn-success center ",style:"display: inline-block; width:3em; padding:0!important; position:absolute; bottom:0; left:0;"%>
+<!-- align-items: center; -->
+  <%= link_to raw("<i class='material-icons '>delete_sweep</i>"),user_account_path(current_user,account.id),class:"btn btn-raised btn-warning center" ,style:"background-color: #FF3333!important;display: inline-block; width:3em; padding: 0!important; position:absolute; bottom:0; right:0;", method: :delete, data: { confirm: 'Are you sure?' } %>
+
+</div>
+</div>
+</div>

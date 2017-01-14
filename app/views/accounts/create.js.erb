@@ -1,8 +1,13 @@
+
 <% if @account.errors.empty? %>
-  // add the row to the table, show alert and hide modal
-  $('table tbody').append(' <%= j render "row", account: @account %>');
-  $('.alert-success').html("El producto ha sido creado con éxito").show();
-  $('#account-modal').modal('hide');
+$("#account-modal").modal('hide');
+// $(".account-name").val('');
+
+$("#container_account").prepend(' <%= j render "row", account: @account %>');
+
+ $(".front , .back").attr("id","nuevo");
+$("#nuevo").css( "background-color", "#FFC300" );
+
 <% else %>
   // show first error
   alert('<%= @account.errors.full_messages[0] %>');

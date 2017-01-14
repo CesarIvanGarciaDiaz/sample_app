@@ -4,7 +4,8 @@ class AccountsController < ApplicationController
 
 
   def index
-    @accounts = Account.all
+    @accounts = Account.order(:name)
+    @account=Account.new
   end
 
   def new
@@ -18,11 +19,16 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(account_params)
-     if @account.save
-     flash[:success] = "Creado Correctamente"
-     redirect_to user_accounts_path(session[:user_id])
-    # else
-    #   render 'new'
+    respond_to do |format|
+      if @account.save
+
+# flash[:success] = "Creado Correctamente"
+  # redirect_to user_accounts_path(session[:user_id])
+    format.js
+else
+    format.js
+
+end
       end
   end
 
