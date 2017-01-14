@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20170110172534) do
     t.date    "date"
     t.string  "detail"
     t.integer "category_id"
-    t.integer "withdrawal",       default: 0
-    t.integer "deposit",          default: 0
+    t.integer "withdrawal"
+    t.integer "deposit"
     t.index ["account_id"], name: "index_movements_on_account_id"
     t.index ["category_id"], name: "index_movements_on_category_id"
     t.index ["user_id"], name: "index_movements_on_user_id"
