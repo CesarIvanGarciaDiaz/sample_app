@@ -9,8 +9,9 @@
     <%= render 'layouts/header' %><!-- agrega el parcial de header -->
     <div class="container">
       <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-      <% end %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}")%>
+       <% end %>
+
       <br><br>
       <%= yield %>
       <br>
@@ -21,3 +22,16 @@
     </div>
   </body>
 </html>
+
+<script type="text/javascript">
+$(function () {
+  var alert = $('.alert');
+  if (alert.length > 0) {
+    alert.show().animate({height: alert.outerHeight()}, 200);
+    window.setTimeout(function() {
+      alert.slideUp();
+    }, 3000);
+  }
+});
+
+</script>
