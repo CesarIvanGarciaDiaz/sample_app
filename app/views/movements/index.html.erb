@@ -1,4 +1,3 @@
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 .btn{
@@ -39,23 +38,16 @@ h1{
       <th>Fecha</th>
       <th>Mes</th>
       <th>Detalle</th>
-
       <th>Categoria</th>
-
-      <th>deposito</th>
-      <th>retiro</th>
-      <th>total</th>
-      <th colspan="2"></th>
+      <th>Retiro</th>
+      <th>Deposito</th>
+      <th>Total</th>
+      
     </tr>
   </thead>
-
-  <tbody>
-    <% @movements.each do |movement| %>
-       <%= render "row", movement: movement  %>
-    <% end %>
-  </tbody>
+  
+       <%= render "row", movement: :movement  %>
 </table>
-
 <br>
 
   <div class="container">

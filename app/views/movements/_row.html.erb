@@ -1,14 +1,42 @@
-<tr id="<%= movement.id %>">
-    <td><%= movement.concepto_de_pago %></td>
-    <td><%= movement.reference %></td>
-    <td><%= movement.date.strftime('%d/%m/%Y') %></td>
-    <td> <%= movement.date.strftime('%B %Y') %></td>
-    <td><%= movement.detail %></td>
-    <td><%= Category.find(movement.category_id).name %></td>
-    <td><%= movement.withdrawal %></td>
-    <td><%= movement.deposit %></td>
-    <td><%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %></td>
-    <td><%= link_to raw("<i class='material-icons md-18'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<tbody>
+    <% @temp_m = 0 %>
+    <% @movements.each do |movement| %>
+    <tr id="<%= movement.id %>">
+        <td><%= movement.concepto_de_pago %></td>
+        <td><%= movement.reference %></td>
+        <td><%= movement.date.strftime('%d/%m/%Y') %></td>
+        <td> <%= movement.date.strftime('%B %Y') %></td>
+        <td><%= movement.detail %></td>
+        <td><%= Category.find(movement.category_id).name %></td>
+        <td><%= movement.withdrawal %></td>
+        <td><%= movement.deposit %></td>
+        <% @m = movement.deposit + movement.withdrawal %>
+        <% @temp_m += @m %>
+        <td><%= @temp_m %></td>
+        <%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
+        <%= link_to raw("<i class='material-icons md-18'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
+    </tr>
+    <%end%>
+</tbody>
 
+<style>
+tfoot > tr > td{
+  font-size: 30px;
+  font-weight:bold;
+  font-family: Serif, Georgia;
+  color:black;
+}
+tfoot > tr{
+  background-color: whitesmoke; 
+}
+tfoot > tr:hover{
+  background-color: #EEE;
+}
+</style>
 
-</tr>
+<tfoot>
+    <tr>
+    <td colspan="7">Total:</td>
+    <td colspan="2"><%= @temp_m %></td>
+    </tr>
+</tfoot>

@@ -15,7 +15,7 @@ class MovementsController < ApplicationController
 
     def create
       params[:movement][:reference] ||= "Sin refencia"
-
+      @category = Category.all
       @movement =Movement.new(movement_params)
        if @movement.save
        flash[:success] = "Creado Correctamente"

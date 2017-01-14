@@ -9,6 +9,23 @@
         margin-right:1.5em;
     }
 </style>
+<script>
+  // $("#movement_category_id").change(function(){ 
+  //category tiene que ser + * -
+  //   var selection = $("#movement_category_id > option:selected" ).val(); 
+
+  //  if (selection == "-"){                       
+  //     $("#movement_withdrawal").prop( "disabled", false );
+  //     $("#movement_deposit").prop( "disabled", true );                       
+  //  }
+  //  else if(selection == "+"){ 
+  //     $("#movement_withdrawal").prop( "disabled", true );
+  //     $("#movement_deposit").prop( "disabled", false );
+  //  }
+  //  else
+  //     $("#movement_withdrawal, #movement_deposit").prop( "disabled", false );
+  // }).change();
+</script>
 <div id="movement-modal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -27,7 +44,7 @@
                       <%= f.text_field :concepto_de_pago ,class: 'form-control', size: 40 %>
                   </div>
 
-                  <div style="width:5em" class="horizontal">
+                  <div style="width:7em" class="horizontal">
                       <%= f.label "Referencia" %>
                       <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia"%>
                   </div>
@@ -68,7 +85,7 @@
                   </div>
   </div>
         <div class="modal-footer">
-            <%= f.submit class:"btn btn-primary btn-lg btn-block" , value:"Guardar"%>
+            <%= f.submit class:"btn btn-primary btn-lg btn-block", value: "Crear Movimiento"%>
         </div>
         <% end %>
        </div><!-- /.modal-content -->

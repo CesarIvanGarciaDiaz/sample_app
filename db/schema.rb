@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20170110172534) do
     t.integer "user_id"
     t.integer "account_id"
     t.string  "concepto_de_pago"
-    t.string  "reference",        default: "Sin Referencia"
+    t.string  "reference"
     t.date    "date"
     t.string  "detail"
     t.integer "category_id"
