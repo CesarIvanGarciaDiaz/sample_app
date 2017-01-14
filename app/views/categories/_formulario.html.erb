@@ -9,10 +9,15 @@
       <div class="modal-body">
   <div class="alert alert-danger" role="alert" style="display: none;"></div>
       <div class="field">
-        <%= f.label :name %>
-        <%= f.text_field :name ,class: "form-control input-lg", placeholder: "Nombre de la cuenta" %>
+        <%= f.label "Nombre" %>
+        <%= f.text_field :name ,class: "form-control input-lg", placeholder: "Nombre de la categoría" %>
       </div>
 
+      <div class="field">
+        <%= f.label "Clasificación" %>
+        <%= f.select(:classification, [["Neutro", "*"], ["Egreso", "-"], ["Ingreso", "+"]]) %>
+        <!-- {:class => "form-control"} -->
+      </div>
 
  </div>
 

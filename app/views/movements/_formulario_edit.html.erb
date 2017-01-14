@@ -16,33 +16,39 @@
                 <%= f.hidden_field :user_id, :value => params[:user_id] %>
 
                 <div class="field">
-                    <%= f.label :concepto_de_pago %>
-                    <%= f.text_field :concepto_de_pago ,class: 'form-control' %>
+                    <%= f.label "Concepto de Pago" %>
+                    <%= f.text_field :concepto_de_pago ,class: 'form-control', size: 40  %>
+                </div>
+
+                <div style="width:5em" class="field">
+                    <%= f.label "Referencia" %>
+                    <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia"%>
+                </div>
+
+                <div class="input-group date" style="width: 5em">
+                    <%= f.label "Fecha" %>
+                    <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true %>
                 </div>
 
                 <div class="field">
-                    <%= f.label :reference %>
-                    <%= f.text_field :reference ,class: 'form-control' %>
+                    <%= f.label "Detalles" %>
+                    <%= f.text_field :detail ,class: 'form-control', size: 40 %>
                 </div>
 
-                <div class="input-group date">
-                    <%= f.label :date %>
-
-                    <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es',
-   "data-date-today-highlight" => true, "data-date-today-btn" => true %>
-
-                </div>
-
-                <div class="field">
-                    <%= f.label :detail %>
-                    <%= f.text_field :detail ,class: 'form-control' %>
-                </div>
-
-                <div class="field">
+                <div class="field"  style="width: 10em; top:20px;">
                     <%= f.label "Categoria"%>
                     <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
                 </div>
+                
+                <div class="horizontal">
+                    <%= f.label "Retiro"%>
+                    <%= f.text_field :withdrawal, class: 'form-control dig', size: 10, value: 0 %>
+                </div>
 
+                <div class="horizontal">
+                    <%= f.label "Deposito"%>
+                    <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0 %>
+                </div>
             </div>
 
             <div class="modal-footer">

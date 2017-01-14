@@ -8,6 +8,11 @@
 <p id="notice"><%= notice %></p>
 <h1>Seleccione la cuenta a administrar</h1>
 
+<%= form_for :category do |f| %>
+<%= f.collection_select :category_id, Category.all, :id, :classification%>
+<%= f.submit class:"btn btn-primary btn-lg btn-block" , value:"Guardar"%>
+<%end%>
+
 <% @categories.each do |category| %>
 
 <div class="social">
@@ -16,6 +21,8 @@
     <%= render "row", category: category %>
   </div>
   <div class='back'>
+    <br>
+    <p><%= Category.resolverEstado(category.classification ) %></p>
 
   <%= link_to raw("<i class='material-icons '>edit</i>"),edit_user_category_path(current_user,category.id)  ,remote: true,class:"btn btn-success center ",style:"display: inline-block; width:3em; padding:0!important; position:absolute; bottom:0; left:0;"%>
   <%= link_to raw("<i class='material-icons '>delete_sweep</i>"),user_category_path(current_user,category.id),class:"btn btn-raised btn-warning center" ,style:"background-color: #FF3333!important;display: inline-block; width:3em; padding: 0!important; position:absolute; bottom:0; right:0;", method: :delete, data: { confirm: 'Are you sure?' } %>
