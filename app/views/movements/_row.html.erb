@@ -11,6 +11,15 @@
     font-weight: bold;
     color:blue;
   }
+  #add{
+  position: absolute;
+  margin-left: -60px;
+  margin-top: -5px;
+  cursor: pointer;
+  }
+  #add:hover{
+    color:green !important;
+  }
 </style>
 
 <tbody>
@@ -19,7 +28,8 @@
     <% @movements.each do |movement| %>
 
     <tr id="<%= movement.id %>">
-        <td ><%= movement.concepto_de_pago %></td>
+
+        <td ><div id="add" style="display: block;"><i class="material-icons md-48">add_circle_outline</i></div><%= movement.concepto_de_pago %></td>
         <td><%= movement.reference %></td>
         <td><%= movement.date.strftime('%d/%m/%Y') %></td>
         <td> <%= movement.date.strftime('%B %Y') %></td>
@@ -32,8 +42,7 @@
         <td><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></td>
          <!-- link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition"  -->
 
-  <td id="<%= movement.id %>" class="b"tyle="display:none"><%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
-
+  <td id="n<%= movement.id %>" class="b" style="display:none"><%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
 
         <%= link_to raw("<i class='material-icons md-18'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
 </td>
@@ -55,10 +64,15 @@
 </tbody>
 
 <script>
+// $("#2 td:last-child").css("position","relative","position","-40px")
 $(document).ready(function(){
+
     $("tr>td").click(function(){
         $(".b").toggle();
+        // #2 td:last-child
+        // $('tr > td').animate({left:"-40px", opacity:"0"},750);
     });
+
 });
 </script>
 
