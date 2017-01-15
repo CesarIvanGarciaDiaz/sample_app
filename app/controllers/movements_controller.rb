@@ -1,7 +1,7 @@
 class MovementsController < ApplicationController
  before_filter :require_login
     def index
-      @movements = Account.find(params[:account_id]).movements.order("date", "reference")
+      @movements = Account.find(params[:account_id]).movements.order("created_at", "reference")
     end
 
     def new

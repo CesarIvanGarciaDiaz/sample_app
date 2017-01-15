@@ -3,26 +3,40 @@
 <h2>Filtro</h2>
 
 
-<div class="col-md-15">
+<!-- <div class="col-md-15">
 	<div class="well bs-component">
-		<%= form_tag previous_record_user_history_movements_url do |f| %>
-    <!-- previous_record_user_history_movements_path -->
+		form_tag previous_record_user_history_movements_url do |f| 
+ previous_record_user_history_movements_path 
 
-			<%= label_tag "Introduzca fechas"%>
+		label_tag "Introduzca fechas"
 		<div class="input-group input-daterange">
-			<%= text_field_tag :year1, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true, "data-date-orientation" => "bottom"%>
+			text_field_tag :year1, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true, "data-date-orientation" => "bottom"
       <div class="input-group-addon">to</div>
-      <%= text_field_tag :year2, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true, "data-date-orientation" => "bottom"%>
+      text_field_tag :year2, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true, "data-date-orientation" => "bottom"
 		</div>
 
 		<div class="actions">
-			<%= submit_tag "Filtrar",class: "btn btn-primary"%>
+			submit_tag "Filtrar",class: "btn btn-primary"
 		</div>
-		<% end %>
+		end
 	</div>
+</div> -->
+
+<div style="display: block; width: 100%; margin:10px;">
+<div class="btn-group">
+<a class="btn btn-info" style="width: 7em">Filtrar</a>
+<a href="bootstrap-elements.html" data-target="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="width:3em"><span class="caret"></span>
+<div class="ripple-container">
+
 </div>
-<hr>
-<h1><%= params[:year1] %></h1>
-<h1>hola</h1>
-<h1><%= params[:previous_record] %></h1>
-<hr>
+</a>
+
+<ul class="dropdown-menu">
+<li><a><%=link_to "2016", :date => "2016"%></a></li>
+<li><a><%=link_to "2015", :date => "2015"%></a></li>
+<li><a><%=link_to "2014", :date => "2014"%></a></a></li>
+<li class="divider"></li>
+<li><a><%=link_to "All", current_record_user_history_movements_path(current_user)%></a></li>
+</ul>
+</div>
+</div>

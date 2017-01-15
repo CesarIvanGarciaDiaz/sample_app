@@ -7,17 +7,14 @@ class Movement < ApplicationRecord
 
 
   validates :reference, uniqueness: {:message => "El número de referencia ya ha sido utilizado"}, allow_blank: true
-  validates :withdrawal, :numericality => {:only_integer => true, :less_than_or_equal_to => 0, :message => "La cantidad ingresada debe ser menor o igual a cero"    }
-  validates :deposit, :numericality =>    {:only_integer => true, :greater_than_or_equal_to => 0, :message => "La cantidad ingresada debe ser mayo o igual a cero"  }
+  validates :deposit, :withdrawal, :numericality => { :greater_than_or_equal_to => 0, :message => "La cantidad ingresada debe numerica y sin signos"  }
   validates :concepto_de_pago, presence: {:message => "debe ser llenado"}
   validates :date, presence: {:message => "Debe indicarse una fecha de registro"}
 
   before_create do
-    if self.reference.blank?
-      self.reference = "Sin referencia"
-    end
+    self.withdrawal = self.withdrawal * -1 if self.withdrawal >= 0
+    self.reference = "Sin referencia" if self.reference.blank?
   end
-
 
   # has_many :movement_defineds
 

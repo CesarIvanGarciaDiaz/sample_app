@@ -41,18 +41,15 @@ h1{
       <th>Categoria</th>
       <th>Retiro</th>
       <th>Deposito</th>
-      <th>Total</th>
-      
+      <th>Saldo</th>
     </tr>
   </thead>
-  
-       <%= render "row", movement: :movement  %>
+  <%= render "row", movement: :movement  %>
 </table>
+
 <br>
-
-  <div class="container">
+<div class="container">
   <div class="center">
-
-<%= link_to 'Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>
+    <%= link_to 'Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>
   </div>
-  </div>
+</div>
