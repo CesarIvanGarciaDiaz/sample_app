@@ -2,7 +2,7 @@
   // add the row to the table, show alert and hide modal
   $('table tbody').append(' <%= j render "row", movement: @movement %>');
 
-  $('#movement-modal').modal('hide');
+
 <% else %>
   // show first error
   alert('<%= @movement.errors.full_messages[0] %>');

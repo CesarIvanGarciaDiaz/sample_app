@@ -1,3 +1,5 @@
+
+
 <style>
   tr > td:nth-child(7){
     text-align:right;
@@ -10,11 +12,14 @@
     color:blue;
   }
 </style>
+
 <tbody>
+
     <% @temp_m = 0 %>
     <% @movements.each do |movement| %>
+
     <tr id="<%= movement.id %>">
-        <td><%= movement.concepto_de_pago %></td>
+        <td ><%= movement.concepto_de_pago %></td>
         <td><%= movement.reference %></td>
         <td><%= movement.date.strftime('%d/%m/%Y') %></td>
         <td> <%= movement.date.strftime('%B %Y') %></td>
@@ -25,13 +30,46 @@
         <% @m = movement.deposit + movement.withdrawal %>
         <% @temp_m += @m %>
         <td><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></td>
-        <%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
+         <!-- link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition"  -->
+
+  <td id="<%= movement.id %>" class="b"tyle="display:none"><%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
+
+
         <%= link_to raw("<i class='material-icons md-18'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
-    </tr>
+</td>
+  </tr>
     <%end%>
+
+    <!-- <tr>
+    <td><input type="text" id="new_concepto_de_pago"></td>
+<td><input type="text" id="new_reference"></td>
+    <td><input type="text" id="new_date_complete"></td>
+    <td><input type="text" id="new_age"></td>
+    <td><input type="button" class="add" onclick="add_row();" value="Add Row"></td>
+    </tr> -->
+
+
+
+
+
 </tbody>
 
+<script>
+$(document).ready(function(){
+    $("tr>td").click(function(){
+        $(".b").toggle();
+    });
+});
+</script>
+
 <style>
+
+tbody > tr:hover {
+  background-color: rgba(93, 179, 161, 0.77)!important;
+color: white;
+font-weight: 500;
+
+}
 tfoot > tr > td{
   font-size: 30px;
   font-weight:bold;
@@ -39,7 +77,7 @@ tfoot > tr > td{
   color:black;
 }
 tfoot > tr{
-  background-color: whitesmoke; 
+  background-color: whitesmoke;
 }
 tfoot > tr:hover{
   background-color: #EEE;
