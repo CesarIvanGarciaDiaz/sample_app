@@ -5,8 +5,8 @@ class CategoriesController < ApplicationController
      # @categories = Category.all
      # @categories = Category.where(nil)
      # @categories = @categories.classification(params[:value]) if params[:value].present?
-     # @category = 
-     @categories = Category.egreso
+     # @category =
+     @categories = Category.all
    end
 
    def new

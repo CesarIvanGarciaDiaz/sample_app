@@ -19,16 +19,16 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(account_params)
-    respond_to do |format|
+    # respond_to do |format|
       if @account.save
 
-# flash[:success] = "Creado Correctamente"
-  # redirect_to user_accounts_path(session[:user_id])
-    format.js
-else
-    format.js
+flash[:success] = "Creado Correctamente"
+  redirect_to user_accounts_path(session[:user_id])
+#     format.js
+# else
+#     format.js
 
-end
+# end
       end
   end
 

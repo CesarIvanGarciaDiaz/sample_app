@@ -1,58 +1,56 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 <style>
-.btn{
-padding-top: 0;
-padding-bottom: 0;
-align-items: center;
-font-size: 12px;
-}
-th{
-  text-align: center;
-  font-family: fantasy;
-  font-size: 15px;
-}
-td{
-  text-align: center;
-}
-h1{
-  padding-bottom: 0;
-  padding-top: -10px;
-}
-.boton_creado{
-  position: relative;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left:80%;
-  width: auto;
-}
+    .btn {
+        padding-top: 0;
+        padding-bottom: 0;
+        align-items: center;
+        font-size: 12px;
+    }
+    th {
+        text-align: center;
+        font-family: fantasy;
+        font-size: 15px;
+    }
+    td {
+        text-align: center;
+    }reated_at desctom: 0;
+        padding-top: -10px;
+    }
+    .boton_creado {
+        position: relative;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: 80%;
+        width: auto;
+    }
+
 </style>
-<p id="notice"><%= notice %></p>
 
-<% @cuenta = Account.find(params[:account_id])%>
-<h1>Movimientos de <%= @cuenta.name %></h1>
-<table class="table table-striped table-hover ">
-  <thead class="thead-inverse">
-    <tr style="background-color:#DEDEDE;">
-      <th>Concepto de pago</th>
-      <th>Referencia</th>
-      <th>Fecha</th>
-      <th>Mes</th>
-      <th>Detalle</th>
-      <th>Categoria</th>
-      <th>Retiro</th>
-      <th>Deposito</th>
-      <th>Total</th>
-      
-    </tr>
-  </thead>
-  
-       <%= render "row", movement: :movement  %>
+
+<div id="wrapper">
+    <table class="table table-striped table-hover ">
+        <thead class="thead-inverse">
+            <tr style="background-color:#DEDEDE;">
+                <th>Concepto de pago</th>
+                <th>Referencia</th>
+                <th>Fecha</th>
+                <th>Mes</th>
+                <th>Detalle</th>
+                <th>Categoria</th>
+                <th>Retiro</th>
+                <th>Deposito</th>
+                <th>Total</th>
+<th></th>
+            </tr>
+        </thead>
+
+
+        <%= render "row", movement: :movement  %>
+
+        <br>
+
+
 </table>
-<br>
-
-  <div class="container">
-  <div class="center">
-
+</div>
+<%= will_paginate %>
 <%= link_to 'Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>
-  </div>
-  </div>

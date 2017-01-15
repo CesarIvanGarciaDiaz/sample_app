@@ -1,14 +1,9 @@
-
 <% if @account.errors.empty? %>
-$("#account-modal").modal('hide');
-// $(".account-name").val('');
-
-$("#container_account").prepend(' <%= j render "row", account: @account %>');
-
+ $("#account-modal").modal('hide');
+ $("#container_account").prepend('<%= j render "row", account: @account %>');
  $(".front , .back").attr("id","nuevo");
-$("#nuevo").css( "background-color", "#FFC300" );
+ $("#nuevo").css( "background-color", "#FFC300" );
 
 <% else %>
-  // show first error
-  alert('<%= @account.errors.full_messages[0] %>');
+alert('<%= @account.errors.full_messages[0] %>');
 <% end %>

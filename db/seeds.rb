@@ -4,19 +4,19 @@ User.create!(name:  "Vlad Inquisidor",
              password_confirmation: "foobar",
              admin: true)
 
-# Account.create(name: "Tarjeta")
-# Account.create(name: "PayPal")
-# Account.create(name: "Cartera")
-# Account.create(name: "Cursos")
-# Account.create(name:"Banco")
-# Account.create(name:"Caja Chica")
-# Account.create(name:"Pagos")
+Account.create(name: "Tarjeta")
+Account.create(name: "PayPal")
+Account.create(name: "Cartera")
+Account.create(name: "Cursos")
+Account.create(name:"Banco")
+Account.create(name:"Caja Chica")
+Account.create(name:"Pagos")
 #
 # FinancialStatement.create(account_id: 1, withdrawal: 0, deposit: 100, balance: 100)
 # # FinancialStatement.first.account
 #
-# Category.create(name: "compras")
-# Category.create(name: "transferencias")
+Category.create(name: "compras")
+Category.create(name: "transferencias")
 # Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Abono de coppel", reference: "1212", date: "2012/06/12", detail: "Pago de deudas", category_id: 2, withdrawal: 100)
 # Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Fiesta en bar", reference: "1212", date: "2012/06/15", detail: "Pago por fiesta", category_id: 2, withdrawal: 150)
 # Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Compra en amazon", reference: "1313", date: "2012/06/13", detail: "---", category_id: 1, withdrawal: 120)
@@ -49,12 +49,25 @@ User.create!(name:  "Vlad Inquisidor",
 	#<Movement id: 2, user_id: 1, account_id: 1, concepto_de_pago: "Compra en amazon", reference: "1313", date: "2012-06-13", detail: "---">]>
 
 
-# 99.times do |n|
-#   name  = Faker::Name.name
-#   email = "example-#{n+1}@railstutorial.org"
-#   password = "password"
-#   User.create!(name:  name,
-#                email: email,
-#                password:              password,
-#                password_confirmation: password)
-# end
+99.times do |n|
+
+user_id=1
+account_id=1
+concepto_de_pago='pago por honorarios'
+reference= ""
+date='01/03/2017'
+detail="Ingresos para alumnos"
+category_id=1
+withdrawal=0
+deposit=1000
+  Movement.create!(user_id:  user_id,
+              account_id: account_id,
+              concepto_de_pago: concepto_de_pago,
+              reference: reference,
+              date: date,
+              detail: detail ,
+              category_id: category_id,
+withdrawal: withdrawal,
+deposit: deposit
+)
+end
