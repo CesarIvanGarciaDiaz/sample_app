@@ -1,14 +1,14 @@
 class Category < ApplicationRecord
 	has_many :movements
 
-  scope :neutro, proc { where classification: "*" }
-  scope :egreso, proc { where classification: "-" }
-  scope :ingreso, proc { where classification: "+" }
+  validates :name, uniqueness: {:message => "El nombre ya ha sido utilizado"}
+  # scope :neutro, proc { where classification: "*" }
+  scope :clsif, -> (csfct) { where classification: csfct } 
 
   def self.resolverEstado( type )
-    if type == "*" 
+    if type == "n" 
       "Categoria Neutra"
-    elsif type == "-"
+    elsif type == "e"
       "Categoria de Egresos"
     else
       "Categoria de Ingreso"

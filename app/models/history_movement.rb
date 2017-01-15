@@ -1,0 +1,2 @@
+class HistoryMovement < ApplicationRecord
+end

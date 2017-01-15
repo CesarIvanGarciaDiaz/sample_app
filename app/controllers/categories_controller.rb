@@ -2,11 +2,8 @@ class CategoriesController < ApplicationController
   before_filter :require_login
 
    def index
-     # @categories = Category.all
-     # @categories = Category.where(nil)
-     # @categories = @categories.classification(params[:value]) if params[:value].present?
-     # @category = 
-     @categories = Category.egreso
+     @categories = Category.where(nil)
+     @categories = @categories.clsif(params[:csfct]) if params[:csfct].present?
    end
 
    def new
