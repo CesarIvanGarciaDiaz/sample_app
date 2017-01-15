@@ -46,15 +46,17 @@ ActiveRecord::Schema.define(version: 20170110172534) do
   end
 
   create_table "movements", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "account_id"
-    t.string  "concepto_de_pago"
-    t.string  "reference"
-    t.date    "date"
-    t.string  "detail"
-    t.integer "category_id"
-    t.integer "withdrawal"
-    t.integer "deposit"
+    t.integer  "user_id"
+    t.integer  "account_id"
+    t.string   "concepto_de_pago"
+    t.string   "reference"
+    t.date     "date"
+    t.string   "detail"
+    t.integer  "category_id"
+    t.float    "withdrawal"
+    t.float    "deposit"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.index ["account_id"], name: "index_movements_on_account_id"
     t.index ["category_id"], name: "index_movements_on_category_id"
     t.index ["user_id"], name: "index_movements_on_user_id"

@@ -1,5 +1,18 @@
 
 
+<style>
+  tr > td:nth-child(7){
+    text-align:right;
+    font-weight: bold;
+    color:red;
+  }
+  tr > td:nth-child(8){
+    text-align:right;
+    font-weight: bold;
+    color:blue;
+  }
+</style>
+
 <tbody>
 
     <% @temp_m = 0 %>
@@ -12,16 +25,16 @@
         <td> <%= movement.date.strftime('%B %Y') %></td>
         <td><%= movement.detail %></td>
         <td><%= Category.find(movement.category_id).name %></td>
-        <td><%= movement.withdrawal %></td>
-        <td><%= movement.deposit %></td>
-
-
-
+        <td><%= number_to_currency(movement.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
+        <td><%= number_to_currency(movement.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
         <% @m = movement.deposit + movement.withdrawal %>
         <% @temp_m += @m %>
-        <td><%= @temp_m %></td>
+        <td><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></td>
+         <!-- link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition"  -->
 
-        <td id="<%= movement.id %>" class="b"tyle="display:none"><%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
+  <td id="<%= movement.id %>" class="b"tyle="display:none"><%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
+
+
         <%= link_to raw("<i class='material-icons md-18'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
 </td>
   </tr>
@@ -74,6 +87,6 @@ tfoot > tr:hover{
 <tfoot>
     <tr>
     <td colspan="7">Total:</td>
-    <td colspan="2"><%= @temp_m %></td>
+    <td colspan="2"><%=number_to_currency(@temp_m, locale: :es, separator: '.', delimiter: ',') %></td>
     </tr>
 </tfoot>

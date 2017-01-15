@@ -26,31 +26,30 @@
 
 </style>
 
+<p id="notice"><%= notice %></p>
 
-<div id="wrapper">
-    <table class="table table-striped table-hover ">
-        <thead class="thead-inverse">
-            <tr style="background-color:#DEDEDE;">
-                <th>Concepto de pago</th>
-                <th>Referencia</th>
-                <th>Fecha</th>
-                <th>Mes</th>
-                <th>Detalle</th>
-                <th>Categoria</th>
-                <th>Retiro</th>
-                <th>Deposito</th>
-                <th>Total</th>
-<th></th>
-            </tr>
-        </thead>
-
-
-        <%= render "row", movement: :movement  %>
-
-        <br>
-
-
+<% @cuenta = Account.find(params[:account_id])%>
+<h1>Movimientos de <%= @cuenta.name %></h1>
+<table class="table table-striped table-hover ">
+  <thead class="thead-inverse">
+    <tr style="background-color:#DEDEDE;">
+      <th>Concepto de pago</th>
+      <th>Referencia</th>
+      <th>Fecha</th>
+      <th>Mes</th>
+      <th>Detalle</th>
+      <th>Categoria</th>
+      <th>Retiro</th>
+      <th>Deposito</th>
+      <th>Saldo</th>
+    </tr>
+  </thead>
+  <%= render "row", movement: :movement  %>
 </table>
+
+<br>
+<div class="container">
+  <div class="center">
+    <%= link_to 'Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>
+  </div>
 </div>
-<%= will_paginate %>
-<%= link_to 'Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>

@@ -11,12 +11,15 @@ Account.create(name: "Cursos")
 Account.create(name:"Banco")
 Account.create(name:"Caja Chica")
 Account.create(name:"Pagos")
-#
-# FinancialStatement.create(account_id: 1, withdrawal: 0, deposit: 100, balance: 100)
-# # FinancialStatement.first.account
-#
-Category.create(name: "compras")
-Category.create(name: "transferencias")
+
+Category.create(name: "Partida Virtual", classification: "n")
+Category.create(name: "Banco", classification: "e")
+Category.create(name: "Donativos Recurrentes", classification: "i")
+Category.create(name: "Renta Oficinas", classification: "e")
+Category.create(name: "Impuestos Federales", classification: "e")
+Category.create(name: "Inversion", classification: "i")
+Category.create(name: "Donativos Unicos", classification: "e")
+
 # Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Abono de coppel", reference: "1212", date: "2012/06/12", detail: "Pago de deudas", category_id: 2, withdrawal: 100)
 # Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Fiesta en bar", reference: "1212", date: "2012/06/15", detail: "Pago por fiesta", category_id: 2, withdrawal: 150)
 # Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Compra en amazon", reference: "1313", date: "2012/06/13", detail: "---", category_id: 1, withdrawal: 120)

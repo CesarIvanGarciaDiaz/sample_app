@@ -1,3 +1,28 @@
+<style>
+  tr > td:nth-child(8){
+    text-align:right;
+    font-weight: bold;
+    color:red;
+  }
+  tr > td:nth-child(9){
+    text-align:right;
+    font-weight: bold;
+    color:blue;
+  }
+tfoot > tr > td{
+  font-size: 30px;
+  font-weight:bold;
+  font-family: Serif, Georgia;
+  color:black;
+}
+tfoot > tr{
+  background-color: whitesmoke; 
+}
+tfoot > tr:hover{
+  background-color: #EEE;
+}
+
+</style>
 <% provide(:title, "Registro #{Time.now.year}") %>
 <h1>Resumen de movimientos realizados</h1>
 <h1><%= Time.now.strftime '%Y' %></h1>
@@ -11,9 +36,8 @@
       <th>Reference</th>
       <th>Fecha de Pago</th>
       <th>Mes</th>
-      <th>Category</th>
       <th>Detalle</th>
-      <!-- mandar a llamar Financial Statement -->
+      <th>Categoria</th>
       <th>Retiro</th>
       <th>Deposito</th>
       <th>Saldo</th>      
@@ -21,22 +45,35 @@
   </thead>
 
   <tbody>
+    <% @temp_m = 0%>
     <% @movements.each do |movement| %>
       <tr>
-      	<td><%= Account.find(movement.account_id).name %></td>
+        <td><%= Account.find(movement.account_id).name %></td>
         <td><%= movement.concepto_de_pago %></td>
         <td><%= movement.reference %></td>
         <td><%= movement.date.strftime('%d/%m/%Y') %></td>
         <!-- Esta fecha es la de cuando se registro -->
         <td> <%= movement.date.strftime('%B') %></td>
         <!-- Crear espacio para fecha en que se reporto el retiro o deposito -->
-        <td><%= Category.find(movement.category_id).name %></td>
+
         <td><%= movement.detail %></td>
-      	<!-- mandar a llamar Financial Statement -->
-        <td> $41,347.32 </td>
-        <td> $48,306,279.60 </td>
-        <td>  $52,788,148.62 </td>
-	  </tr>
+
+        <td><%= Category.find(movement.category_id).name %></td>
+<td><%= number_to_currency(movement.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
+        <td><%= number_to_currency(movement.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
+        <% @m = movement.deposit + movement.withdrawal %>
+        <% @temp_m += @m %>
+        <td><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></td>
+    </tr>
     <% end %>
   </tbody>
+
+
+  <tfoot>
+      <tr>
+      <td colspan="8">Total:</td>
+      <td colspan="2"><%=number_to_currency(@temp_m, locale: :es, separator: '.', delimiter: ',') %></td>
+      </tr>
+  </tfoot>
+
 </table>

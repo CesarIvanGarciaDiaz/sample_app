@@ -8,8 +8,9 @@ class CreateMovements < ActiveRecord::Migration[5.0]
       t.date :date
       t.string :detail
       t.belongs_to :category , index:true
-      t.integer :withdrawal
-      t.integer :deposit
+      t.float :withdrawal
+      t.float :deposit
+      t.timestamps
       # se debe calcular en la vista el balance 
     end
   end

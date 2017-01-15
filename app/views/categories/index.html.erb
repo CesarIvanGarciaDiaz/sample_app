@@ -6,12 +6,27 @@
 }
 </style>
 <p id="notice"><%= notice %></p>
-<h1>Seleccione la cuenta a administrar</h1>
+<h1>Lista de Categorias</h1>
 
-<%= form_for :category do |f| %>
-<%= f.collection_select :category_id, Category.all, :id, :classification%>
-<%= f.submit class:"btn btn-primary btn-lg btn-block" , value:"Guardar"%>
-<%end%>
+<div style="display: block; width: 100%; margin:10px;">
+
+<div class="btn-group">
+<a class="btn btn-info" style="width: 7em">Filtrar</a>
+<a href="bootstrap-elements.html" data-target="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="width:3em"><span class="caret"></span>
+<div class="ripple-container">
+
+</div>
+</a>
+
+<ul class="dropdown-menu">
+<li><a><%=link_to "Egreso", :csfct => "e"%></a></li>
+<li><a><%=link_to "Ingreso", :csfct => "i"%></a></li>
+<li><a><%=link_to "Neutro", :csfct => "n"%></a></a></li>
+<li class="divider"></li>
+<li><a><%=link_to "Reset", user_categories_path(current_user)%></a></li>
+</ul>
+</div>
+</div>
 
 <% @categories.each do |category| %>
 
