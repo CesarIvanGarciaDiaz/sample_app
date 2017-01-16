@@ -1,9 +1,9 @@
-<% if @account.errors.empty? %>
+<% if @movement.errors.empty? %>
   // add the row to the table, show alert and hide modal
-  $('table tbody tr#<%= @account.id %>').replaceWith(' <%= j render "row", account: @account %>');
-  $('.alert-success').html("La cuenta ha sido modificada con éxito").show();
-  $('#account-modal').modal('hide');
+  $('table tbody tr#<%= @movement.id %>').replaceWith(' <%= j render "row", movement: @movement %>');
+  $('.alert-success').html("El movimiento ha sido modificado con éxito").show();
+  $('#movement-modal').modal('hide');
 <% else %>
   // show first error
-  alert('<%= @account.errors.full_messages[0] %>');
+  alert('<%= @movement.errors.full_messages[0] %>');
 <% end %>

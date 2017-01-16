@@ -1,4 +1,12 @@
 <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+<style media="screen">
+.boton{
+top: 10%;
+left:0;
+position: fixed;
+margin: none;
+}
+</style>
 <p id="notice"><%= notice %></p>
 
 <% @cuenta = Account.find(params[:account_id])%>
@@ -15,6 +23,7 @@
       <th>Retiro</th>
       <th>Deposito</th>
       <th>Saldo</th>
+<th></th>
     </tr>
   </thead>
   <%= render "row", movement: :movement  %>
@@ -22,7 +31,8 @@
 
 <br>
 <div class="container">
-  <div class="center">
-    <%= link_to 'Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary btn_new_mvnt'  %>
-  </div>
+  <div class="boton">
+<!-- <i class="material-icons" style="display: inline-flex; vertical-align: middle;font-size:33px;">note_add</i> -->
+    <%= link_to 'add_to_queue', new_user_account_movement_path(current_user),remote:true,class:'btn btn_new_mvnt material-icons',style:"box-shadow:none;height: 90px;width: 20px;text-align: center;font-size: 5em;color:#3fd041;left:0;  "  %>
+ </div>
 </div>

@@ -39,15 +39,15 @@
                     <%= f.label "Categoria"%>
                     <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
                 </div>
-                
+
                 <div class="horizontal" style="width: 6em">
                     <%= f.label "Retiro"%>
-                    <%= f.text_field :withdrawal, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
+                    <%= f.text_field :withdrawal, class: 'form-control dig', size: 10, autocomplete: :off %>
                 </div>
 
                 <div class="horizontal" style="width: 6em">
                     <%= f.label "Deposito"%>
-                    <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
+                    <%= f.text_field :deposit, class: 'form-control dig', size: 10, autocomplete: :off %>
                 </div>
             </div>
 
