@@ -1,14 +1,3 @@
-<style type="text/css">
-    .modal-dialog{
-        width: 85%;
-        padding: 0 auto;
-    }
-    .horizontal{
-        position:relative;
-        display: inline-block;
-        margin-right:1.5em;
-    }
-</style>
 <script>
   // $("#movement_category_id").change(function(){ 
   //category tiene que ser + * -
@@ -46,17 +35,17 @@
 
                   <div style="width:7em" class="horizontal">
                       <%= f.label "Referencia" %>
-                      <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia"%>
+                      <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia", autocomplete: :off %>
                   </div>
 
-                  <div class="input-group date horizontal" style="width: 5em">
+                  <div class="input-group date horizontal" style="width: 5.5em">
                       <%= f.label "Fecha" %>
-                      <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true%>
+                      <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-start-date" => Time.now, "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off %>
                   </div>
 
                   <div class="horizontal">
                       <%= f.label "Detalles" %>
-                      <%= f.text_field :detail ,class: 'form-control', size: 40 %>
+                      <%= f.text_field :detail ,class: 'form-control', size: 40, autocomplete: :off %>
                   </div>
 
                   <div class="horizontal" style="width: 10em; top:20px;"><!-- class="field" -->
@@ -64,17 +53,17 @@
                       <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
                   </div>
 
-                  <div class="horizontal">
+                  <div class="horizontal" style="width: 6em">
                       <%= f.label "Retiro"%>
-                      <%= f.text_field :withdrawal, class: 'form-control dig', size: 10, value: 0 %>
+                      <%= f.text_field :withdrawal, size: 10, class: 'form-control dig', value: 0, autocomplete: :off %>
                   </div>
 
-                  <div class="horizontal">
+                  <div class="horizontal" style="width: 6em">
                       <%= f.label "Deposito"%>
-                      <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0 %>
+                      <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
                   </div>
 
-                  <div class="horizontal">
+<!--                   <div class="horizontal">
                       <label data-toggle="collapse" data-target="#iva" aria-expanded="false" aria-controls="collapseTwo">
                           Integrar Iva<input type="checkbox">
                       </label>
@@ -82,7 +71,7 @@
 
                    <div id="iva" aria-expanded="false" class="collapse out">
                       <div class="well">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe ut molestias eius, nam neque esse eos modi corrupti harum fugit, hic recusandae praesentium, minima ipsa eligendi architecto at! Culpa, explicabo.</div>
-                  </div>
+                  </div> -->
   </div>
         <div class="modal-footer">
             <%= f.submit class:"btn btn-primary btn-lg btn-block", value: "Crear Movimiento"%>

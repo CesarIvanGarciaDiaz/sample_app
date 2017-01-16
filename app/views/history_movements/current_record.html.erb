@@ -53,7 +53,7 @@ tfoot > tr:hover{
         <td><%= movement.reference %></td>
         <td><%= movement.date.strftime('%d/%m/%Y') %></td>
         <!-- Esta fecha es la de cuando se registro -->
-        <td> <%= movement.date.strftime('%B') %></td>
+        <td> <%= ApplicationRecord.month(movement.date) %></td>
         <!-- Crear espacio para fecha en que se reporto el retiro o deposito -->
 
         <td><%= movement.detail %></td>
