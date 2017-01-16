@@ -1,11 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  withdrawal: 1
-  deposit: 1
-  balance: 1
+  child_id: 1
 
 two:
-  withdrawal: 1
-  deposit: 1
-  balance: 1
+  child_id: 1

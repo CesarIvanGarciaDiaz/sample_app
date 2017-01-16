@@ -15,39 +15,39 @@
                 <%= f.hidden_field :account_id, :value => params[:account_id] %>
                 <%= f.hidden_field :user_id, :value => params[:user_id] %>
 
-                <div class="field">
+                <div class="horizontal">
                     <%= f.label "Concepto de Pago" %>
                     <%= f.text_field :concepto_de_pago ,class: 'form-control', size: 40  %>
                 </div>
 
-                <div style="width:5em" class="field">
+                <div style="width:7em" class="horizontal">
                     <%= f.label "Referencia" %>
-                    <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia"%>
+                    <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia", autocomplete: :off %>
                 </div>
 
-                <div class="input-group date" style="width: 5em">
+                <div class="input-group date horizontal" style="width: 5.5em">
                     <%= f.label "Fecha" %>
-                    <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true %>
+                    <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-start-date" => Time.now, "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off %>
                 </div>
 
-                <div class="field">
+                <div class="horizontal">
                     <%= f.label "Detalles" %>
-                    <%= f.text_field :detail ,class: 'form-control', size: 40 %>
+                    <%= f.text_field :detail ,class: 'form-control', size: 40, autocomplete: :off %>
                 </div>
 
-                <div class="field"  style="width: 10em; top:20px;">
+                <div class="horizontal"  style="width: 10em; top:20px;">
                     <%= f.label "Categoria"%>
                     <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
                 </div>
                 
-                <div class="horizontal">
+                <div class="horizontal" style="width: 6em">
                     <%= f.label "Retiro"%>
-                    <%= f.text_field :withdrawal, class: 'form-control dig', size: 10, value: 0 %>
+                    <%= f.text_field :withdrawal, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
                 </div>
 
-                <div class="horizontal">
+                <div class="horizontal" style="width: 6em">
                     <%= f.label "Deposito"%>
-                    <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0 %>
+                    <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
                 </div>
             </div>
 

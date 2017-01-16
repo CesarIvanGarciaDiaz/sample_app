@@ -1,88 +1,34 @@
-
-
-<style>
-  tr > td:nth-child(7){
-    text-align:right;
-    font-weight: bold;
-    color:red;
-  }
-  tr > td:nth-child(8){
-    text-align:right;
-    font-weight: bold;
-    color:blue;
-  }
-</style>
-
-<tbody>
+<tbody id="view">
 
     <% @temp_m = 0 %>
     <% @movements.each do |movement| %>
 
     <tr id="<%= movement.id %>">
-        <td ><%= movement.concepto_de_pago %></td>
+
+        <td ><div id="add<%= movement.id %>" style="display: block;" class="add"><i class="material-icons icAdd">add_circle_outline</i></div><%= movement.concepto_de_pago %></td>
         <td><%= movement.reference %></td>
         <td><%= movement.date.strftime('%d/%m/%Y') %></td>
-        <td> <%= movement.date.strftime('%B %Y') %></td>
+        <td> <%= ApplicationRecord.month(movement.date) %></td>
         <td><%= movement.detail %></td>
         <td><%= Category.find(movement.category_id).name %></td>
         <td><%= number_to_currency(movement.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
         <td><%= number_to_currency(movement.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
         <% @m = movement.deposit + movement.withdrawal %>
         <% @temp_m += @m %>
-        <td><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></td>
-         <!-- link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition"  -->
 
-  <td id="<%= movement.id %>" class="b" style="display:none"><%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
+        <td>
+          <div id="n<%= movement.id %>" style="display:block; position:absolute; opacity:0; pointer-events:none;">
+              <%= link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-right: 20px;" %>
+              <%= link_to raw("<i class='material-icons md-24'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+          <%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %>
+        </td>
 
 
-        <%= link_to raw("<i class='material-icons md-18'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
-</td>
-  </tr>
+    </tr>
     <%end%>
 
-    <!-- <tr>
-    <td><input type="text" id="new_concepto_de_pago"></td>
-<td><input type="text" id="new_reference"></td>
-    <td><input type="text" id="new_date_complete"></td>
-    <td><input type="text" id="new_age"></td>
-    <td><input type="button" class="add" onclick="add_row();" value="Add Row"></td>
-    </tr> -->
-
-
-
-
-
 </tbody>
-
-<script>
-$(document).ready(function(){
-    $("tr>td").click(function(){
-        $(".b").toggle();
-    });
-});
-</script>
-
-<style>
-
-tbody > tr:hover {
-  background-color: rgba(93, 179, 161, 0.77)!important;
-color: white;
-font-weight: 500;
-
-}
-tfoot > tr > td{
-  font-size: 30px;
-  font-weight:bold;
-  font-family: Serif, Georgia;
-  color:black;
-}
-tfoot > tr{
-  background-color: whitesmoke;
-}
-tfoot > tr:hover{
-  background-color: #EEE;
-}
-</style>
 
 <tfoot>
     <tr>
@@ -90,3 +36,37 @@ tfoot > tr:hover{
     <td colspan="2"><%=number_to_currency(@temp_m, locale: :es, separator: '.', delimiter: ',') %></td>
     </tr>
 </tfoot>
+
+<script>
+  $(document).ready(function(){
+    $("tbody > tr").click(function(event){
+      var left = "95px";
+      var id = $(this).attr("id");
+      if ($("tr#"+ id +" td:last-child").width() > 100)
+        var left = "140px"
+
+      $("div #add" + id).css("pointer-events","auto").animate({"opacity":"1","margin-left":"-45px"},500);
+      $("div#n"+id).css("pointer-events","auto").animate({"opacity":"1","margin-left":left});
+
+      $("tbody > tr").click(function(event){
+        $("div #add" + id).css("pointer-events","none").animate({"opacity":"0","margin-left":"0"},500);
+        $("div#n"+id).css("pointer-events","none").animate({"opacity":"0","margin-left":"0"},500);
+      });
+    });
+
+/*No lo borres sirve muy bien*/
+    // $("tbody > tr").mouseover(function(event){
+    //   var id = $(this).attr("id");
+    //   $("div #add" + id).css("pointer-events","auto").animate({"opacity":"1","margin-left":"-45px"},500);
+    //   $("div#n"+id).css("pointer-events","auto").animate({"opacity":"1","margin-left":"110px"});
+    // });
+
+    // $("tbody > tr").mouseout(function(event){
+    //   var id = $(this).attr("id");
+    //   $("div #add" + id).css("pointer-events","none").animate({"opacity":"0","margin-left":"0"},500);
+    //   $("div#n"+id).css("pointer-events","none").animate({"opacity":"0","margin-left":"0"},500);
+    // });
+/*No lo borres sirve muy bien*/
+/*!   !   !   !   !   !   !   !   !*/
+  });
+</script>
