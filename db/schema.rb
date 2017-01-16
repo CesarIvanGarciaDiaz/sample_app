@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
+ActiveRecord::Schema.define(version: 20170115151953) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -30,9 +30,7 @@
     t.datetime "updated_at", null: false
   end
 
-
   create_table "movement_parents", force: :cascade do |t|
-
     t.integer  "movement_id"
     t.integer  "child_id"
     t.boolean  "parent"

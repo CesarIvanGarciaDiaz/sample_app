@@ -14,13 +14,10 @@ include SessionsHelper
   end
 
   def previous_record
-     # if params[:year1]
-     #  @movements = Movement.where('date BETWEEN ? AND ?', "#{params[:year1].strftime('%Y')}-01-01", "#{params[:year2].strftime('%Y')}-12-31").all
-     # else
-     #  @movements = Movement.first
-     # end
-     @history = Movement.where(nil)
-     @history = @history.dt(params[:dt]) if params[:dt].present?
+    @history = Movement.where(nil)
+    if params.present?
+      @history = @history.dt(params)
+    end
   end
   
   def show 
