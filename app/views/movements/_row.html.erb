@@ -15,6 +15,7 @@
         <td><%= number_to_currency(movement.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
         <% @m = movement.deposit + movement.withdrawal %>
         <% @temp_m += @m %>
+
         <td>
           <div id="n<%= movement.id %>" style="display:block; position:absolute; opacity:0; pointer-events:none;">
               <%= link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-right: 20px;" %>
@@ -22,6 +23,7 @@
           </div>
           <%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %>
         </td>
+
 
     </tr>
     <%end%>
@@ -37,7 +39,7 @@
 
 <script>
   $(document).ready(function(){
-    $("tbody > tr").click(function(event){ 
+    $("tbody > tr").click(function(event){
       var left = "95px";
       var id = $(this).attr("id");
       if ($("tr#"+ id +" td:last-child").width() > 100)
@@ -46,20 +48,20 @@
       $("div #add" + id).css("pointer-events","auto").animate({"opacity":"1","margin-left":"-45px"},500);
       $("div#n"+id).css("pointer-events","auto").animate({"opacity":"1","margin-left":left});
 
-      $("tbody > tr").click(function(event){ 
+      $("tbody > tr").click(function(event){
         $("div #add" + id).css("pointer-events","none").animate({"opacity":"0","margin-left":"0"},500);
         $("div#n"+id).css("pointer-events","none").animate({"opacity":"0","margin-left":"0"},500);
       });
     });
 
 /*No lo borres sirve muy bien*/
-    // $("tbody > tr").mouseover(function(event){ 
+    // $("tbody > tr").mouseover(function(event){
     //   var id = $(this).attr("id");
     //   $("div #add" + id).css("pointer-events","auto").animate({"opacity":"1","margin-left":"-45px"},500);
     //   $("div#n"+id).css("pointer-events","auto").animate({"opacity":"1","margin-left":"110px"});
     // });
 
-    // $("tbody > tr").mouseout(function(event){ 
+    // $("tbody > tr").mouseout(function(event){
     //   var id = $(this).attr("id");
     //   $("div #add" + id).css("pointer-events","none").animate({"opacity":"0","margin-left":"0"},500);
     //   $("div#n"+id).css("pointer-events","none").animate({"opacity":"0","margin-left":"0"},500);
