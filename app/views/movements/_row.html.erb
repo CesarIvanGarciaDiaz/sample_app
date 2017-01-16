@@ -32,7 +32,7 @@
         <td><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></td>
          <!-- link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition"  -->
 
-  <td id="<%= movement.id %>" class="b"tyle="display:none"><%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
+  <td id="<%= movement.id %>" class="b" style="display:none"><%= link_to raw("<i class='material-icons md-18'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition" %>
 
 
         <%= link_to raw("<i class='material-icons md-18'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>

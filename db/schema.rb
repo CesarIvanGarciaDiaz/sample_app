@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110172534) do
+ActiveRecord::Schema.define(version: 20170115042911) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -33,6 +33,11 @@ ActiveRecord::Schema.define(version: 20170110172534) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["account_id"], name: "index_financial_statements_on_account_id"
+  end
+
+  create_table "history_movements", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "movement_defineds", force: :cascade do |t|
