@@ -1,0 +1,2 @@
+class MovementParent < ApplicationRecord
+end

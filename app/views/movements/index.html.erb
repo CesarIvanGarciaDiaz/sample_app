@@ -1,38 +1,11 @@
 <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-<style>
-    .btn {
-        padding-top: 0;
-        padding-bottom: 0;
-        align-items: center;
-        font-size: 12px;
-    }
-    th {
-        text-align: center;
-        font-family: fantasy;
-        font-size: 15px;
-    }
-    td {
-        text-align: center;
-    }reated_at desctom: 0;
-        padding-top: -10px;
-    }
-    .boton_creado {
-        position: relative;
-        padding-top: 0;
-        padding-bottom: 0;
-        padding-left: 80%;
-        width: auto;
-    }
-
-</style>
-
 <p id="notice"><%= notice %></p>
 
 <% @cuenta = Account.find(params[:account_id])%>
 <h1>Movimientos de <%= @cuenta.name %></h1>
 <table class="table table-striped table-hover ">
   <thead class="thead-inverse">
-    <tr style="background-color:#DEDEDE;">
+    <tr>
       <th>Concepto de pago</th>
       <th>Referencia</th>
       <th>Fecha</th>
@@ -50,6 +23,6 @@
 <br>
 <div class="container">
   <div class="center">
-    <%= link_to 'Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary' ,style: 'align:center;padding:15px 15px 15px 15px!important;' %>
+    <%= link_to 'Nuevo Movimiento', new_user_account_movement_path(current_user),remote:true,class:'btn btn-primary btn_new_mvnt'  %>
   </div>
 </div>

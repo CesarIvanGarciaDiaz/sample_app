@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MovementDefinedTest < ActiveSupport::TestCase
+class MovementParentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
