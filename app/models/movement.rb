@@ -1,9 +1,14 @@
+require 'time'
 class Movement < ApplicationRecord
   belongs_to :account
   belongs_to :user
   belongs_to :category
   has_many :movement_parents
 
+  scope :dt, -> (params) { where("date BETWEEN ? AND ?",
+    params[:since] != nil ? Time.parse(params[:since]).strftime('%Y-%m-%d') : "0000-00-00",
+    params[:until] != nil ? Time.parse(params[:until]).strftime('%Y-%m-%d') : "0000-00-00" 
+    )}
 
 
   validates :reference, uniqueness: {:message => "El número de referencia ya ha sido utilizado"}, allow_blank: true
@@ -16,5 +21,4 @@ class Movement < ApplicationRecord
     self.reference = "Sin referencia" if self.reference.blank?
   end
 
-  # has_many :movement_defineds
 end
