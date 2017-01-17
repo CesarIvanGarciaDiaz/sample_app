@@ -14,8 +14,25 @@
   </div>
 
   <div class='back'>
+  <% total = 0 %>
+  <% account.movements.each do |t| %>
+  <% temp = t.withdrawal + t.deposit %>
+  <% total += temp %>
+  <% end %>
+<%= link_to number_to_currency(total, locale: :es, separator: '.', delimiter: ',') , user_account_movements_path(current_user,account.id), class:"show-back"
 
-<%=link_to account.name, user_account_movements_path(current_user,account.id), class:"btn btn",style:"width:200px;height:90px;margin-top:-3px;margin-left:0px;margin-buttom:0;padding: 41% 30%;color: white;margin:none;box-shadow:none;font-size:1.3em;"%>
+%>
+<!-- style:"
+width:200px;
+height:90px;
+margin-top:-3px;
+margin-left:0px;
+margin-buttom:0;
+padding: 41% 30%;
+color: white;
+margin:none;
+box-shadow:none;
+font-size:1.3em;" -->
 <!-- ,style:"width:200px;height:50px;margin-top:-3px;margin-left:0px;margin-buttom:0;padding: 25%; background-color: white;" -->
 
   <%= link_to raw("<i class='material-icons '>edit</i>"),edit_user_account_path(current_user,account.id) ,remote: true,class:"btn btn-success center ",style:"display: inline-block; width:3em; padding:0!important; position:absolute; bottom:0; left:0;"%>
