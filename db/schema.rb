@@ -40,15 +40,6 @@ ActiveRecord::Schema.define(version: 20170115151953) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "movement_defineds", force: :cascade do |t|
-    t.integer  "movement_id"
-    t.string   "detail"
-    t.integer  "total_amount"
-    t.integer  "comission"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["movement_id"], name: "index_movement_defineds_on_movement_id"
-  end
 
   create_table "movement_parents", force: :cascade do |t|
     t.integer  "movement_id"

@@ -1,69 +1,60 @@
 <script>
-  // $("#movement_category_id").change(function(){ 
-  //category tiene que ser + * -
-  //   var selection = $("#movement_category_id > option:selected" ).val(); 
-
-  //  if (selection == "-"){                       
-  //     $("#movement_withdrawal").prop( "disabled", false );
-  //     $("#movement_deposit").prop( "disabled", true );                       
-  //  }
-  //  else if(selection == "+"){ 
-  //     $("#movement_withdrawal").prop( "disabled", true );
-  //     $("#movement_deposit").prop( "disabled", false );
-  //  }
-  //  else
-  //     $("#movement_withdrawal, #movement_deposit").prop( "disabled", false );
-  // }).change();
+    // $("#movement_category_id").change(function(){ category tiene que ser + * -   var selection = $("#movement_category_id > option:selected" ).val();  if (selection == "-"){     $("#movement_withdrawal").prop( "disabled", false );
+    // $("#movement_deposit").prop( "disabled", true );  }  else if(selection == "+"){     $("#movement_withdrawal").prop( "disabled", true );     $("#movement_deposit").prop( "disabled", false );  }  else     $("#movement_withdrawal,
+    // #movement_deposit").prop( "disabled", false ); }).change();
 </script>
 <div id="movement-modal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title center">Nuevo Movimiento</h4>
-</div>
-      <%= form_for :movement, remote: true do |f| %>
-      <div class="modal-body">
-  <div class="alert alert-danger" role="alert" style="display: none;"></div>
-  <%= f.hidden_field :account_id, :value => params[:account_id] %>
-                  <%= f.hidden_field :user_id, :value => params[:user_id] %>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title center">Nuevo Movimiento</h4>
+            </div>
+            <%= form_for :movement, remote: true do |f| %>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert" style="display: none;"></div>
+                <%= f.hidden_field :account_id, :value => params[:account_id] %>
+                <%= f.hidden_field :user_id, :value => params[:user_id] %>
 
-                  <div  class="horizontal">
-                      <%= f.label "Concepto de pago" %>
-                      <%= f.text_field :concepto_de_pago ,class: 'form-control', size: 40 %>
-                  </div>
+                <div class="horizontal">
+                    <%= f.label "Concepto de pago" %>
+                    <%= f.text_field :concepto_de_pago ,class: 'form-control', size: 40 %>
+                </div>
 
-                  <div style="width:7em" class="horizontal">
-                      <%= f.label "Referencia" %>
-                      <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia", autocomplete: :off %>
-                  </div>
+                <div style="width:7em" class="horizontal">
+                    <%= f.label "Referencia" %>
+                    <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia", autocomplete: :off %>
+                </div>
 
-                  <div class="input-group date horizontal" style="width: 5.5em">
-                      <%= f.label "Fecha" %>
-                      <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-start-date" => Time.now, "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off %>
-                  </div>
+                <div class="input-group date horizontal" style="width: 5.5em">
+                    <%= f.label "Fecha" %>
+                    <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off %>
+                </div>
 
-                  <div class="horizontal">
-                      <%= f.label "Detalles" %>
-                      <%= f.text_field :detail ,class: 'form-control', size: 40, autocomplete: :off %>
-                  </div>
+                <div class="horizontal">
+                    <%= f.label "Detalles" %>
+                    <%= f.text_field :detail ,class: 'form-control', size: 40, autocomplete: :off %>
+                </div>
 
-                  <div class="horizontal" style="width: 10em; top:20px;"><!-- class="field" -->
-                      <%= f.label "Categoria"%>
-                      <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
-                  </div>
+                <div class="horizontal" style="width: 10em; top:20px;">
+                    <!-- class="field" -->
+                    <%= f.label "Categoria"%>
+                    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
+                </div>
 
-                  <div class="horizontal" style="width: 6em">
-                      <%= f.label "Retiro"%>
-                      <%= f.text_field :withdrawal, size: 10, class: 'form-control dig', value: 0, autocomplete: :off %>
-                  </div>
+                <div class="horizontal" style="width: 6em">
+                    <%= f.label "Retiro"%>
+                    <%= f.text_field :withdrawal, size: 10, class: 'form-control dig', value: 0, autocomplete: :off %>
+                </div>
 
-                  <div class="horizontal" style="width: 6em">
-                      <%= f.label "Deposito"%>
-                      <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
-                  </div>
+                <div class="horizontal" style="width: 6em">
+                    <%= f.label "Deposito"%>
+                    <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
+                </div>
 
-<!--                   <div class="horizontal">
+                <!--                   <div class="horizontal">
                       <label data-toggle="collapse" data-target="#iva" aria-expanded="false" aria-controls="collapseTwo">
                           Integrar Iva<input type="checkbox">
                       </label>
@@ -72,11 +63,14 @@
                    <div id="iva" aria-expanded="false" class="collapse out">
                       <div class="well">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe ut molestias eius, nam neque esse eos modi corrupti harum fugit, hic recusandae praesentium, minima ipsa eligendi architecto at! Culpa, explicabo.</div>
                   </div> -->
-  </div>
-        <div class="modal-footer">
-            <%= f.submit class:"btn btn-primary btn-lg btn-block", value: "Crear Movimiento"%>
+            </div>
+            <div class="modal-footer">
+                <%= f.submit class:"btn btn-primary btn-lg btn-block", value: "Crear Movimiento"%>
+            </div>
+            <% end %>
         </div>
-        <% end %>
-       </div><!-- /.modal-content -->
-     </div><!-- /.modal-dialog -->
-   </div><!-- /.modal -->
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

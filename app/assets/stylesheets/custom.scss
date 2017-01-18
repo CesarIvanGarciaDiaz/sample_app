@@ -15,7 +15,65 @@ $gray-medium-light: #eaeaea;
 }
 
 
+#hexagono2{
+  height: 5.7735em;
+  position: relative;
+  width: 10em;
+}
+#hexagono2:before {
+  background: inherit;
+  content: '';
+  height: 100%;
+  position: absolute;
+  transform: rotate(-60deg);
+  transform-origin: 50% 50%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left:0;
+}
+#hexagono2:after {
+  background: inherit;
+  content: '';
+  height: 100%;
+  position: absolute;
+  transform: rotate(60deg);
+  transform-origin: 50% 50%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left:0;
+}
+.color-example{
+  top:60px;
+  background:gray;
+}
+#hexagono2{
+  transition: 2s ease;
+  -moz-transition: 2s ease; /* Firefox */
+ 	-webkit-transition: 2s ease; /* Chrome - Safari */
+ 	-o-transition: 2s ease; /* Opera */
+}
+#hexagono2:hover
+{
+  transform : rotate(360deg);
+  -moz-transform : rotate(360deg); /* Firefox */
+	-webkit-transform : rotate(360deg); /* Chrome - Safari */
+	-o-transform : rotate(360deg); /* Opera */
+}
 
+
+#master{
+  height:290px;
+  width:290px;
+  background-color:yellow;
+}
+
+.color-example{
+  background:rgb(23, 209, 142);
+}
 .img-circle {
   background-repeat: no-repeat;
     // background-position: 50%;

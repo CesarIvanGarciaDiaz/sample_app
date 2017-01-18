@@ -1,3 +1,15 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.btn-user{
+	width: 		250px !important;
+	height: 	50px !important;
+	font-size: 	15px !important;
+	font-weight:bold !important;
+	padding-top:15px !important;
+	padding-bottom:0 !important;
+	border-radius: 0 !important;
+	&:hover{
+		box-shadow:disabled !important;
+	}
+}
