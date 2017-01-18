@@ -70,3 +70,22 @@
 .social:hover {
     transform: rotateY(100deg);
 }
+
+.show-back{
+    color:white!important;
+    font-size:24px;
+    position:relative;
+    top:3em;
+    &:hover{
+        text-decoration: none;
+    }
+    &:after{
+        content:"";
+        position: fixed;
+        padding-top: 3.35em;
+        padding-bottom: 5em;
+        left: 0;
+        right: 0;
+        top: 0;
+    } 
+}

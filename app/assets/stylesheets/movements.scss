@@ -70,11 +70,11 @@ tbody#view{
 			color:blue;
 		}
 	}
-	tr:hover {
-		background-color: rgba(93, 179, 161, 0.77)!important;
-		color: white;
-		font-weight: 500;
-	}
+	// tr:hover {
+	// 	background-color: rgba(93, 179, 161, 0.77)!important;
+	// 	color: white;
+	// 	font-weight: 500;
+	// }
 }
 tfoot{
 	tr{
@@ -86,9 +86,9 @@ tfoot{
 			color:black;
 		}
 	}
-	tr:hover{
-		background-color: #EEE;
-	}
+	// tr:hover{
+	// 	background-color: #EEE;
+	// }
 }
 .btn_new_mvnt {
 	align:center;

@@ -5,9 +5,15 @@
 
     <tr id="<%= movement.id %>">
         <td >
-            <div id="add<%= movement.id %>" style="display: block;" class="add">
+
+
+            <div id="add<%= movement.id %>" style="display: block;margin-right:9px;" class="add">
                 <i class="material-icons icAdd">add_circle_outline</i>
-            </div><%= movement.concepto_de_pago %></td>
+            </div>
+
+        <!-- link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-right: 5px;" %> -->
+
+        <%= movement.concepto_de_pago %></td>
         <td><%= movement.reference %></td>
         <td><%= movement.date.strftime('%d/%m/%Y') %></td>
         <td>
@@ -20,14 +26,11 @@
         <% @temp_m += @m %>
         <td>
             <%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></td>
-        <td>
-            <!-- <div id="n<%= movement.id %>" style="">
-link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-right: 20px;" %>
-link_to raw("<i class='material-icons md-24'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
-</div> -->
+        <td style="background-color:#EEEEEE;">
+
 
             <div id="n<%= movement.id %>" style="display:block; position:absolute; opacity:0; pointer-events:none;">
-                <%=link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-right: 5px;" %>
+                <%=link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-left: 1px;" %>
                 <%=link_to raw("<i class='material-icons md-24'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
             </div>
 
@@ -53,11 +56,11 @@ link_to raw("<i class='material-icons md-24'>delete_sweep</i>"), user_account_mo
 
             $("div #add" + id).css("pointer-events", "auto").animate({
                 "opacity": "1",
-                "margin-left": "-35px"
+                "margin-left": "-43px"
             }, 500);
             $("div#n" + id).css("pointer-events", "auto").animate({
                 "opacity": "1",
-                "margin-left": "30px"
+                "margin-left": "5px"
             }, 500);
             // }, 3000);
             var t = setInterval(ocultar, 2000);
