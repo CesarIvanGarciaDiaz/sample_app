@@ -1,8 +1,5 @@
 <% if @account.errors.empty? %>
- $("#account-modal").modal('hide');
- $("#container_account").prepend('<%= j render "row", account: @account %>');
- $(".front , .back").attr("id","nuevo");
- $("#nuevo").css( "background-color", "#FFC300" );
+$("#account-modal").modal('hide'); $("#container_account").prepend('<%= j render "row", account: @account %>'); $(".front , .back").attr("id","nuevo"); $("#nuevo").css( "background-color", "#FFC300" );
 
 <% else %>
 alert('<%= @account.errors.full_messages[0] %>');

@@ -1,5 +1,7 @@
 class MovementsController < ApplicationController
  before_filter :require_login
+
+# before_create
     def index
   #  @movements = Account.find(params[:account_id]).movements.order("date", "reference").paginate(page: params[:page])
 
@@ -12,15 +14,21 @@ class MovementsController < ApplicationController
     end
 
     def edit
-       @movement=Movement.find(params[:id])
-
+    @movement=Movement.find(params[:id])
+      # if @movement.reference == ""
+      # @movement.reference ="Sin referencia"
+      # end
+#@movement.reference= "Sin referencia" if @movement.reference.blank?
+#@movement.reference= "Sin referencia" if @movement.reference.blank?
     end
 
     def create
       params[:movement][:reference] ||= "Sin refencia"
       @category = Category.all
       @movement =Movement.new(movement_params)
+
        if @movement.save
+
        flash[:success] = "Creado Correctamente"
        redirect_to user_account_movements_path(current_user)
        create_clon(@movement.id)
@@ -39,7 +47,7 @@ class MovementsController < ApplicationController
       @val_1 = 0
       @val_2 = 0
 
-      if @clon.withdrawal != 0 
+      if @clon.withdrawal != 0
         @val_1 = @c1
       elsif @clon.deposit != 0
         @val_2 = @c1
@@ -50,9 +58,9 @@ class MovementsController < ApplicationController
       elsif @clon.deposit != 0
         @iva_2 = @c2
       end
-      
 
-@total = Movement.new(user_id:           current_user, 
+
+@total = Movement.new(user_id:           current_user,
                       account_id:        @clon.account_id,
                       concepto_de_pago:  @c1_n,
                       reference:         "hijo_SubTotal#{id}",
@@ -62,8 +70,8 @@ class MovementsController < ApplicationController
                       withdrawal:        @val_1,
                       deposit:           @val_2)
 @total.save
-      
-@iva = Movement.new(user_id:           current_user, 
+
+@iva = Movement.new(user_id:           current_user,
                     account_id:        @clon.account_id,
                     concepto_de_pago:  @c2_n,
                     reference:         "hijo_IVA#{id}",
@@ -82,6 +90,7 @@ class MovementsController < ApplicationController
 
     def update
       @movement = Movement.update(params[:id], movement_params)
+      # @movement.reference = "Sin referencia" if @movement == ""
       if @movement.save
         flash[:success] = "Movimiento a sido actualizado"
         redirect_to user_account_movements_path(current_user)

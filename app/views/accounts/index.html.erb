@@ -1,17 +1,17 @@
 <style media="screen">
-  .btn{
-    width: 10px;
-height: 35px;
-margin: 0 auto;
-  }
+    .btn {
+        width: 10px;
+        height: 35px;
+        margin: 0 auto;
+    }
+
 </style>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+
 <div>
-<p id="notice"><%= notice %></p>
-<h1>Seleccione la cuenta a administrar</h1>
-<% @accounts.each do |account| %>
+    <p id="notice"><%= notice %></p>
+    <h1>Seleccione la cuenta a administrar</h1>
+    <% @accounts.each do |account| %>
     <%= render "row", account: account %>
 
-<% end %>
+    <% end %>
 </div>

@@ -1,29 +1,34 @@
 <div id="category-modal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title center">Nueva Categoria</h4>
-</div>
-      <%= form_for :category, remote: true do |f| %>
-      <div class="modal-body">
-  <div class="alert alert-danger" role="alert" style="display: none;"></div>
-      <div class="field">
-        <%= f.label "Nombre" %>
-        <%= f.text_field :name ,class: "form-control input-lg", placeholder: "Nombre de la categoría" %>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title center">Nueva Categoria</h4>
+            </div>
+            <%= form_for :category, remote: true do |f| %>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert" style="display: none;"></div>
+                <div class="field">
+                    <%= f.label "Nombre" %>
+                    <%= f.text_field :name ,class: "form-control input-lg", placeholder: "Nombre de la categoría" %>
+                </div>
 
-      <div class="field">
-        <%= f.label "Clasificación" %>
-        <%= f.select(:classification, [["Neutro", "n"], ["Egreso", "e"], ["Ingreso", "i"]]) %>
-      </div>
+                <div class="field">
+                    <%= f.label "Clasificación" %>
+                    <%= f.select(:classification, [["Neutro", "n"], ["Egreso", "e"], ["Ingreso", "i"]]) %>
+                </div>
 
- </div>
+            </div>
 
-        <div class="modal-footer">
-            <%= f.submit class:"btn btn-primary btn-lg btn-block" , value:"Guardar"%>
+            <div class="modal-footer">
+                <%= f.submit class:"btn btn-primary btn-lg btn-block" , value:"Guardar"%>
+            </div>
+            <% end %>
         </div>
-        <% end %>
-       </div><!-- /.modal-content -->
-     </div><!-- /.modal-dialog -->
-   </div><!-- /.modal -->
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

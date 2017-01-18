@@ -25,10 +25,21 @@ ActiveRecord::Schema.define(version: 20170115151953) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "financial_statements", force: :cascade do |t|
+    t.integer  "account_id"
+    t.integer  "withdrawal", default: 0
+    t.integer  "deposit",    default: 0
+    t.integer  "balance",    default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["account_id"], name: "index_financial_statements_on_account_id"
+  end
+
   create_table "history_movements", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
 
   create_table "movement_parents", force: :cascade do |t|
     t.integer  "movement_id"

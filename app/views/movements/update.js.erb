@@ -1,7 +1,7 @@
 <% if @movement.errors.empty? %>
   // add the row to the table, show alert and hide modal
   $('table tbody tr#<%= @movement.id %>').replaceWith(' <%= j render "row", movement: @movement %>');
-  $('.alert-success').html("La cuenta ha sido modificada con éxito").show();
+  $('.alert-success').html("El movimiento ha sido modificado con éxito").show();
   $('#movement-modal').modal('hide');
 <% else %>
   // show first error
