@@ -4,38 +4,27 @@
     <% @movements.each do |movement| %>
 
     <tr id="<%= movement.id %>">
-        <td >
-
-
-            <div id="add<%= movement.id %>" style="display: block;margin-right:9px;" class="add">
-                <i class="material-icons icAdd">add_circle_outline</i>
-            </div>
-
-        <!-- link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-right: 5px;" %> -->
-
-        <%= movement.concepto_de_pago %></td>
-        <td><%= movement.reference %></td>
-        <td><%= movement.date.strftime('%d/%m/%Y') %></td>
         <td>
-            <%= ApplicationRecord.month(movement.date) %></td>
-        <td><%= movement.detail %></td>
-        <td><%= Category.find(movement.category_id).name %></td>
-        <td><%= number_to_currency(movement.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
-        <td><%= number_to_currency(movement.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
+          <div id="add<%= movement.id %>" style="display: block;margin-right:9px;" class="add">
+            <i class='material-icons icAdd'>add_circle_outline</i>
+          </div>
+          <span><%= movement.concepto_de_pago %></span>
+        </td>
+        <td><span><%= movement.reference == "" ? "Sin referencia" : movement.reference%></span></td>
+        <td><span><%= movement.date.strftime('%d/%m/%Y') %></span></td>
+        <td><span><%= ApplicationRecord.month(movement.date) %></span></td>
+        <td><span><%= movement.detail %></span></td>
+        <td><span><%= Category.find(movement.category_id).name %></span></td>
+        <td><span><%= number_to_currency(movement.withdrawal, locale: :es, separator: '.', delimiter: ',') %></span></td>
+        <td><span><%= number_to_currency(movement.deposit, locale: :es, separator: '.', delimiter: ',') %></span></td>
         <% @m = movement.deposit + movement.withdrawal %>
         <% @temp_m += @m %>
-        <td>
-            <%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></td>
-        <td style="background-color:#EEEEEE;">
-
-
-            <div id="n<%= movement.id %>" style="display:block; position:absolute; opacity:0; pointer-events:none;">
-                <%=link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-left: 1px;" %>
-                <%=link_to raw("<i class='material-icons md-24'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
-
+        <td><span><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></span>
+          <div id="n<%= movement.id %>" style="display:block; position:absolute; opacity:0; pointer-events:none;">
+            <%=link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-left: 1px;" %>
+            <%=link_to raw("<i class='material-icons md-24'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
         </td>
-
     </tr>
     <%end%>
 
@@ -50,9 +39,14 @@
 
 <script>
     $(document).ready(function () {
-        $("tbody > tr").mouseover(function (event) {
+        $("tbody > tr").click(function (event) {
+        var width;
             var id = $(this).attr("id");
-            // var t = setTimeout(function() { alert("hover");
+             if ($("tr > td:nth-child(9)").width() > 90){
+              width = "10em";
+            }else{
+              width = "4em";
+            }
 
             $("div #add" + id).css("pointer-events", "auto").animate({
                 "opacity": "1",
@@ -60,10 +54,10 @@
             }, 500);
             $("div#n" + id).css("pointer-events", "auto").animate({
                 "opacity": "1",
-                "margin-left": "5px"
+                "margin-left": width
             }, 500);
             // }, 3000);
-            var t = setInterval(ocultar, 2000);
+            var t = setInterval(ocultar, 3000);
             function ocultar() {
                 $("div #add" + id).css("pointer-events", "none").animate({
                     "opacity": "0",
@@ -79,3 +73,5 @@
 
     });
 </script>
+
+                <!-- "margin-left": "90px" -->
