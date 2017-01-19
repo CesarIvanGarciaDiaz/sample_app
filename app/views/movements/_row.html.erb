@@ -6,7 +6,8 @@
     <tr id="<%= movement.id %>">
         <td>
           <div id="add<%= movement.id %>" style="display: block;margin-right:9px;" class="add">
-            <i class='material-icons icAdd'>add_circle_outline</i>
+
+<%=link_to raw("<i class='material-icons icAdd'>add_circle_outline</i>"), create_clone_user_account_movement_path(current_user, params[:account_id],movement.id),remote:true%>
           </div>
           <span><%= movement.concepto_de_pago %></span>
         </td>
@@ -45,7 +46,7 @@
              if ($("tr > td:nth-child(9)").width() > 90){
               width = "10em";
             }else{
-              width = "4em";
+              width = "6em";
             }
 
             $("div #add" + id).css("pointer-events", "auto").animate({
