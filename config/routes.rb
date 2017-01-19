@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
   resources :users do
     resources :accounts do
-      resources :movements
+      resources :movements do
+          member do
+            # get :action
+            # put :action
+            get 'create_clone'
+            post 'create_clone'
+            # delete :action
+          end
+
     end
   end
+  end
+
 
   resources :users do
     resources :categories
@@ -26,6 +36,8 @@ Rails.application.routes.draw do
   post  '/users/:user_id/categories/new',  to: 'categories#create'
   post  '/users/:user_id/accounts/:account_id/movements/new',  to: 'movements#create'
 
+
+  # post  '/users/:user_id/accounts/:account_id/movements/:id/create_clone'
   # get 'sessions/new'
   # post '/users/:user_id/accounts/:account_id/movements/:id/edit',  to: 'accounts#edit'
   #post '/users/:user_id/accounts/:account_id/movements/:id/edit',  to: 'movements#edit'

@@ -11,7 +11,7 @@ class CreateMovements < ActiveRecord::Migration[5.0]
       t.float :withdrawal
       t.float :deposit
       t.timestamps
-      # se debe calcular en la vista el balance 
+      # se debe calcular en la vista el balance
     end
   end
 end

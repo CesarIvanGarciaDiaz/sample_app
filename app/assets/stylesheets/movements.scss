@@ -6,7 +6,10 @@
 	box-shadow: none !important;
 	padding: 0!important;
 	margin: auto 0;
-	margin-top:-10px;
+  margin-top:-3.5em;
+	&:nth-child(1){
+	margin-right:1em;
+	}
 }
 
 .modal-dialog{
@@ -23,6 +26,10 @@
 	padding-bottom: 0;
 	align-items: center;
 	font-size: 12px;
+}
+.btn-lg{
+	height:2em !important;
+	font-size: 15px;
 }
 thead tr{
 	background-color:#DEDEDE;

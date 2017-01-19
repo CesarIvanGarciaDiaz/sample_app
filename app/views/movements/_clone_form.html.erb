@@ -1,0 +1,15 @@
+<%= form_for :movement, remote: true do |f| %>
+<%= f.hidden_field :account_id, :value => params[:account_id] %>
+<%= f.hidden_field :user_id, :value => params[:user_id] %>
+
+<td><%= f.text_field :concepto_de_pago ,placeholder:"Concepto de pago", size: 40 %></td>
+<td><%= f.text_field :reference , placeholder:"Sin referencia", autocomplete: :off %></td>
+<td><%= f.text_field :date,placeholder:"Fecha", "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off %></td>
+<td><%= f.text_field :detail,placeholder:"Detalles", size: 40, autocomplete: :off %></td>
+<td><%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %></td>
+<td><%= f.text_field :withdrawal,placeholder:"Retiro", size: 10, value: 0, autocomplete: :off %></td>
+<td><%= f.text_field :deposit,placeholder:"Deposito", size: 10, value: 0, autocomplete: :off %></td>
+
+<%= f.submit class:"btn btn-primary btn-lg btn-block", value: "Crear Movimiento" %>
+
+<% end %>

@@ -1,52 +1,45 @@
 <style media="screen">
-    .boton {
-        top: 10%;
-        left: 0;
-        position: fixed;
-        margin: none;
-    }
-
-    .search {
-        position: fixed;
-        top: 15%;
-        color: white;
-        background: #03A8F2;
-        width: 80px;
-        height: 80px;
-        border-radius: 75px;
-        float: left;
-        cursor: pointer;
-    }
-    .search:hover {
-        background: #614381;
-
-    }
-
-.search .material-icons{
-top:-5px;
-  text-align: center;
-
+.boton {
+  top: 10%;
+  left: 0;
+  position: fixed;
+  margin: none;
 }
-
-
-
-    tr > td:nth-child(7) {
-        text-align: right;
-        font-weight: bold;
-        background-color: rgba(214, 13, 13, 0.20);
-    }
-    tr > td:nth-child(8) {
-        text-align: right;
-        font-weight: bold;
-        background-color: rgba(13, 154, 214, 0.20);
-    }
-    tr > td:nth-child(9) {
-        text-align: right;
-        font-weight: bold;
-        background-color: rgba(77, 214, 13, 0.4);
-    }
-
-
+.search {
+  position: fixed;
+  bottom:10%;
+  color: white;
+  background: #03A8F2;
+  width: 80px;
+  height: 80px;
+  border-radius: 75px;
+  float: left;
+  cursor: pointer;
+  margin-left: 0.5em;
+}
+.search:hover {
+  background: #614381;
+  /*#1976d2;*/
+}
+.search .material-icons{
+  text-align: center;
+  margin-top: 1.5px;
+}
+tr > td:nth-child(7) {
+  text-align: right;
+  font-weight: bold;
+  background-color: rgba(214, 13, 13, 0.20);
+}
+tr > td:nth-child(8) {
+  text-align: right;
+  font-weight: bold;
+  background-color: rgba(13, 154, 214, 0.20);
+}
+tr > td:nth-child(9) {
+  text-align: right;
+  font-weight: bold;
+  background-color: rgba(77, 214, 13, 0.4);
+}
 </style>
 <p id="notice"><%= notice %></p>
 
@@ -69,17 +62,10 @@ top:-5px;
     </thead>
     <%= render "row", movement: :movement  %>
 </table>
-<!--
-<br> -->
+
 <div class="container">
     <div class="boton">
-        <!-- <i class="material-icons" style="display: inline-flex; vertical-align: middle;font-size:33px;">note_add</i> -->
-
-        <!-- <div class="search" id="search">
-
- </div> -->
         <div class="search" id="search">
-
             <%=link_to 'assignment', new_user_account_movement_path(current_user),remote:true,class:' btn btn_new_mvnt material-icons' ,style:" color:white; font-size:50px; box-shadow:none;;" %>
         </div>
     </div>

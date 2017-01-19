@@ -1,3 +1,5 @@
+require 'time'
+
 class Movement < ApplicationRecord
   belongs_to :account
   belongs_to :user
@@ -16,8 +18,8 @@ class Movement < ApplicationRecord
 
   before_create do
     self.withdrawal = self.withdrawal * -1 if self.withdrawal >= 0
-    self.reference = "Sin referencia" if self.reference.blank?
   end
+
 
   # has_many :movement_defineds
 end
