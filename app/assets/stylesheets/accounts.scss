@@ -6,7 +6,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 // a,a:visited { color: #fff; }
 // a:hover { color: #fff; }
-
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-material-design";
 .social {
     float: left;
     margin: 1em;
@@ -87,5 +89,5 @@
         left: 0;
         right: 0;
         top: 0;
-    } 
+    }
 }
