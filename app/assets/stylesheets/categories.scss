@@ -1,6 +1,9 @@
 // Place all the styles related to the Categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-material-design";
 .filtr{
 	width: 		5em !important;
 	font-size: 	20px !important;

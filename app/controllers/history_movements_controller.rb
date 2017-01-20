@@ -19,17 +19,16 @@ include SessionsHelper
       @history = @history.dt(params)
     end
   end
-  
-  def show 
+
+  def show
     @movements = Movement.where('date BETWEEN ? AND ?', "#{params[:year]}-01-01", "#{params[:year]}-12-31").all
   end
 
   def download
     @movements = Movement.where('date BETWEEN ? AND ?', "#{Time.now.year}-01-01", "#{Time.now.year}-12-31").all
-    pdf = WickedPdf.new.pdf_from_string(
-      render_to_string(template: 'history_movements/report.pdf.erb', layout: 'pdf.html') )
-    send_data(pdf, 
-      :filename => "Reporte #{Time.now.year}.pdf", 
+    pdf = WickedPdf.new.pdf_from_string(render_to_string(template: 'history_movements/report.pdf.erb', layout: 'pdf.html'))
+    send_data(pdf,
+      :filename => "Reporte #{Time.now.year}.pdf",
       :disposition => 'attachment')
     
   end
