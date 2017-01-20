@@ -9,7 +9,7 @@ include SessionsHelper
       respond_to do |format|
         format.html
         format.json
-        format.pdf {render template: 'history_movements/report', pdf: "Reporte #{Time.now.year}", layout: 'pdf.html' } # nombre del archivo a partir del que se genera el pdf
+        format.pdf {render template: 'history_movements/report', pdf: "Reporte #{Time.now.year}", layout: 'pdf.html'}  # nombre del archivo a partir del que se genera el pdf
       end
   end
 
@@ -26,10 +26,12 @@ include SessionsHelper
 
   def download
     @movements = Movement.where('date BETWEEN ? AND ?', "#{Time.now.year}-01-01", "#{Time.now.year}-12-31").all
-    pdf = WickedPdf.new.pdf_from_string(render_to_string(template: 'history_movements/report.pdf.erb', layout: 'pdf.html'))
+    pdf = WickedPdf.new.pdf_from_string(
+      render_to_string(template: 'history_movements/report.pdf.erb', layout: 'pdf.html') )
     send_data(pdf, 
       :filename => "Reporte #{Time.now.year}.pdf", 
       :disposition => 'attachment')
+    
   end
 
 private
