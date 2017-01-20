@@ -2,13 +2,24 @@
 <html>
 <head>
     <title></title>
+
+  <%= wicked_pdf_stylesheet_link_tag 'pdf.css.scss' %>
     <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+    <%= wicked_pdf_stylesheet_link_tag "bootstrap.min.css"%>
+
+  <%= csrf_meta_tags %>
+
+
+
     <%= render 'layouts/rails_default' %>
     <meta charset='utf-8'>
+
 </head>
-<body>
+<body style="margin-top: 100px;">
 <div class="container">
     <%= yield%>
 </div>
 </body>
+<footer>
+</footer>
 </html>

@@ -1,29 +1,46 @@
 <% provide(:title, "Registro #{Time.now.year}") %>
+  <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
 <style type="text/css">
-    h1 {
-        font-family: Georgia,"Times New Roman",Serif;
-        font-size: 30px;
-    }
-    tr th {
-        font-family: "Times New Roman",Georgia,Serif;
-        font-size: 10px;
-        padding: 3px 1.5px;
-    }
-    td {
-        font-family: Serif,"Times New Roman",Georgia;
-        font-size: 8.5px;
-        padding: 5px;
-    }
+h1 {
+      font-family: Georgia,"Times New Roman",Serif;
+      font-size: 30px;
+  }
+  tr th {
+      font-family: "Times New Roman",Georgia,Serif;
+      font-size: 10px;
+      padding: 3px 1.5px;
+  }
+  thead{
+      margin-bottom: 10em;
+      margin-top: 2em;
+  }
+
+  .nobreak:before{
+      clear: both;
+  }
+  .nobreak {
+      page-break-inside: avoid;
+  }
+      /*page-break-before: always !important;*/
+  td {
+      font-family: Serif,"Times New Roman",Georgia;
+      font-size: 8.5px;
+      padding: 5px;
+  }
 
 </style>
+
+  <% @temp_m = 0 %>
 <div class="center">
+ <!-- <div class= "left" style="padding-top:0;width:100%;"><%= wicked_pdf_image_tag('lo.jpg') %></div> -->
     <h1>Resumen de movimientos realizados</h1>
     <h1><%= Time.now.strftime '%Y' %></h1>
+
 </div>
 
 <table class="table table-striped table-hover ">
     <thead>
-        <tr style="background-color: #2791E7">
+        <tr style="background-color:#E7E8EB; ">
             <th>Cuenta</th>
             <th>Concepto de pago</th>
             <th>Reference</th>
@@ -40,7 +57,7 @@
 
     <tbody>
         <% @movements.each do |movement| %>
-        <tr>
+        <tr class="nobreak">
             <td><%= Account.find(movement.account_id).name %></td>
             <td><%= movement.concepto_de_pago %></td>
             <!-- style="word-wrap:break-word;" -->
@@ -52,18 +69,19 @@
             <!-- Crear espacio para fecha en que se reporto el retiro o deposito -->
             <td><%= Category.find(movement.category_id).name %></td>
             <td><%= movement.detail %></td>
-            <td>
-                $41,347.32
-            </td>
-            <td>
-                $48,306,279.60
-            </td>
-            <td>
-                $52,788,148.62
-            </td>
+            <td><span><%= number_to_currency(movement.withdrawal, locale: :es, separator: '.', delimiter: ',') %></span></td>
+            <td><span><%= number_to_currency(movement.deposit, locale: :es, separator: '.', delimiter: ',') %></span></td>
+            <% @m = movement.deposit + movement.withdrawal %>
+            <% @temp_m += @m %>
+            <td><span><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></span>
             <!-- mandar a llamar Financial Statement -->
 
         </tr>
         <% end %>
+
+
     </tbody>
+
+
+
 </table>
