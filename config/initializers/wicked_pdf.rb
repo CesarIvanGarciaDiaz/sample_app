@@ -9,9 +9,5 @@
 # https://github.com/mileszs/wicked_pdf/blob/master/README.md
 
 WickedPdf.config = {
-  :layout => 'pdf.html'),
-  :margin => {
-    :top => 38,
-    :bottom => 25
-  }
+
 }

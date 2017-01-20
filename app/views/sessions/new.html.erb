@@ -1,3 +1,4 @@
+
 <% provide(:title, "Log in") %>
 <h1>Log in</h1>
 
@@ -11,11 +12,16 @@
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me %>
-        <span>Remember me on this computer</span>
-      <% end %>
-
+      <div class='form-group'>
+        <div class='control-label col-sm-2'>
+      </div>
+        <div class="checkbox col-sm-8">
+            <%= f.label :remember_me, class: "checkbox inline" do %>
+              <%= f.check_box :remember_me %>
+              <span>Remember me on this computer</span>
+              <%end%>
+        </div>
+</div>
       <%= f.submit "Log in", class: "btn btn-primary" %>
     <% end %>
 
