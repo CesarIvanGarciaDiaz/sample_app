@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
-    <%= render 'layouts/rails_default' %>
-    <%= render 'layouts/shim' %><!-- agrega el parcial de IE  -->
-  </head>
-  <body>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <%= render 'layouts/header' %><!-- agrega el parcial de header -->
-    <div class="container">
-      <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}")%>
-       <% end %>
+    <head>
+        <title><%= full_title(yield(:title)) %></title>
+        <%= render 'layouts/rails_default' %>
+        <%= render 'layouts/shim' %>
+        <!-- agrega el parcial de IE  -->
+    </head>
+    <body>
+        <!-- Material Design fonts -->
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+        <script src="material.js"></script>
 
-      <br><br>
-      <%= yield %>
-      <br>
-      <br>
-      <br>
-      <%= render 'layouts/footer' %><!-- agrega el parcial de footer -->
-      <%= debug(params) if Rails.env.development? %>
-    </div>
-  </body>
+        <!-- <link rel="stylesheet" type="text/css" href="dist/css/ripples.min.css"> -->
+
+        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+        <%= render 'layouts/header' %>
+        <!-- agrega el parcial de header -->
+        <div class="container">
+            <% flash.each do |message_type, message| %>
+            <%= content_tag(:div, message, class: "alert alert-#{message_type}")%>
+            <% end %>
+
+            <br><br>
+            <%= yield %>
+            <br>
+            <br>
+            <br>
+            <%= render 'layouts/footer' %>
+            <!-- agrega el parcial de footer -->
+             <!-- debug(params) if Rails.env.development? %> -->
+        </div>
+    </body>
 </html>
 
 <script type="text/javascript">
-$(function () {
-  var alert = $('.alert');
-  if (alert.length > 0) {
-    alert.show().animate({height: alert.outerHeight()}, 200);
-    window.setTimeout(function() {
-      alert.slideUp();
-    }, 3000);
-  }
-});
-
+    $(function () {
+        var alert = $('.alert');
+        if (alert.length > 0) {
+            alert.show().animate({
+                height: alert.outerHeight()
+            }, 200);
+            window.setTimeout(function () {
+                alert.slideUp();
+            }, 3000);
+        }
+    });
 </script>

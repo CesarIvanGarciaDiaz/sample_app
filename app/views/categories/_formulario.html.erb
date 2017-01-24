@@ -1,3 +1,6 @@
+
+<link href="jquery.dropdown.css" rel="stylesheet">
+
 <div id="category-modal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -19,7 +22,6 @@
                     <%= f.label "Clasificación" %>
                     <%= f.select(:classification, [["Neutro", "n"], ["Egreso", "e"], ["Ingreso", "i"]]) %>
                 </div>
-
             </div>
 
             <div class="modal-footer">
@@ -32,3 +34,23 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+
+<!-- <script src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script> -->
+<!-- <script src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/ripples.min.js"></script> -->
+
+<script src="jquery.dropdown.js"></script>
+<script>
+  $.material.init();
+
+  $(document).ready(function() {
+    $(".select").dropdown({"optionClass": "withripple"});
+  });
+
+  $().dropdown({autoinit: "select"});
+
+  $("button").click(function() {
+    $("body").append("<select class=select><option>hey</option><option>hey</option></select>");
+  });
+
+</script>

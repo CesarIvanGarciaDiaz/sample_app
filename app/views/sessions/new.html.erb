@@ -1,24 +1,38 @@
+
+<script src="material.js"></script>
 <% provide(:title, "Log in") %>
-<h1>Log in</h1>
+
+<div class="panel panel-primary">
+<div class="panel-heading">
+	<h3 class="panel-title center" style="font-weight: bold;font-size:30px;">INGRESAR</h3>
+</div>
+<div class="panel-body">
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(:session, url: login_path) do |f| %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <%= f.label :email ,style:"font-size:25px;" %>
+      <%= f.email_field :email, class: 'form-control'  ,style:"font-size:20px;text-align:center;"  %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <%= f.label :password  ,style:"font-size:25px;" %>
+      <%= f.password_field :password, class: 'form-control' ,style:"font-size:20px;text-align:center;margin:0px;"  %>
 
-      <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me %>
-        <span>Remember me on this computer</span>
-      <% end %>
-
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <div class='form-group'>
+        <div class='control-label col-sm-2'>
+      </div>
+        <!-- <div class="checkbox col-sm-8">
+            <%= f.label :remember_me, class: "checkbox inline" do %>
+              <%= f.check_box :remember_me %>
+              <span>Remember me on this computer</span>
+              <%end%>
+        </div> -->
+</div>
+      <%= f.submit "Log in", class:"btn btn-primary"%>
     <% end %>
 
 
   </div>
+</div>
+</div>
 </div>
