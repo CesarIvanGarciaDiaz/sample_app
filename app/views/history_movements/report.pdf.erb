@@ -1,7 +1,7 @@
 <% provide(:title, "Registro #{Time.now.year}") %>
   <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
 <style type="text/css">
-h1 {
+  h1{
       font-family: Georgia,"Times New Roman",Serif;
       font-size: 30px;
   }
@@ -32,7 +32,7 @@ h1 {
 
   <% @temp_m = 0 %>
 <div class="center">
- <!-- <div class= "left" style="padding-top:0;width:100%;"><%= wicked_pdf_image_tag('lo.jpg') %></div> -->
+  <!-- <div class= "left" style="padding-top:0;width:100%;"><%= wicked_pdf_image_tag('lo.jpg') %></div> -->
     <h1>Resumen de movimientos realizados</h1>
     <h1><%= Time.now.strftime '%Y' %></h1>
 
@@ -64,8 +64,7 @@ h1 {
             <td><%= movement.reference %></td>
             <td><%= movement.date.strftime('%d/%m/%Y') %></td>
             <!-- Esta fecha es la de cuando se registro -->
-            <td>
-                <%= movement.date.strftime('%B') %></td>
+            <td><%= movement.date.strftime('%B') %></td>
             <!-- Crear espacio para fecha en que se reporto el retiro o deposito -->
             <td><%= Category.find(movement.category_id).name %></td>
             <td><%= movement.detail %></td>

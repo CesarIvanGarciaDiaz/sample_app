@@ -9,7 +9,7 @@ include SessionsHelper
       respond_to do |format|
         format.html
         format.json
-        format.pdf {render template: 'history_movements/report', pdf: "Reporte #{Time.now.year}", layout: 'pdf.html' } # nombre del archivo a partir del que se genera el pdf
+        format.pdf {render template: 'history_movements/report', pdf: "Reporte #{Time.now.year}", layout: 'pdf.html'}  # nombre del archivo a partir del que se genera el pdf
       end
   end
 
@@ -30,6 +30,7 @@ include SessionsHelper
     send_data(pdf,
       :filename => "Reporte #{Time.now.year}.pdf",
       :disposition => 'attachment')
+    
   end
 
 private

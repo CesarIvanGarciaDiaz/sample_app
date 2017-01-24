@@ -7,7 +7,7 @@
         <td>
             <div id="add<%= movement.id %>" style="display: block;margin-right:9px;" class="add">
 
-                <%=link_to raw("<i class='material-icons icAdd'>add_circle_outline</i>"), create_clone_user_account_movement_path(current_user, params[:account_id],movement.id),remote:true%>
+                <%=link_to raw("<i class='material-icons icAdd'>add_circle_outline</i>"), movement_child_user_account_movement_path(current_user, params[:account_id],movement.id)%>
             </div>
             <span><%= movement.concepto_de_pago %></span>
         </td>

@@ -1,4 +1,7 @@
-User.create!(name:  "Vlad Inquisidor",
+require 'date'
+require 'time'
+
+User.create!(name:  "Ejemplo",
              email: "example@railstutorial.org",
              password:              "foobar",
              password_confirmation: "foobar",
@@ -17,8 +20,13 @@ Category.create(name: "Banco", classification: "e")
 Category.create(name: "Donativos Recurrentes", classification: "i")
 Category.create(name: "Renta Oficinas", classification: "e")
 Category.create(name: "Impuestos Federales", classification: "e")
+
 Category.create(name: "Inversion", classification: "i")
 Category.create(name: "Donativos Unicos", classification: "e")
+
+Category.create(name: "Prueba 1", classification: "n")
+Category.create(name: "Prueba 2", classification: "i")
+Category.create(name: "Prueba 3", classification: "n")
 
 # Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Abono de coppel", reference: "1212", date: "2012/06/12", detail: "Pago de deudas", category_id: 2, withdrawal: 100)
 # Movement.create(user_id: 1, account_id: 1, concepto_de_pago: "Fiesta en bar", reference: "1212", date: "2012/06/15", detail: "Pago por fiesta", category_id: 2, withdrawal: 150)
@@ -54,15 +62,15 @@ Category.create(name: "Donativos Unicos", classification: "e")
 
 99.times do |n|
 
-user_id=1
-account_id=1
-concepto_de_pago='pago por honorarios'
-reference= ""
-date='01/03/2017'
-detail="Ingresos para alumnos"
-category_id=1
-withdrawal=0
-deposit=1000
+user_id = 1
+account_id = 1
+concepto_de_pago = 'pago por honorarios'
+reference =  Faker::Number.number(4)
+date = Faker::Date.forward(23).strftime('%Y-%m-%d')
+detail = "Ingresos para alumnos"
+category_id = 1
+withdrawal = 0
+deposit = Faker::Number.number(3)
   Movement.create!(user_id:  user_id,
               account_id: account_id,
               concepto_de_pago: concepto_de_pago,
