@@ -26,7 +26,7 @@
 //= require_tree .
 
 
-(function() {
+$(function() {
     $.material.init();
     $.material.ripples();
     $.material.input();
@@ -43,3 +43,6 @@
 $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').focus()
 });
+
+
+$.material.init();
