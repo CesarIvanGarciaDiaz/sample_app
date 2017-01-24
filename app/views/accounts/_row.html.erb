@@ -1,13 +1,13 @@
 <div id="container_account">
     <div class="social">
-        <div class='front' style="background-color:#ff7043;">
+        <div class='front' style="background-color:#D33F33;">
             <tr id="<%= account.id %>">
                 <td style="font-size:90px;">
                     <%= account.name %></td>
             </tr>
         </div>
 
-        <div class='back' style="background-color:  #ff5722">
+        <div class='back' style="background-color:  #F14C39">
             <% total = 0 %>
             <% account.movements.each do |t| %>
             <% temp = t.withdrawal + t.deposit %>
@@ -16,10 +16,10 @@
             <%= link_to number_to_currency(total, locale: :es, separator: '.', delimiter: ',') , user_account_movements_path(current_user,account.id), class:"show-back"%>
 
             <%= link_to raw("<i class='material-icons '>edit</i>"),edit_user_account_path(current_user,account.id) ,remote: true,class:"btn btn-success center ",style:"display: inline-block; width:3em; padding:0!important; position:absolute; bottom:0; left:0;
-            background-color:#26c6da"%>
+            background-color:#26c6da; box-shadow:none;"%>
 
-            <%= link_to raw("<i class='material-icons '>delete_sweep</i>"),user_account_path(current_user,account.id),class:"btn btn-raised btn-warning center" ,style:"background-color: #FF3333!important;display: inline-block; width:3em; padding: 0!important;
-            position:absolute; bottom:0; right:0;", method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to raw("<i class='material-icons '>delete_sweep</i>"),user_account_path(current_user,account.id),class:"btn btn-raised btn-warning center" ,style:"background-color: #ffffff!important;display: inline-block; width:3em;color:red; padding: 0!important;
+            position:absolute; bottom:0; right:0;box-shadow:none;", method: :delete, data: { confirm: 'Are you sure?' } %>
 
         </div>
     </div>

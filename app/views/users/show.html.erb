@@ -1,103 +1,118 @@
 <% provide(:title) %>
 
-
-
-
 <style media="screen">
-.card {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-width: 20%;
-top: 12%;
-left: 0;
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 20%;
+        top: 12%;
+        left: 0;
+        position: absolute;
+        background-color: #323131;
+        color: white;
+        border-radius: 2em 2em;
+    }
 
-position: absolute;
-background-color: #323131;
-color: white;
-border-radius: 2em 2em;
-}
+    /* On mouse-over, add a deeper shadow */
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
 
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
+    /* Add some padding inside the card container */
+    .container {
+        /*padding: 2px 16px;*/
+    }
+    .card .imagen2 {
+        background-color: white;
 
-/* Add some padding inside the card container */
-.container {
-  /*padding: 2px 16px;*/
-}
-.card .imagen2{
-background-color: white;
+    }
 
-}
 </style>
 
 <div class="card">
-<div class="imagen2">
-<%= gravatar_for @user %>
-</div>
-<div class="container">
-  <h3 style="font-weight:bold;"><%= @user.name %></h3>
-  <%= @user.email %>
- </div>
+    <div class="imagen2">
+        <%= gravatar_for @user %>
+    </div>
+    <div class="container">
+        <h3 style="font-weight:bold;"><%= @user.name %></h3>
+        <%= @user.email %>
+    </div>
 </div>
 <br>
 <br>
 <% provide(:title, @user.name) %>
 
-
 <script src="Chart.js"></script>
 
-<div id="canvas-holder" class="center"style="padding-top:20px; margin:15px 15px 15px 15px;">
-<canvas id="chart-area4" width="280" height="70"></canvas>
+<div id="canvas-holder" class="center" style="padding-top:20px; margin:15px 15px 15px 15px;">
+    <canvas id="chart-area4" width="280" height="70"></canvas>
 </div>
-
 
 <script>
 
-		var lineChartData = {
-			labels : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio"],
-			datasets : [
-				{
-					label: "Primera serie de datos",
-					fillColor : "rgba(25, 54, 208, 0.2)",
-					strokeColor : "#6b9dfa",
-					pointColor : "#1e45d7",
-					pointStrokeColor : "#fff",
-					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(205, 192, 15, 1)",
-					data : [80,0,40,80,15,5,15]
-				},
-				{
-					label: "Segunda serie de datos",
-					fillColor : "rgba(204, 208, 36, 0.2)",
-					strokeColor : "#e9e225",
-          // amarillo
-					pointColor : "#faab12",
-          //naranja
-					pointStrokeColor : "#fff",
-					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(76, 162, 205, 1)",
-          //azul
-					data : [40,50,70,40,85,55,15]
-				}
-			]
+    var lineChartData = {
+        labels: [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio"
+        ],
+        datasets: [
+            {
+                label: "Primera serie de datos",
+                fillColor: "rgba(25, 54, 208, 0.2)",
+                strokeColor: "#6b9dfa",
+                pointColor: "#1e45d7",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(205, 192, 15, 1)",
+                data: [
+                    80,
+                    0,
+                    40,
+                    80,
+                    15,
+                    5,
+                    15
+                ]
+            }, {
+                label: "Segunda serie de datos",
+                fillColor: "rgba(204, 208, 36, 0.2)",
+                strokeColor: "#e9e225",
+                // amarillo
+                pointColor: "#faab12",
+                //naranja
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(76, 162, 205, 1)",
+                //azul
+                data: [
+                    40,
+                    50,
+                    70,
+                    40,
+                    85,
+                    55,
+                    15
+                ]
+            }
+        ]
 
-		}
+    }
 
-var ctx4 = document.getElementById("chart-area4").getContext("2d");
+    var ctx4 = document.getElementById("chart-area4").getContext("2d");
 
-window.myPie = new Chart(ctx4).Bar(lineChartData, {responsive:true});
+    window.myPie = new Chart(ctx4).Bar(lineChartData, {responsive: true});
 </script>
 
-
-
-
 <div class="center">
-<%= link_to "Resumen Año #{Time.now.strftime('%Y')}", current_record_user_history_movements_path(current_user) , class: "btn btn-user btn-primary" %>
+    <%= link_to "Resumen Año #{Time.now.strftime('%Y')}", current_record_user_history_movements_path(current_user) , class: "btn btn-user btn-primary" %>
 
-<%= link_to "Registros  anteriores", previous_record_user_history_movements_path(current_user), class: "btn btn-user btn-primary" %>
+    <%= link_to "Registros  anteriores", previous_record_user_history_movements_path(current_user), class: "btn btn-user btn-primary" %>
 
-  <%= link_to 'Crear Movimiento', user_accounts_path(@user), class: "btn btn-user btn-primary" %>
+    <%= link_to 'Crear Movimiento', user_accounts_path(@user), class: "btn btn-user btn-primary" %>
 </div>
