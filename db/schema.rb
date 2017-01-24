@@ -33,9 +33,12 @@ ActiveRecord::Schema.define(version: 20170115151953) do
   create_table "movement_parents", force: :cascade do |t|
     t.integer  "movement_id"
     t.integer  "child_id"
-    t.boolean  "parent"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "movement_parent"
+    t.integer  "movement_child"
+    t.boolean  "parent",          default: false
+    t.boolean  "iva",             default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["movement_id"], name: "index_movement_parents_on_movement_id"
   end
 
