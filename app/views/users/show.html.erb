@@ -45,8 +45,8 @@
 
 <script src="Chart.js"></script>
 
-<div id="canvas-holder" class="center" style="padding-top:20px; margin:15px 15px 15px 15px;">
-    <canvas id="chart-area4" width="280" height="70"></canvas>
+<div id="canvas-holder" class="center" style="padding-top:40px; margin:15px 15px 15px 15px;">
+    <canvas id="chart-area4" width="380" height="170"></canvas>
 </div>
 
 <script>
@@ -59,28 +59,25 @@
             "Abril",
             "Mayo",
             "Junio",
-            "Julio"
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
         ],
         datasets: [
             {
-                label: "Primera serie de datos",
+                label: "Egresos",
                 fillColor: "rgba(25, 54, 208, 0.2)",
                 strokeColor: "#6b9dfa",
                 pointColor: "#1e45d7",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(205, 192, 15, 1)",
-                data: [
-                    80,
-                    0,
-                    40,
-                    80,
-                    15,
-                    5,
-                    15
-                ]
+                data: [80,0,40,80,15,5,15,23,43,12,43,54]
             }, {
-                label: "Segunda serie de datos",
+                label: "Ingresos",
                 fillColor: "rgba(204, 208, 36, 0.2)",
                 strokeColor: "#e9e225",
                 // amarillo
@@ -90,15 +87,7 @@
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(76, 162, 205, 1)",
                 //azul
-                data: [
-                    40,
-                    50,
-                    70,
-                    40,
-                    85,
-                    55,
-                    15
-                ]
+                data: [40,50,70,40,85,55,15,34,31,36,87,45]
             }
         ]
 

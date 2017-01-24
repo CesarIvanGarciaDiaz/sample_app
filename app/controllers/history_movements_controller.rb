@@ -5,7 +5,7 @@ include SessionsHelper
 
 
   def current_record
-    @movements = Movement.where('date BETWEEN ? AND ?', "#{Time.now.year}-01-01", "#{Time.now.year}-12-31").all
+    @movements = Movement.where('date BETWEEN ? AND ?', "#{Time.now.year}-01-01", "#{Time.now.year}-12-31").order('date','reference').all
       respond_to do |format|
         format.html
         format.json
