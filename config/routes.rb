@@ -7,6 +7,7 @@ Rails.application.routes.draw do
             # put :action
             get 'create_clone'
             post 'create_clone'
+            get 'movement_child'
             # delete :action
           end
 
