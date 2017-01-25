@@ -33,8 +33,6 @@ class MovementsController < ApplicationController
 
     def create_clone
 
-    end
-def clone
 
         @clon=Movement.find(params[:id])
         #@clon = Movement.find(id)

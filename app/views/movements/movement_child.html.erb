@@ -50,6 +50,7 @@ tr > td:nth-child(8) {
     <th>Categoria</th>
     <th style="color:rgba(214, 13, 13, 0.86);">Retiro</th>
     <th style="color:rgba(13, 154, 214, 0.86);">Deposito</th>
+
   </thead>
   <tbody>
     <tr>
@@ -59,11 +60,10 @@ tr > td:nth-child(8) {
       <td><%= ApplicationRecord.month(@movi.date) %></td>
       <td><%= @movi.detail %></td>
       <td><%= Category.find(@movi.category_id).name %></td>
-      <td><%= number_to_currency(@movi.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
-      <td><%= number_to_currency(@movi.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
+
     </tr>
   </tbody>
 </table>
 
-<%= link_to raw("<i class='material-icons'>add_to_photos</i>"), nil, class: 'btn btn-primary btn_child' %>
+<%= link_to raw("<i class='material-icons'>add_to_photos</i>"), create_clone_user_account_movement_path(current_user,params[:account_id]),remote:true, class: 'btn btn-primary btn_child'%>
 <%= link_to raw("<i class='material-icons'>backspace</i>"), user_account_movements_path(current_user,params[:account_id]), class: 'btn btn-primary btn_child', style:"bottom: 20%;" %>

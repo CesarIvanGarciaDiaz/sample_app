@@ -5,9 +5,10 @@ Rails.application.routes.draw do
           member do
             # get :action
             # put :action
+
+            get 'movement_child'
             get 'create_clone'
             post 'create_clone'
-            get 'movement_child'
             # delete :action
           end
 
