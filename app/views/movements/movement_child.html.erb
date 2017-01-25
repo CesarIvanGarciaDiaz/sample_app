@@ -43,12 +43,10 @@
         position: fixed;
         left: 2px;
         top: 12%;
-
         color: white;
         background: #03A8F2;
-
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
         border-radius: 75px;
         float: left;
         cursor: pointer;
@@ -60,38 +58,12 @@
     }
     .search:hover {
         background: #614381;
-
-    }
-
-    .search2 {
-        position: fixed;
-        left: 2px;
-        top: 30%;
-
-        color: white;
-        background: #03A8F2;
-
-        width: 80px;
-        height: 80px;
-        border-radius: 75px;
-        float: left;
-        cursor: pointer;
-    }
-    .search2 i.material-icons {
-        padding-left: 0;
-        padding-top: 0;
-        font-size: 60px;
-    }
-    .search2:hover {
-        background: #614381;
-
     }
 
     .btn {
         width: 300px;
         height: 50px!important;
         align-items: center;
-
     }
     #dropdown-pa {
         position: fixed;
@@ -138,144 +110,127 @@
     <div class="search" id="boton_agregar">
         <i class="material-icons">monetization_on</i>
     </div>
-
-    <!-- <div class="search2" id="boton_agregar_irc">
-<i class="material-icons">timeline</i>
-</div> -->
-
-    <div class="search2" id="boton_movements">
+<!--  -->
+    <div class="search" id="boton_movements" style="top:24%">
         <i class="material-icons">business</i>
     </div>
 
+
+
+
+
+<style>
+    input#porcentaje.form-control{ width:20px; }
+    input.input-group-addon{ width:10px !important; }
+    
+</style>
+<!-- DIV pertenece a IVA -->
     <div class="panel panel-info" id="iva-porc" style="display:none; position:absolute;top:15%;">
         <div class="panel-heading">
-            <h3 class="panel-title center" style="font-weight: bold;">Buscar</h3>
+            <h3 class="panel-title center" style="font-weight: bold;">IVA</h3>
         </div>
         <div class="panel-body">
             <%= form_tag( add_movement_child_path(@movi) , method: "post") do %>
-            <script></script>
-            <!-- text_field_tag :concepto_de_pago,value: Movement.find(params[:id]).concepto_de_pago << " subtotal" %>
-         text_field_tag :reference, value: Movement.find(params[:id]).reference << " subtotal" %> -->
-
             <% amount =  @movi.deposit - @movi.withdrawal %>
             <% subtotal =  (amount / 1.16).round(2)  %>
             <% iva =  (amount - subtotal).round(2) %>
+
             <div class="input-group">
                 <%= label_tag(:subtotal, "Subtotal:") %>
                 <span class="input-group-addon">$</span>
                 <%= text_field_tag :subtotal, nil, autocomplete: :off, value: subtotal, class: "form-control" %>
             </div>
-            <div class="input-group">
-                <%= label_tag(:porcentaje, "Iva:") %>
-                <%= text_field_tag :porcentaje, nil, autocomplete: :off, value: 16 , class: "form-control"%>
-                <span class="input-group-addon">%</span>
+
+            <div class="input-group" id="yo">
+                <%#= label_tag(:porcentaje, "Iva:") %>
+                <label id="porcentaje" class="input-group-addon" style="color: black"><b>Iva:<b></label>
+                <%= text_field_tag :porcentaje, nil, autocomplete: :off, value: 16 , class: "form-control", size: 3%>
+                <span class="input-group-addon yo" style="padding: 0;">
+                %</span>
             </div>
+
             <div class="input-group">
-            <%= label_tag(:iva, "Aplicar un iva de") %>
+                <%= label_tag(:iva, "Se aplica un iva de:") %>
                 <span class="input-group-addon">$</span>
                 <%= text_field_tag :iva, nil, autocomplete: :off, value: iva, class: "form-control" %>
             </div>
 
+
             <div class="field center">
                 <%= submit_tag("Aplicar", class: "btn btn-primary") %>
             </div>
             <% end %>
         </div>
     </div>
+<!-- DIV pertenece a IVA -->
 
-    <div class="panel panel-info" id="irc" style="display:none; position:absolute;top:15%;">
-        <div class="panel-heading">
-            <h3 class="panel-title center" style="font-weight: bold;">Buscar</h3>
-        </div>
-        <div class="panel-body">
-            <%= form_tag( nil , method: "post") do %>
-            <script></script>
-            <!-- text_field_tag :concepto_de_pago,value: Movement.find(params[:id]).concepto_de_pago << " subtotal" %>
-         text_field_tag :reference, value: Movement.find(params[:id]).reference << " subtotal" %> -->
 
-            <% amount =  (@movi.deposit - @movi.withdrawal)/1.16  %>
-            <% iva =  amount * 0.16  %>
-            <div class="field">
-                <%= label_tag(:iva, "Aplicar un iva de:") %>
-                <%= text_field_tag :subtotal, nil, autocomplete: :off, value: amount %>
-            </div>
-            <div class="field">
-                <%= text_field_tag :iva, nil, autocomplete: :off, value: iva %>
 
-            </div>
-            <div class="field">
-                <%= label_tag(:iva, "Aplicar un iva de:") %>
-                <%= text_field_tag :iva, nil, autocomplete: :off, value: 16 %>
-            </div>
-            <div class="field center">
-                <%= submit_tag("Aplicar", class: "btn btn-primary") %>
-            </div>
-            <% end %>
-        </div>
+
+
+<!-- movement -from- movement -->
+<div class="panel panel-info" id="movements" style="display: none; position:absolute;top:15%;z-index: 2;">
+    <div class="panel-heading">
+        <h3 class="panel-title center" style="font-weight: bold;">Buscar</h3>
     </div>
+    <div class="panel-body">
+        <%= form_for :movement, remote: true do |f| %>
+        <div class="modal-body">
+            <div class="alert alert-danger" role="alert" style="display: none;"></div>
+            <%= f.hidden_field :account_id, :value => params[:account_id] %>
+            <%= f.hidden_field :user_id, :value => params[:user_id] %>
 
-    <div class="panel panel-info" id="movements" style="display: none; position:absolute;top:15%;">
-        <div class="panel-heading">
-            <h3 class="panel-title center" style="font-weight: bold;">Buscar</h3>
-        </div>
-        <div class="panel-body">
-            <%= form_for :movement, remote: true do |f| %>
-            <div class="modal-body">
-                <div class="alert alert-danger" role="alert" style="display: none;"></div>
-                <%= f.hidden_field :account_id, :value => params[:account_id] %>
-                <%= f.hidden_field :user_id, :value => params[:user_id] %>
-
-                <div class="horizontal">
-                    <%= f.label "Concepto de pago" %>
-                    <%= f.text_field :concepto_de_pago ,class: 'form-control', size: 40 %>
-                </div>
-
-                <div style="width:7em" class="horizontal">
-                    <%= f.label "Referencia" %>
-                    <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia", autocomplete: :off %>
-                </div>
-
-                <div class="input-group date horizontal" style="width: 5.5em">
-                    <%= f.label "Fecha" %>
-                    <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off %>
-                </div>
-
-                <div class="horizontal">
-                    <%= f.label "Detalles" %>
-                    <%= f.text_field :detail ,class: 'form-control', size: 40, autocomplete: :off %>
-                </div>
-
-                <div class="horizontal" style="width: 10em; top:20px;">
-                    <!-- class="field" -->
-                    <%= f.label "Categoria"%>
-                    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
-                </div>
-
-                <div class="horizontal" style="width: 6em">
-                    <%= f.label "Retiro"%>
-                    <%= f.text_field :withdrawal, size: 10, class: 'form-control dig', value: 0, autocomplete: :off %>
-                </div>
-
-                <div class="horizontal" style="width: 6em">
-                    <%= f.label "Deposito"%>
-                    <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
-                </div>
-
+            <div class="horizontal">
+                <%= f.label "Concepto de pago" %>
+                <%= f.text_field :concepto_de_pago ,class: 'form-control', size: 40 %>
             </div>
 
-            <%= f.submit class:"btn btn-primary btn-lg btn-block", value: "Crear Movimiento"%>
+            <div style="width:7em" class="horizontal">
+                <%= f.label "Referencia" %>
+                <%= f.text_field :reference ,class: 'form-control', placeholder:"Sin referencia", autocomplete: :off %>
+            </div>
 
-            <% end %>
+            <div class="input-group date horizontal" style="width: 5.5em">
+                <%= f.label "Fecha" %>
+                <%= f.text_field :date, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off %>
+            </div>
+
+            <div class="horizontal">
+                <%= f.label "Detalles" %>
+                <%= f.text_field :detail ,class: 'form-control', size: 40, autocomplete: :off %>
+            </div>
+
+            <div class="horizontal" style="width: 10em; top:20px;">
+                <!-- class="field" -->
+                <%= f.label "Categoria"%>
+                <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
+            </div>
+
+            <div class="horizontal" style="width: 6em">
+                <%= f.label "Retiro"%>
+                <%= f.text_field :withdrawal, size: 10, class: 'form-control dig', value: 0, autocomplete: :off %>
+            </div>
+
+            <div class="horizontal" style="width: 6em">
+                <%= f.label "Deposito"%>
+                <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
+            </div>
+
         </div>
-    </div>
 
-    <!-- link_to raw("<i class='material-icons md-24'>timeline</i>"),nil, class:"btn btn-raised btn-info edition"%> -->
-    <!-- link_to raw("<i class='material-icons md-24'>business</i>"),nil, class:"btn btn-raised btn-info edition"%> -->
+        <%= f.submit class:"btn btn-primary btn-lg btn-block", value: "Crear Movimiento Hijo"%>
+
+        <% end %>
+    </div>
 </div>
+<!--  movement -from- movement -->
 
-<%= link_to raw("<i class='material-icons'>add_to_photos</i>"), create_clone_user_account_movement_path(current_user,params[:account_id]),remote:true, class: 'btn btn-primary btn_child'%>
-<%= link_to raw("<i class='material-icons'>backspace</i>"), user_account_movements_path(current_user,params[:account_id]), class: 'btn btn-primary btn_child', style:"bottom: 20%;" %>
 
+<!-- isr -->
+<!-- isr -->
+
+<%#= link_to raw("<i class='material-icons'>add_to_photos</i>"), create_clone_user_account_movement_path(current_user,params[:account_id]),remote:true, class: ' btn-primary btn_child', style:"height:80px!important; width:80px!important; border-radius:50%;"%>
+<%= link_to raw("<i class='material-icons' style='margin-top:10px!important; margin-left:8px!important;'>backspace</i>"), user_account_movements_path(current_user,params[:account_id]), class: ' btn-primary btn_child', style:"bottom: 20%;height:80px!important; width:80px!important; border-radius:50%; bottom:5%" %>
 <script>
     $(document).ready(function () {
         $("#boton_agregar").click(function () {
