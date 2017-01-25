@@ -31,6 +31,36 @@ class MovementsController < ApplicationController
         end
     end
 
+
+def add_movement_child
+
+p @movement=Movement.find(params[:id])
+@child_movement = @movement.dup
+@child_movement.concepto_de_pago = "IVA DE #{@movement.concepto_de_pago}"
+@child_movement.withdrawal = params[:iva]
+@child_movement.deposit = 0
+
+p @child_movement.save
+p @child_movement
+@movement.movement_parents.create(
+  movement_parent: @movement.id,
+  movement_child: @child_movement.id,
+  iva:true
+)
+
+
+end
+
+
+
+
+
+
+
+
+
+
+
     def create_clone
 
 
