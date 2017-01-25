@@ -1,0 +1,4 @@
+$('<%= j render "clone_form", title: "Movimiento de Movimiento" %>').on('hidden.bs.modal', function (e) {
+  $(this).remove();
+  $('.modal-backdrop').remove();
+}).modal();

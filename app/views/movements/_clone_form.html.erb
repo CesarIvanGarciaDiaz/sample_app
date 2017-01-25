@@ -1,15 +1,108 @@
-<%= form_for :movement, remote: true do |f| %>
-<%= f.hidden_field :account_id, :value => params[:account_id] %>
-<%= f.hidden_field :user_id, :value => params[:user_id] %>
+<style type="text/css">
+	.search {
+		position: fixed;
+		left: 2px;
+		top: 12%;
 
-<td><%= f.text_field :concepto_de_pago ,placeholder:"Concepto de pago", size: 40 %></td>
-<td><%= f.text_field :reference , placeholder:"Sin referencia", autocomplete: :off %></td>
-<td><%= f.text_field :date,placeholder:"Fecha", "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off %></td>
-<td><%= f.text_field :detail,placeholder:"Detalles", size: 40, autocomplete: :off %></td>
-<td><%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %></td>
-<td><%= f.text_field :withdrawal,placeholder:"Retiro", size: 10, value: 0, autocomplete: :off %></td>
-<td><%= f.text_field :deposit,placeholder:"Deposito", size: 10, value: 0, autocomplete: :off %></td>
+		color: white;
+background: #03A8F2;
 
-<%= f.submit class:"btn btn-primary btn-lg btn-block", value: "Crear Movimiento" %>
+		width: 80px;
+		height: 80px;
+		border-radius: 75px;
+		float: left;
+		cursor: pointer;
+	}
+	.search i.material-icons {
+		padding-left: 0;
+		padding-top: 0;
+		font-size: 80px;
+	}
+.search:hover{
+	background: #614381;
 
-<% end %>
+}
+	.btn {
+		width: 300px;
+		height: 50px!important;
+		align-items: center;
+
+	}
+#dropdown-pa{
+	position: fixed;
+	right: 2px;
+	top: 10%;
+
+	color: white;
+	background: #614381;
+
+	float: left;
+	cursor: pointer;
+}
+
+
+</style>
+
+
+<div id="movement_clone-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title center">Nuevo Movimiento</h4>
+            </div>
+          <%= form_tag remote:true  do %>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert" style="display: none;"></div>
+
+                <%=link_to raw("<i class='material-icons md-24'>monetization_on</i>"),nil, class:"btn btn-raised btn-info edition", id:"boton_agregar"%>
+                <%=link_to raw("<i class='material-icons md-24'>timeline</i>"),nil, class:"btn btn-raised btn-info edition"%>
+                <%=link_to raw("<i class='material-icons md-24'>business</i>"),nil, class:"btn btn-raised btn-info edition"%>
+
+            <div class="modal-footer">
+
+            </div>
+            <% end %>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- <script type="text/javascript">
+function iva(){
+ this.iniciar = function(){
+    this.agregarItem();
+    this.eliminarItem();
+ };
+ this.agregarItem = function(){
+    $("#boton_agregar").click(function(){
+
+var precio_real=
+      //  var nombre = $("#nombre").val();
+       var calificacion = $("#calificacion").val();
+       var item;
+       item += '<tr>';
+       item += '<td style="text-align: center"> ' + nombre + ' </td>';
+       item += '<td style="text-align: center"> ' + calificacion + ' </td>';
+       item += '<td style="text-align: center"> <a class="eliminar_item" href="javascript:void(0)"> Eliminar </a> </td>';
+       item += '</tr>';
+       $("#lista").append(item);
+       $("#nombre").val("");
+       $("#calificacion").val("");
+    });
+ };
+ this.eliminarItem = function(){
+    $("#lista").delegate(".eliminar_item", "click", function(){
+       $(this).parents("tr").remove();
+    });
+ };
+ return this.iniciar();
+};
+$(document).ready(function(){
+ iva();
+});
+</script> -->
