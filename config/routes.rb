@@ -8,14 +8,16 @@ Rails.application.routes.draw do
 
             get 'movement_child'
             get 'create_clone'
-            post 'create_clone'
+
             # delete :action
+post 'add_movement_child'
           end
 
     end
   end
   end
 
+  post '/movements/:id/create_clone', to: 'movements#add_movement_child', as: 'add_movement_child' 
 
   resources :users do
     resources :categories
