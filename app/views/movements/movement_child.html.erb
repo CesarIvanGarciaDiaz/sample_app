@@ -78,7 +78,7 @@
     }
 
 </style>
-<% @movi =  Account.first.movements.find(params[:id]) %>
+<% @movi =  Account.find(params[:account_id]).movements.find(params[:id]) %>
 <table>
     <thead>
         <th>Concepto de Pago</th>
@@ -104,6 +104,43 @@
     </tbody>
 </table>
 
+
+<!-- ************************ -->
+
+
+<% puts @movi_iva =  Account.find(params[:account_id]).movements.find(params[:id]).movement_parents %>
+
+<% if @movi_iva.blank? %>
+      <table>
+          <thead>
+              <th>Concepto de Pago</th>
+              <th>Referencia</th>
+              <th>Fecha</th>
+              <th>Mes</th>
+              <th>Detalle</th>
+              <th>Categoria</th>
+              <th style="color:rgba(214, 13, 13, 0.86);">Retiro</th>
+              <th style="color:rgba(13, 154, 214, 0.86);">Deposito</th>
+          </thead>
+          <tbody>
+              <tr>
+                  <td><%= @movi_iva.concepto_de_pago%></td>
+                  <td><%= @movi_iva.reference %></td>
+                  <td><%= @movi_iva.date.strftime('%d/%m/%Y') %></td>
+                  <td><%= ApplicationRecord.month(@movi_iva.date) %></td>
+                  <td><%= @movi_iva.detail %></td>
+                  <td><%= Category.find(@movi_iva.category_id).name %></td>
+                  <td><%= number_to_currency(@movi_iva.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
+                  <td><%= number_to_currency(@movi_iva.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
+              </tr>
+          </tbody>
+      </table>
+<% end %>
+
+
+
+
+
 <div class="">
     <!-- link_to raw("<i class='material-icons md-24'>monetization_on</i>"),nil, class:"btn btn-raised btn-info edition", id:"boton_agregar"%> -->
 
@@ -122,7 +159,7 @@
 <style>
     input#porcentaje.form-control{ width:20px; }
     input.input-group-addon{ width:10px !important; }
-    
+
 </style>
 <!-- DIV pertenece a IVA -->
     <div class="panel panel-info" id="iva-porc" style="display:none; position:absolute;top:15%;">
