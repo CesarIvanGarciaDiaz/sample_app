@@ -37,10 +37,16 @@ def add_movement_child
 p @movement=Movement.find(params[:id])
 @child_movement = @movement.dup
 @child_movement.concepto_de_pago = "IVA DE #{@movement.concepto_de_pago}"
-@child_movement.withdrawal = params[:iva]
+# params[:iva].to_i *= -1.0
+        p params[:iva]
+        p params[:iva].to_f
+        iva = params[:iva].to_f
+        iva*= -1.0 if iva < 0
+        p iva
+        p "-^-"*1000
+@child_movement.withdrawal = iva
 @child_movement.deposit = 0
 @child_movement.reference=""
-puts "****"*100
 p @child_movement.save
 puts "****"*100
 p @child_movement

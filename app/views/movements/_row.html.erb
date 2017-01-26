@@ -32,7 +32,7 @@
         <td>
             <span><%= number_to_currency(movement.deposit, locale: :es, separator: '.', delimiter: ',') %></span>
         </td>
-        <% @m = movement.deposit + movement.withdrawal %>
+        <% @m = movement.deposit - movement.withdrawal %>
         <% @temp_m += @m %>
         <td>
             <span><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></span>
