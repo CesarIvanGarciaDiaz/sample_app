@@ -104,6 +104,39 @@
     </tbody>
 </table>
 
+
+<!-- ************************ -->
+<br>
+<br>
+
+<% @movi_co=  Account.find(params[:account_id]).movements.find(params[:id]).movement_parents %>
+
+<% unless @movi_co.blank? %>
+      <table>
+          <thead>
+              <th>Concepto de Pago</th>
+              <th style="color:rgba(13, 154, 214, 0.86);" colspan="2">Monto</th>
+          </thead>
+
+
+<% @movi_iva = @movi_co.where(movement_parent: params[:id])%>
+<% @movi_iva.each do |t|%>
+<% @mostrar_hijos=Movement.find(t.movement_child) %>
+          <tbody>
+              <tr>
+                  <td><%= @mostrar_hijos.concepto_de_pago%></td>
+                  <td style="text-align: right;font-weight: bold;color: rgba(214, 13, 13, 0.86);background-color: rgba(214, 13, 13, 0.20);"><%= number_to_currency(@mostrar_hijos.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
+                  <td style="text-align: right;font-weight: bold;color: rgba(13, 154, 214, 0.86);background-color: rgba(13, 154, 214, 0.20);"><%= number_to_currency(@mostrar_hijos.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
+              </tr>
+<% end %>
+          </tbody>
+      </table>
+<% end %>
+
+
+
+
+
 <div class="">
     <!-- link_to raw("<i class='material-icons md-24'>monetization_on</i>"),nil, class:"btn btn-raised btn-info edition", id:"boton_agregar"%> -->
 
@@ -122,7 +155,7 @@
 <style>
     input#porcentaje.form-control{ width:20px; }
     input.input-group-addon{ width:10px !important; }
-    
+
 </style>
 <!-- DIV pertenece a IVA -->
     <div class="panel panel-info" id="iva-porc" style="display:none; position:absolute;top:15%;">
@@ -155,7 +188,6 @@
                 <%= text_field_tag :iva, nil, autocomplete: :off, value: iva, class: "form-control" %>
             </div>
 
-
             <div class="field center">
                 <%= submit_tag("Aplicar", class: "btn btn-primary") %>
             </div>
@@ -174,7 +206,7 @@
         <h3 class="panel-title center" style="font-weight: bold;">Buscar</h3>
     </div>
     <div class="panel-body">
-        <%= form_for :movement, remote: true do |f| %>
+        <%= form_for '/users/1/accounts/1/movements', remote: true do |f| %>
         <div class="modal-body">
             <div class="alert alert-danger" role="alert" style="display: none;"></div>
             <%= f.hidden_field :account_id, :value => params[:account_id] %>
@@ -214,7 +246,7 @@
             <div class="horizontal" style="width: 6em">
                 <%= f.label "Deposito"%>
                 <%= f.text_field :deposit, class: 'form-control dig', size: 10, value: 0, autocomplete: :off %>
-            </div>
+            </div >
 
         </div>
 
