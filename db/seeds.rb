@@ -65,7 +65,7 @@ Category.create(name: "Prueba 3", classification: "n")
 user_id = 1
 account_id = 1
 concepto_de_pago = 'pago por honorarios'
-reference =  Faker::Number.number(4)
+reference =  ""
 date = Faker::Date.forward(23).strftime('%Y-%m-%d')
 detail = "Ingresos para alumnos"
 category_id = 1

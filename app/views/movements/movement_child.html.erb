@@ -78,7 +78,7 @@
     }
 
 </style>
-<% @movi =  Account.first.movements.find(params[:id]) %>
+<% @movi =  Account.find(params[:account_id]).movements.find(params[:id]) %>
 <table>
     <thead>
         <th>Concepto de Pago</th>
