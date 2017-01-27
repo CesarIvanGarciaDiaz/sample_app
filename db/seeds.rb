@@ -60,10 +60,10 @@ Category.create(name: "Prueba 3", classification: "n")
 	#<Movement id: 2, user_id: 1, account_id: 1, concepto_de_pago: "Compra en amazon", reference: "1313", date: "2012-06-13", detail: "---">]>
 
 
-99.times do |n|
+3.times do |n|
 
 user_id = 1
-account_id = 1
+account_id = Faker::Number.number(1)
 concepto_de_pago = 'pago por honorarios'
 reference =  ""
 date = Faker::Date.forward(23).strftime('%Y-%m-%d')

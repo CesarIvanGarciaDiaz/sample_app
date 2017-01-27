@@ -2,7 +2,14 @@
 
     <% @temp_m = 0 %>
     <% @movements.each do |movement| %>
-
+        <% @test = MovementParent.find_by(movement_id: movement.id)%>
+        <% if @test == nil or @test.iva == false %>
+            <% @m = movement.deposit - movement.withdrawal %>
+            <% @temp_m += @m %>
+            <% @acumulativo = number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %>
+        <% else %>
+            <% @acumulativo = "----" %>
+        <% end %>        
     <tr id="<%= movement.id %>">
         <td>
             <div id="add<%= movement.id %>" style="display: block;margin-right:9px;" class="add">
@@ -32,10 +39,8 @@
         <td>
             <span><%= number_to_currency(movement.deposit, locale: :es, separator: '.', delimiter: ',') %></span>
         </td>
-        <% @m = movement.deposit - movement.withdrawal %>
-        <% @temp_m += @m %>
         <td>
-            <span><%= number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %></span>
+            <span><%= @acumulativo %></span>
             <div id="n<%= movement.id %>" style="display:block; position:absolute; opacity:0; pointer-events:none;">
                 <%=link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],movement.id),remote:true ,class:"btn btn-raised btn-info edition", style: "margin-left: 1px;" %>
                 <%=link_to raw("<i class='material-icons md-24'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], movement.id),class:"btn btn-raised btn-warning edition", method: :delete, data: { confirm: 'Are you sure?' } %>
