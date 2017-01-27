@@ -32,96 +32,70 @@ class MovementsController < ApplicationController
     end
 
 
-def add_movement_child
+    def add_movement_child
+      iva = params[:iva].to_f
+      subt = params[:subtotal].to_f
+      iva*= -1.0 if iva < 0
+      subt*= -1.0 if iva < 0
 
-p @movement=Movement.find(params[:id])
-@child_movement = @movement.dup
-@child_movement.concepto_de_pago = "IVA DE #{@movement.concepto_de_pago}"
-# params[:iva].to_i *= -1.0
-        p params[:iva]
-        p params[:iva].to_f
-        iva = params[:iva].to_f
-        iva*= -1.0 if iva < 0
-        p iva
-        p "-^-"*1000
-@child_movement.withdrawal = iva
-@child_movement.deposit = 0
-@child_movement.reference=""
-p @child_movement.save
-puts "****"*100
-p @child_movement
-@movement.movement_parents.create(
-  movement_parent: @movement.id,
-  movement_child: @child_movement.id,
-  iva:true
-)
+      @movement=Movement.find(params[:id])
+      
+      @iva_movement = @movement.dup
+      @iva_movement.concepto_de_pago = "IVA de #{@movement.concepto_de_pago}"
+      @iva_movement.withdrawal  = iva
+      @iva_movement.deposit     = 0
+      @iva_movement.reference   = ""
+      @iva_movement.save
+      
+      @subtotal_mov = @movement.dup
+      @subtotal_mov.concepto_de_pago = "SubTotal de #{@movement.concepto_de_pago}"
+      @subtotal_mov.withdrawal  = 0
+      @subtotal_mov.deposit     = subt
+      @subtotal_mov.reference   = ""
+      @subtotal_mov.save
 
+      @movement.movement_parents.create(
+        movement_parent: @movement.id,
+        movement_child: @iva_movement.id,
+        iva:true
+        )
+      @movement.movement_parents.create(
+        movement_parent: @movement.id,
+        movement_child: @subtotal_mov.id,
+        iva:true
+        )
+      redirect_to :back
+    end
 
-end
+    def add_register_child
+      @original = Movement.find(params[:id])
+      p "*"*1000
+      mov_dual = Movement.new
+        mov_dual.account_id    =   @original.account_id
+        mov_dual.user_id       =   current_user.id
+        mov_dual.concepto_de_pago =params[:concepto_de_pago]
+        mov_dual.reference     =   params[:reference]
+        mov_dual.date          =   params[:date]
+        mov_dual.detail        =   params[:detail]
+        mov_dual.category_id   =   params[:category_id].to_i
+        mov_dual.withdrawal    =   params[:withdrawal].to_f
+        mov_dual.deposit       =   params[:deposit].to_f
+      
+      mov_dual.save
+      p "-^-"*1000
+      MovementParent.create(
+        movement_id:     params[:id],
+        movement_parent: params[:id],
+        movement_child:  mov_dual.id
+        )
+      p "-</>-"*1000
 
-
-
-
-
-
-
-
-
-
-
-    def create_clone
-
-
-        @clon=Movement.find(params[:id])
-        #@clon = Movement.find(id)
-        @c1_n = @clon.concepto_de_pago << " total"
-        @c2_n = @clon.concepto_de_pago << " iva"
-        @conv = @clon.deposit - @clon.withdrawal
-        @c1 = ((@conv / 1.16)*100).round/100.0  #sin iva
-        @c2 = ((@conv - @c1)*100).round/100.0   #valor d iva
-        @val_1 = 0
-        @val_2 = 0
-
-        if @clon.withdrawal != 0
-          @val_1 = @c1
-        elsif @clon.deposit != 0
-          @val_2 = @c1
-        end
-
-        if @clon.withdrawal != 0
-          @iva_1 = @c2
-        elsif @clon.deposit != 0
-          @iva_2 = @c2
-        end
-
-
-  @total = Movement.new(user_id:           current_user,
-                        account_id:        @clon.account_id,
-                        concepto_de_pago:  @c1_n,
-                        reference:         "hijo_SubTotal#{params[:id]}",
-                        date:              @clon.date,
-                        detail:            @clon.detail,
-                        category_id:       @clon.category_id,
-                        withdrawal:        @val_1,
-                        deposit:           @val_2)
-  @total.save
-
-  @iva = Movement.new(user_id:           current_user,
-                      account_id:        @clon.account_id,
-                      concepto_de_pago:  @c2_n,
-                      reference:         "hijo_IVA#{params[:id]}",
-                      date:              @clon.date,
-                      detail:            @clon.detail,
-                      category_id:       @clon.category_id,
-                      withdrawal:        @iva_1,
-                      deposit:           @iva_2)
-  @iva.save
-
-        puts "*"*1000
-        puts @c1
-        puts @c2
-        puts @c3 = @c1 + @c2
-end
+       flash[:success] = "Creado Correctamente"
+             #  create_clon(@movement.id)
+  
+              redirect_to :back
+    end
+    
     def update
       @movement = Movement.update(params[:id], movement_params)
       # @movement.reference = "Sin referencia" if @movement == ""
@@ -133,7 +107,33 @@ end
 
     def destroy
       @movement=Movement.find(params[:id])
-      @movement.destroy
+
+
+      
+      if !(MovementParent.find_by(movement_child: params[:id]).nil?)
+          MovementParent.find_by(movement_child: params[:id]).destroy
+      elsif !(MovementParent.find_by(movement_id: params[:id]).nil?)
+        @delete_parent = MovementParent.where(movement_id: params[:id])
+        @delete_parent.each do |t|
+          Movement.find(t.movement_child).destroy
+        end
+        @delete_parent.destroy_all
+      end
+
+        @movement.destroy
+
+
+
+
+#      unless MovementParent.find_by(movement_child: params[:id]).nil?  # si el registro existe 
+        # borra el registro del hijo
+ #       MovementParent.find_by('movement_child == ? and iva == ?', params[:id], true).destroy
+        # elimina la asosciacion del hijo
+  #    end
+
+   #   unless MovementParent.find_by(movement_id: params[:id]).nil? # si el registro existe
+      # borra los hijos
+      # end
       flash[:success] = "Movement was successfully destroyed."
       redirect_to user_account_movements_path(session[:user_id])
     end

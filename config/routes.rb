@@ -18,7 +18,7 @@ post 'add_movement_child'
   end
 
   post '/movements/:id/create_clone', to: 'movements#add_movement_child', as: 'add_movement_child' 
-
+  post '/movements/:id/child', to: 'movements#add_register_child', as: 'add_register'
   resources :users do
     resources :categories
   end

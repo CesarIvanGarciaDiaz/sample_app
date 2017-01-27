@@ -4,7 +4,7 @@ class Movement < ApplicationRecord
   belongs_to :account
   belongs_to :user
   belongs_to :category
-  has_many :movement_parents
+  has_many :movement_parents#, dependent: :destroy
 
   scope :dt, -> (params) { where("date BETWEEN ? AND ?",
       params[:since] != nil ? Time.parse(params[:since]).strftime('%Y-%m-%d') : "0000-00-00",
@@ -16,6 +16,7 @@ class Movement < ApplicationRecord
   validates :concepto_de_pago, presence: {:message => "debe ser llenado"}
   validates :date, presence: {:message => "Debe indicarse una fecha de registro"}
 
+#  before_destroy do
   # before_create do
   #   self.withdrawal = self.withdrawal * -1 if self.withdrawal >= 0
   # end
