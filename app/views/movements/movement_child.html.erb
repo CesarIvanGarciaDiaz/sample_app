@@ -163,9 +163,9 @@
             <h3 class="panel-title center" style="font-weight: bold;">IVA</h3>
         </div>
         <div class="panel-body">
-            <%= form_tag( add_movement_child_path(@movi) , method: "post") do %>
+            <%= form_tag(add_movement_child_path(@movi) , method: "post") do %>
             <% amount =  @movi.deposit - @movi.withdrawal %>
-            <% subtotal =  (amount / 1.16).round(2)  %>
+            <% subtotal = (amount / 1.16).round(2)  %>
             <% iva =  (amount - subtotal).round(2) %>
 
             <div class="input-group">
@@ -189,15 +189,12 @@
             </div>
 
             <div class="field center">
-                <%= submit_tag("Aplicar", class: "btn btn-primary") %>
+                <%= submit_tag("Aplicar", class: "btn btn-primary" ,turbolink:"true" ) %>
             </div>
             <% end %>
         </div>
     </div>
 <!-- DIV pertenece a IVA -->
-
-
-
 
 
 <!-- movement -from- movement -->

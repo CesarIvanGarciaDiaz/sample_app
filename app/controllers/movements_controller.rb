@@ -33,7 +33,6 @@ class MovementsController < ApplicationController
 
 
 def add_movement_child
-
 p @movement=Movement.find(params[:id])
 @child_movement = @movement.dup
 @child_movement.concepto_de_pago = "IVA DE #{@movement.concepto_de_pago}"
@@ -57,6 +56,13 @@ p @child_movement
 )
 
 
+       flash[:success] = "Creado IVA Correctamente"
+        redirect_to :back
+      #  create_clon(@movement.id)
+      # else
+      #   render 'new'
+
+
 end
 
 
@@ -71,57 +77,12 @@ end
 
     def create_clone
 
-
-        @clon=Movement.find(params[:id])
-        #@clon = Movement.find(id)
-        @c1_n = @clon.concepto_de_pago << " total"
-        @c2_n = @clon.concepto_de_pago << " iva"
-        @conv = @clon.deposit - @clon.withdrawal
-        @c1 = ((@conv / 1.16)*100).round/100.0  #sin iva
-        @c2 = ((@conv - @c1)*100).round/100.0   #valor d iva
-        @val_1 = 0
-        @val_2 = 0
-
-        if @clon.withdrawal != 0
-          @val_1 = @c1
-        elsif @clon.deposit != 0
-          @val_2 = @c1
-        end
-
-        if @clon.withdrawal != 0
-          @iva_1 = @c2
-        elsif @clon.deposit != 0
-          @iva_2 = @c2
-        end
+      @movement=Movement.find(params[:id])
+      @mov_mov = @movement.dup
+      @mov_mov.concepto_de_pago = "IVA DE #{@movement.concepto_de_pago}"
 
 
-  @total = Movement.new(user_id:           current_user,
-                        account_id:        @clon.account_id,
-                        concepto_de_pago:  @c1_n,
-                        reference:         "hijo_SubTotal#{params[:id]}",
-                        date:              @clon.date,
-                        detail:            @clon.detail,
-                        category_id:       @clon.category_id,
-                        withdrawal:        @val_1,
-                        deposit:           @val_2)
-  @total.save
-
-  @iva = Movement.new(user_id:           current_user,
-                      account_id:        @clon.account_id,
-                      concepto_de_pago:  @c2_n,
-                      reference:         "hijo_IVA#{params[:id]}",
-                      date:              @clon.date,
-                      detail:            @clon.detail,
-                      category_id:       @clon.category_id,
-                      withdrawal:        @iva_1,
-                      deposit:           @iva_2)
-  @iva.save
-
-        puts "*"*1000
-        puts @c1
-        puts @c2
-        puts @c3 = @c1 + @c2
-end
+    end
     def update
       @movement = Movement.update(params[:id], movement_params)
       # @movement.reference = "Sin referencia" if @movement == ""
