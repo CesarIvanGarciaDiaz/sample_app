@@ -59,26 +59,26 @@ Category.create(name: "Prueba 3", classification: "n")
 	#<ActiveRecord::Associations::CollectionProxy [#<Movement id: 1, user_id: 1, account_id: 1, concepto_de_pago: "Abono de coppel", reference: "1212", date: "2012-06-12", detail: "Pago de deudas">,
 	#<Movement id: 2, user_id: 1, account_id: 1, concepto_de_pago: "Compra en amazon", reference: "1313", date: "2012-06-13", detail: "---">]>
 
-
-99.times do |n|
-
-user_id = 1
-account_id = 1
-concepto_de_pago = 'pago por honorarios'
-reference =  ""
-date = Faker::Date.forward(23).strftime('%Y-%m-%d')
-detail = "Ingresos para alumnos"
-category_id = 1
-withdrawal = 0
-deposit = Faker::Number.number(3)
-  Movement.create!(user_id:  user_id,
-              account_id: account_id,
-              concepto_de_pago: concepto_de_pago,
-              reference: reference,
-              date: date,
-              detail: detail ,
-              category_id: category_id,
-withdrawal: withdrawal,
-deposit: deposit
-)
-end
+# 
+# 3.times do |n|
+#
+# user_id = 1
+# account_id = Faker::Number.number(1)
+# concepto_de_pago = 'pago por honorarios'
+# reference =  ""
+# date = Faker::Date.forward(23).strftime('%Y-%m-%d')
+# detail = "Ingresos para alumnos"
+# category_id = 1
+# withdrawal = 0
+# deposit = Faker::Number.number(3)
+#   Movement.create!(user_id:  user_id,
+#               account_id: account_id,
+#               concepto_de_pago: concepto_de_pago,
+#               reference: reference,
+#               date: date,
+#               detail: detail ,
+#               category_id: category_id,
+# withdrawal: withdrawal,
+# deposit: deposit
+# )
+# end
