@@ -4,9 +4,7 @@ class MovementsController < ApplicationController
 # before_create
     def index
   #  @movements = Account.find(params[:account_id]).movements.order("date", "reference").paginate(page: params[:page])
-
       @movements = Account.find(params[:account_id]).movements.order("reference", "date", "updated_at")
-
     end
 
     def new
@@ -22,7 +20,7 @@ class MovementsController < ApplicationController
       @movement =Movement.new(movement_params)
 
        if @movement.save
-
+      #  MovementParent.create(movement_id: @movement.id, movement_parent:@movement_id, movement_child: "", parent:true, iva:false)
        flash[:success] = "Creado Correctamente"
        redirect_to user_account_movements_path(current_user)
         end
@@ -106,19 +104,40 @@ class MovementsController < ApplicationController
       @movement=Movement.find(params[:id])
 
 
+@test_iva = MovementParent.find_by('movement_child == ? and iva == ?',params[:id],true)
 
-      if !(MovementParent.find_by(movement_child: params[:id]).nil?)
-          MovementParent.find_by(movement_child: params[:id]).destroy
-      elsif !(MovementParent.find_by(movement_id: params[:id]).nil?)
-        @delete_parent = MovementParent.where(movement_id: params[:id])
-        @delete_parent.each do |t|
+unless @test_iva.blank?                         # si el movimiento es procedente del iva
+@padre = MovementParent.where(movement_parent: @test_iva.movement_parent)
+  @padre.each do |t|
+    @existe = Movement.find(t.movement_child)
+    @existe.destroy unless @existe.nil?         #destruir registros en movimientos
+  end
+  @padre.destroy_all
+else
+    # @movement.destroy
+    @power = MovementParent.where(movement_parent: params[:id])
+      @power.each do |t|
           Movement.find(t.movement_child).destroy
-        end
-        @delete_parent.destroy_all
       end
+    @power.destroy_all                            #destruir registros en MovementParent
+end
 
-        @movement.destroy
+@movement.destroy
 
+
+
+      #
+      # if !(MovementParent.find_by(movement_child: params[:id]).nil?)
+      #     MovementParent.find_by(movement_child: params[:id]).destroy
+      # elsif !(MovementParent.find_by(movement_id: params[:id]).nil?)
+      #   @delete_parent = MovementParent.where(movement_id: params[:id])
+      #   @delete_parent.each do |t|
+      #     Movement.find(t.movement_child).destroy
+      #   end
+      #   @delete_parent.destroy_all
+      # end
+      #
+      #
 
 
 

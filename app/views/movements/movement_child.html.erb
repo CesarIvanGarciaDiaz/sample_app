@@ -118,6 +118,7 @@
     <div class="col-md-6">
         <% unless @movi_co.blank?%>
         <% @movi_iva = @movi_co.where('movement_parent == ? and iva == ?', params[:id], true)%>
+        <% unless @movi_iva.nil? %>
         <table>
             <thead>
                 <tr>
@@ -131,15 +132,18 @@
             <tbody>
                 <% @movi_iva.each do |t|%>
                 <% @mostrar_hijos = Movement.find(t.movement_child) %>
+<% unless @mostrar_hijos.blank? %>
                 <tr>
                     <td><%= @mostrar_hijos.concepto_de_pago%></td>
                     <td style="text-align: right;font-weight: bold;color: rgba(214, 13, 13, 0.86);background-color: rgba(214, 13, 13, 0.20);"><%= number_to_currency(@mostrar_hijos.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
                     <td style="text-align: right;font-weight: bold;color: rgba(13, 154, 214, 0.86);background-color: rgba(13, 154, 214, 0.20);"><%= number_to_currency(@mostrar_hijos.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
                 </tr>
-                <% end %>
+<% end %>
+              <% end %>
             </tbody>
         </table>
         <% end %>
+<%end%>
     </div>
     <!-- cierre de columna -->
 
