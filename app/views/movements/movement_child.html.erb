@@ -131,14 +131,14 @@
             </thead>
             <tbody>
                 <% @movi_iva.each do |t|%>
+                <% unless (t.movement_child).nil? %>
                 <% @mostrar_hijos = Movement.find(t.movement_child) %>
-<% unless @mostrar_hijos.blank? %>
                 <tr>
                     <td><%= @mostrar_hijos.concepto_de_pago%></td>
                     <td style="text-align: right;font-weight: bold;color: rgba(214, 13, 13, 0.86);background-color: rgba(214, 13, 13, 0.20);"><%= number_to_currency(@mostrar_hijos.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
                     <td style="text-align: right;font-weight: bold;color: rgba(13, 154, 214, 0.86);background-color: rgba(13, 154, 214, 0.20);"><%= number_to_currency(@mostrar_hijos.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
                 </tr>
-<% end %>
+              <% end %>
               <% end %>
             </tbody>
         </table>
@@ -148,9 +148,9 @@
     <!-- cierre de columna -->
 
     <div class="col-md-6">
+      <% @sub_temp = 0 %>
         <% @movi_child = @movi_co.where('movement_parent == ? and iva == ?', params[:id], false)%>
         <% unless @movi_child.blank? %>
-        <% @sub_temp = 0 %>
         <table>
             <thead>
                 <tr>
@@ -164,14 +164,25 @@
             </thead>
             <tbody>
                 <% @movi_child.each do |t|%>
-                <% @mostrar_hijos_2 = Movement.find(t.movement_child) %>
+                <% unless (t.movement_child).blank? %>
+                <% @mostrar_hijos_2 = Movement.find_by(id:t.movement_child) %>
+                <% unless @mostrar_hijos_2.blank? %>
                 <% @m = @mostrar_hijos_2.deposit - @mostrar_hijos_2.withdrawal %>
                 <tr>
                     <td><%= @mostrar_hijos_2.concepto_de_pago%></td>
                     <td style="text-align: right;font-weight: bold;color: rgba(214, 13, 13, 0.86);background-color: rgba(214, 13, 13, 0.20);"><%= number_to_currency(@mostrar_hijos_2.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
                     <td style="text-align: right;font-weight: bold;color: rgba(13, 154, 214, 0.86);background-color: rgba(13, 154, 214, 0.20);"><%= number_to_currency(@mostrar_hijos_2.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
                     <td><%= @sub_temp += @m %></td>
+                    <td style="background-color:rgba(0, 0, 0, 0.0)">
+                      <div style="position:absolute; margin-top:-20px; margin-left:-4em"><%=link_to raw("<i class='material-icons md-24'>edit</i>"), edit_user_account_movement_path(current_user,params[:account_id],@mostrar_hijos_2.id),remote:true ,class:"btn btn-raised btn-info edition", style: "width:25px; height:25px !important;" %>
+                        <div style="position:relative; margin-left:4em; margin-top:-45px;">
+                          <%=link_to raw("<i class='material-icons md-24'>delete_sweep</i>"), user_account_movement_path(current_user, params[:account_id], @mostrar_hijos_2.id),class:"btn btn-raised btn-warning edition",style: "width:25px; height:25px !important;", method: :delete, data: { confirm: 'Are you sure?' } %>
+                        </div>
+                      </div>
+                    </td>
                 </tr>
+                <% end %>
+                <% end %>
                 <% end %>
             </tbody>
         </table>
@@ -181,6 +192,12 @@
 
 </div>
 <!-- cierre de row  -->
+<div class="row">
+  <% @balance = (@movi.deposit - @movi.withdrawal) - @sub_temp %>
+  <% if @balance != 0 %>
+    <p><h1 style="color:red; font-weight:bold">Balance:</h1><h2 style="color:blue">Faltan <%= number_to_currency(@balance, locale: :es, separator: '.', delimiter: ',')%></h2></p>
+  <% end %>
+</div>
 
 <div class="">
     <div class="search" id="boton_agregar">

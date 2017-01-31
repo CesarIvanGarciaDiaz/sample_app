@@ -4,7 +4,7 @@ class MovementsController < ApplicationController
 # before_create
     def index
   #  @movements = Account.find(params[:account_id]).movements.order("date", "reference").paginate(page: params[:page])
-      @movements = Account.find(params[:account_id]).movements.order("reference", "date", "updated_at")
+      @movements = Account.find(params[:account_id]).movements.order("reference", "date", "id")
     end
 
     def new
@@ -20,7 +20,6 @@ class MovementsController < ApplicationController
       @movement =Movement.new(movement_params)
 
        if @movement.save
-      #  MovementParent.create(movement_id: @movement.id, movement_parent:@movement_id, movement_child: "", parent:true, iva:false)
        flash[:success] = "Creado Correctamente"
        redirect_to user_account_movements_path(current_user)
         end
@@ -34,7 +33,13 @@ class MovementsController < ApplicationController
       subt*= -1.0 if iva < 0
 
       @movement=Movement.find(params[:id])
-
+      if MovementParent.where('movement_parent == ? and parent == ?', params[:id], true).blank?
+        MovementParent.create(movement_id: @movement.id, movement_parent:@movement.id, movement_child: "", parent:true, iva:true)
+      else
+        @mov = MovementParent.find_by(movement_id: @movement.id)
+        @mov.iva = true
+        @mov.save
+      end
       @iva_movement = @movement.dup
       @iva_movement.concepto_de_pago = "IVA de #{@movement.concepto_de_pago}"
       @iva_movement.withdrawal  = iva
@@ -64,6 +69,14 @@ class MovementsController < ApplicationController
 
     def add_register_child
       @original = Movement.find(params[:id])
+      if MovementParent.where('movement_parent == ? and parent == ?', params[:id], true).blank?
+        MovementParent.create(movement_id: @original.id, movement_parent:@original.id, movement_child: "", parent:true, iva:false)
+      end
+      # @total = @original.deposit - @original.withdrawal
+      # @total = @total - params[:deposit].to_f
+      # @original.deposit = @total
+      # @original.save
+
       p "*"*1000
       mov_dual = Movement.new
         mov_dual.account_id    =   @original.account_id
@@ -109,15 +122,19 @@ class MovementsController < ApplicationController
 unless @test_iva.blank?                         # si el movimiento es procedente del iva
 @padre = MovementParent.where(movement_parent: @test_iva.movement_parent)
   @padre.each do |t|
-    @existe = Movement.find(t.movement_child)
-    @existe.destroy unless @existe.nil?         #destruir registros en movimientos
+  unless t.movement_child.blank?
+    @existe = Movement.find(t.movement_child).destroy
+  end
+    # @existe.destroy unless @existe.nil?         #destruir registros en movimientos
   end
   @padre.destroy_all
 else
     # @movement.destroy
     @power = MovementParent.where(movement_parent: params[:id])
       @power.each do |t|
+        unless t.movement_child.blank?
           Movement.find(t.movement_child).destroy
+        end
       end
     @power.destroy_all                            #destruir registros en MovementParent
 end
