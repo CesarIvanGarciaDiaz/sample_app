@@ -4,9 +4,7 @@ class MovementsController < ApplicationController
 # before_create
     def index
   #  @movements = Account.find(params[:account_id]).movements.order("date", "reference").paginate(page: params[:page])
-
       @movements = Account.find(params[:account_id]).movements.order("reference", "date", "updated_at")
-
     end
 
     def new
@@ -22,12 +20,9 @@ class MovementsController < ApplicationController
       @movement =Movement.new(movement_params)
 
        if @movement.save
-
+      #  MovementParent.create(movement_id: @movement.id, movement_parent:@movement_id, movement_child: "", parent:true, iva:false)
        flash[:success] = "Creado Correctamente"
        redirect_to user_account_movements_path(current_user)
-      #  create_clon(@movement.id)
-      # else
-      #   render 'new'
         end
     end
 
@@ -39,14 +34,14 @@ class MovementsController < ApplicationController
       subt*= -1.0 if iva < 0
 
       @movement=Movement.find(params[:id])
-      
+
       @iva_movement = @movement.dup
       @iva_movement.concepto_de_pago = "IVA de #{@movement.concepto_de_pago}"
       @iva_movement.withdrawal  = iva
       @iva_movement.deposit     = 0
       @iva_movement.reference   = ""
       @iva_movement.save
-      
+
       @subtotal_mov = @movement.dup
       @subtotal_mov.concepto_de_pago = "SubTotal de #{@movement.concepto_de_pago}"
       @subtotal_mov.withdrawal  = 0
@@ -80,7 +75,7 @@ class MovementsController < ApplicationController
         mov_dual.category_id   =   params[:category_id].to_i
         mov_dual.withdrawal    =   params[:withdrawal].to_f
         mov_dual.deposit       =   params[:deposit].to_f
-      
+
       mov_dual.save
       p "-^-"*1000
       MovementParent.create(
@@ -92,10 +87,10 @@ class MovementsController < ApplicationController
 
        flash[:success] = "Creado Correctamente"
              #  create_clon(@movement.id)
-  
+
               redirect_to :back
     end
-    
+
     def update
       @movement = Movement.update(params[:id], movement_params)
       # @movement.reference = "Sin referencia" if @movement == ""
@@ -109,23 +104,44 @@ class MovementsController < ApplicationController
       @movement=Movement.find(params[:id])
 
 
-      
-      if !(MovementParent.find_by(movement_child: params[:id]).nil?)
-          MovementParent.find_by(movement_child: params[:id]).destroy
-      elsif !(MovementParent.find_by(movement_id: params[:id]).nil?)
-        @delete_parent = MovementParent.where(movement_id: params[:id])
-        @delete_parent.each do |t|
+@test_iva = MovementParent.find_by('movement_child == ? and iva == ?',params[:id],true)
+
+unless @test_iva.blank?                         # si el movimiento es procedente del iva
+@padre = MovementParent.where(movement_parent: @test_iva.movement_parent)
+  @padre.each do |t|
+    @existe = Movement.find(t.movement_child)
+    @existe.destroy unless @existe.nil?         #destruir registros en movimientos
+  end
+  @padre.destroy_all
+else
+    # @movement.destroy
+    @power = MovementParent.where(movement_parent: params[:id])
+      @power.each do |t|
           Movement.find(t.movement_child).destroy
-        end
-        @delete_parent.destroy_all
       end
+    @power.destroy_all                            #destruir registros en MovementParent
+end
 
-        @movement.destroy
+@movement.destroy
 
 
 
+      #
+      # if !(MovementParent.find_by(movement_child: params[:id]).nil?)
+      #     MovementParent.find_by(movement_child: params[:id]).destroy
+      # elsif !(MovementParent.find_by(movement_id: params[:id]).nil?)
+      #   @delete_parent = MovementParent.where(movement_id: params[:id])
+      #   @delete_parent.each do |t|
+      #     Movement.find(t.movement_child).destroy
+      #   end
+      #   @delete_parent.destroy_all
+      # end
+      #
+      #
 
-#      unless MovementParent.find_by(movement_child: params[:id]).nil?  # si el registro existe 
+
+
+#      unless MovementParent.find_by(movement_child: params[:id]).nil?  # si el registro existe
         # borra el registro del hijo
  #       MovementParent.find_by('movement_child == ? and iva == ?', params[:id], true).destroy
         # elimina la asosciacion del hijo
@@ -149,4 +165,4 @@ class MovementsController < ApplicationController
     flash[:danger] = "Please log in."
       redirect_to login_url
     end
-  end
+end

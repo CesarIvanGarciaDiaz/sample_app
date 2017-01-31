@@ -38,7 +38,6 @@
         color: rgba(13, 154, 214, 0.86);
         background-color: rgba(13, 154, 214, 0.20);
     }
-
     .search {
         position: fixed;
         left: 2px;
@@ -59,7 +58,6 @@
     .search:hover {
         background: #614381;
     }
-
     .btn {
         width: 300px;
         height: 50px!important;
@@ -69,16 +67,18 @@
         position: fixed;
         right: 2px;
         top: 10%;
-
         color: white;
         background: #614381;
-
         float: left;
         cursor: pointer;
     }
-/*ESTILOS DE ICONOS DE PORCENTAJE */
-    input#porcentaje.form-control{ width:20px; }
-    input.input-group-addon{ width:10px !important; }
+    /*ESTILOS DE ICONOS DE PORCENTAJE */
+    input#porcentaje.form-control {
+        width: 20px;
+    }
+    input.input-group-addon {
+        width: 10px !important;
+    }
 </style>
 <% @movi =  Account.find(params[:account_id]).movements.find(params[:id]) %>
 <table>
@@ -111,83 +111,87 @@
 <br>
 <br>
 
-
 <% @movi_co=  Account.find(params[:account_id]).movements.find(params[:id]).movement_parents %>
 
 <div class="row">
 
-<div class="col-md-6">
-<% unless @movi_co.blank?%>
-<% @movi_iva = @movi_co.where('movement_parent == ? and iva == ?', params[:id], true)%>
-    <table>
-        <thead>
-            <tr>
-                <th colspan="3">Subtotal e IVA</th>
-            </tr>
-            <tr>
-                <th>Concepto de Pago</th>
-                <th style="color:rgba(13, 154, 214, 0.86);" colspan="2">Monto</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @movi_iva.each do |t|%>
-            <% @mostrar_hijos = Movement.find(t.movement_child) %>
-            <tr>
-                <td><%= @mostrar_hijos.concepto_de_pago%></td>
-                <td style="text-align: right;font-weight: bold;color: rgba(214, 13, 13, 0.86);background-color: rgba(214, 13, 13, 0.20);"><%= number_to_currency(@mostrar_hijos.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
-                <td style="text-align: right;font-weight: bold;color: rgba(13, 154, 214, 0.86);background-color: rgba(13, 154, 214, 0.20);"><%= number_to_currency(@mostrar_hijos.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
-<% end %> 
-</div> <!-- cierre de columna -->
-
-
-<div class="col-md-6">
-<% @movi_child = @movi_co.where('movement_parent == ? and iva == ?', params[:id], false)%>
-<% unless @movi_child.blank? %>
-<% @sub_temp = 0 %>
-    <table>
-        <thead>
-            <tr>
-                <th colspan="4">Sub Movimientos</th>
-            </tr>
-            <tr>
-                <th>Concepto de Pago</th>
-                <th style="color:rgba(13, 154, 214, 0.86);" colspan="2">Monto</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @movi_child.each do |t|%>
-            <% @mostrar_hijos_2 = Movement.find(t.movement_child) %>
-            <% @m = @mostrar_hijos_2.deposit - @mostrar_hijos_2.withdrawal %>
-            <tr>
-                <td><%= @mostrar_hijos_2.concepto_de_pago%></td>
-                <td style="text-align: right;font-weight: bold;color: rgba(214, 13, 13, 0.86);background-color: rgba(214, 13, 13, 0.20);"><%= number_to_currency(@mostrar_hijos_2.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
-                <td style="text-align: right;font-weight: bold;color: rgba(13, 154, 214, 0.86);background-color: rgba(13, 154, 214, 0.20);"><%= number_to_currency(@mostrar_hijos_2.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
-                <td><%= @sub_temp += @m %></td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
+    <div class="col-md-6">
+        <% unless @movi_co.blank?%>
+        <% @movi_iva = @movi_co.where('movement_parent == ? and iva == ?', params[:id], true)%>
+        <% unless @movi_iva.nil? %>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">Subtotal e IVA</th>
+                </tr>
+                <tr>
+                    <th>Concepto de Pago</th>
+                    <th style="color:rgba(13, 154, 214, 0.86);" colspan="2">Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @movi_iva.each do |t|%>
+                <% @mostrar_hijos = Movement.find(t.movement_child) %>
+<% unless @mostrar_hijos.blank? %>
+                <tr>
+                    <td><%= @mostrar_hijos.concepto_de_pago%></td>
+                    <td style="text-align: right;font-weight: bold;color: rgba(214, 13, 13, 0.86);background-color: rgba(214, 13, 13, 0.20);"><%= number_to_currency(@mostrar_hijos.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
+                    <td style="text-align: right;font-weight: bold;color: rgba(13, 154, 214, 0.86);background-color: rgba(13, 154, 214, 0.20);"><%= number_to_currency(@mostrar_hijos.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
+                </tr>
 <% end %>
-</div> <!-- cierre de columna  -->
+              <% end %>
+            </tbody>
+        </table>
+        <% end %>
+<%end%>
+    </div>
+    <!-- cierre de columna -->
 
-</div> <!-- cierre de row  -->
+    <div class="col-md-6">
+        <% @movi_child = @movi_co.where('movement_parent == ? and iva == ?', params[:id], false)%>
+        <% unless @movi_child.blank? %>
+        <% @sub_temp = 0 %>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4">Sub Movimientos</th>
+                </tr>
+                <tr>
+                    <th>Concepto de Pago</th>
+                    <th style="color:rgba(13, 154, 214, 0.86);" colspan="2">Monto</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @movi_child.each do |t|%>
+                <% @mostrar_hijos_2 = Movement.find(t.movement_child) %>
+                <% @m = @mostrar_hijos_2.deposit - @mostrar_hijos_2.withdrawal %>
+                <tr>
+                    <td><%= @mostrar_hijos_2.concepto_de_pago%></td>
+                    <td style="text-align: right;font-weight: bold;color: rgba(214, 13, 13, 0.86);background-color: rgba(214, 13, 13, 0.20);"><%= number_to_currency(@mostrar_hijos_2.withdrawal, locale: :es, separator: '.', delimiter: ',') %></td>
+                    <td style="text-align: right;font-weight: bold;color: rgba(13, 154, 214, 0.86);background-color: rgba(13, 154, 214, 0.20);"><%= number_to_currency(@mostrar_hijos_2.deposit, locale: :es, separator: '.', delimiter: ',') %></td>
+                    <td><%= @sub_temp += @m %></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <% end %>
+    </div>
+    <!-- cierre de columna  -->
 
-
+</div>
+<!-- cierre de row  -->
 
 <div class="">
-    <div class="search" id="boton_agregar"> <!-- IVA -->
+    <div class="search" id="boton_agregar">
+        <!-- IVA -->
         <i class="material-icons">monetization_on</i>
     </div>
-    <div class="search" id="boton_movements" style="top:24%"> <!-- MOVEMENT CHILD -->
+    <div class="search" id="boton_movements" style="top:24%">
+        <!-- MOVEMENT CHILD -->
         <i class="material-icons">business</i>
     </div>
 </div>
-
 
 <!-- DIV pertenece a IVA -->
 <div class="panel panel-info" id="iva-porc" style="display:none; position:absolute;top:15%;">
@@ -196,111 +200,104 @@
     </div>
     <div class="panel-body">
         <%= form_tag( add_movement_child_path(@movi) , method: "post") do %>
-            <% amount =  @movi.deposit - @movi.withdrawal %>
-            <% subtotal =  (amount / 1.16).round(2)  %>
-            <% iva =  (amount - subtotal).round(2) %>
+        <% amount =  @movi.deposit - @movi.withdrawal %>
+        <% subtotal =  (amount / 1.16).round(2)  %>
+        <% iva =  (amount - subtotal).round(2) %>
 
-            <div class="input-group">
-                <%= label_tag(:subtotal, "Subtotal:") %>
-                <span class="input-group-addon">$</span>
-                <%= text_field_tag :subtotal, nil, autocomplete: :off, value: subtotal, class: "form-control" %>
-            </div>
+        <div class="input-group">
+            <%= label_tag(:subtotal, "Subtotal:") %>
+            <span class="input-group-addon">$</span>
+            <%= text_field_tag :subtotal, nil, autocomplete: :off, value: subtotal, class: "form-control" %>
+        </div>
 
-            <div class="input-group" id="yo">
-                <label id="porcentaje" class="input-group-addon" style="color: black"><b>Iva:</b></label>  <%#= label_tag(:porcentaje, "Iva:") %>
-                <%= text_field_tag :porcentaje, nil, autocomplete: :off, value: 16 , class: "form-control", size: 3%>
-                <span class="input-group-addon yo" style="padding: 0;">%</span>
-            </div>
+        <div class="input-group" id="yo">
+            <label id="porcentaje" class="input-group-addon" style="color: black">
+                <b>Iva:</b>
+            </label>
+            <%#= label_tag(:porcentaje, "Iva:") %>
+            <%= text_field_tag :porcentaje, nil, autocomplete: :off, value: 16 , class: "form-control", size: 3%>
+            <span class="input-group-addon yo" style="padding: 0;">%</span>
+        </div>
 
-            <div class="input-group">
-                <%= label_tag(:iva, "Se aplica un iva de:") %>
-                <span class="input-group-addon">$</span>
-                <%= text_field_tag :iva, nil, autocomplete: :off, value: iva, class: "form-control" %>
-            </div>
+        <div class="input-group">
+            <%= label_tag(:iva, "Se aplica un iva de:") %>
+            <span class="input-group-addon">$</span>
+            <%= text_field_tag :iva, nil, autocomplete: :off, value: iva, class: "form-control" %>
+        </div>
 
-            <div class="field center">
-                <%= submit_tag("Aplicar", class: "btn btn-primary") %>
-            </div>
+        <div class="field center">
+            <%= submit_tag("Aplicar", class: "btn btn-primary") %>
+        </div>
         <% end %>
     </div>
 </div>
 <!-- DIV pertenece a IVA -->
-
-
-
-
 
 <!-- creating movement -from- movement -->
 <div class="panel panel-info" id="movements" style="display: none; position:absolute;top:15%;z-index: 2;">
     <div class="panel-heading">
         <h3 class="panel-title center" style="font-weight: bold;">Agregar Movimiento</h3>
     </div>
-<div class="panel-body">
+    <div class="panel-body">
 
-<%= form_tag( add_register_path(@movi), method: "post") do %>
-<div class="alert alert-danger" role="alert" style="display: none;"></div>
-<%#= hidden_field_tag ('account_id', params[:account_id]) %>
-<%#= hidden_field_tag ('user_id', params[:user_id]) %>            
+        <%= form_tag( add_register_path(@movi), method: "post") do %>
+        <%= hidden_field_tag('account_id', params[:account_id]) %>
+        <%= hidden_field_tag('user_id', params[:user_id]) %>
 
-<div class="field">
-<%= label_tag( :concepto_de_pago, "Concepto de pago") %>
-<%= text_field_tag :concepto_de_pago, nil ,class: 'form-control', size: 40 %>
+        <div class="field">
+            <%= label_tag( :concepto_de_pago, "Concepto de pago") %>
+            <%= text_field_tag :concepto_de_pago, nil ,class: 'form-control', size: 40 %>
+        </div>
+
+        <div style="width:7em" class="horizontal">
+            <%= label_tag(:reference, "Referencia") %>
+            <%= text_field_tag( :reference, nil ,class: 'form-control', placeholder:"Sin referencia", autocomplete: :off) %>
+        </div>
+
+        <div class="input-group date horizontal" style="width: 5.5em">
+            <%= label_tag(:date, "Fecha") %>
+            <%= text_field_tag( :date, nil, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off) %>
+        </div>
+
+        <div class="field">
+            <%= label_tag(:detail, "Detalles") %>
+            <%= text_field_tag( :detail, nil ,class: 'form-control', size: 40, autocomplete: :off) %>
+        </div>
+
+        <div class="field" style="width: 10em; top:20px;">
+            <%= label_tag(:category_id, "Categoria")%>
+            <%= select_tag :category_id, options_from_collection_for_select(Category.all, "id", "name") %>
+        </div>
+
+        <div class="field" style="width: 6em">
+            <%= label_tag(:withdrawal, "Retiro")%>
+            <%= text_field_tag( :withdrawal, nil, size: 10, class: 'form-control dig', value: 0, autocomplete: :off) %>
+        </div>
+
+        <div style="width: 6em">
+            <%= label_tag(:deposit, "Deposito")%>
+            <%= text_field_tag( :deposit, nil, class: 'form-control dig', size: 10, value: 0, autocomplete: :off) %>
+        </div >
+
+
+    <!-- cierre panel body -->
+
+    <div class="field center">
+        <%= submit_tag("Crear", class: "btn btn-primary") %>
+    </div>
+  <% end %>
 </div>
 
-<div style="width:7em" class="horizontal">
-<%= label_tag(:reference, "Referencia") %>
-<%= text_field_tag( :reference, nil ,class: 'form-control', placeholder:"Sin referencia", autocomplete: :off) %>
 </div>
 
-<div class="input-group date horizontal" style="width: 5.5em">
-<%= label_tag(:date, "Fecha") %>
-<%= text_field_tag( :date, nil, class: 'form-control', "data-provide" => "datepicker", "data-date-language" => 'es', "data-date-today-highlight" => true, "data-date-today-btn" => true,autocomplete: :off) %>
-</div>
-
-<div class="field">
-<%= label_tag(:detail, "Detalles") %>
-<%= text_field_tag( :detail, nil ,class: 'form-control', size: 40, autocomplete: :off) %>
-</div>
-
-<div class="field" style="width: 10em; top:20px;">
-<%= label_tag(:category_id, "Categoria")%>
-<%= select_tag :category_id, options_from_collection_for_select(Category.all, "id", "name") %>
-</div>
-
-<div class="field" style="width: 6em">
-<%= label_tag(:withdrawal, "Retiro")%>
-<%= text_field_tag( :withdrawal, nil, size: 10, class: 'form-control dig', value: 0, autocomplete: :off) %>
-</div>
-
-<div style="width: 6em">
-<%= label_tag(:deposit, "Deposito")%>
-<%= text_field_tag( :deposit, nil, class: 'form-control dig', size: 10, value: 0, autocomplete: :off) %>
-</div >
-
-</div> <!-- cierre panel body -->
-
-<div class="field center">
-    <%= submit_tag("Crear", class: "btn btn-primary") %>
-</div>
-
-<% end %>
-</div>
-<!--  movement -from- movement -->
-
-
-<!-- isr -->
-<!-- isr -->
-
-<%#= link_to raw("<i class='material-icons'>add_to_photos</i>"), create_clone_user_account_movement_path(current_user,params[:account_id]),remote:true, class: ' btn-primary btn_child', style:"height:80px!important; width:80px!important; border-radius:50%;"%>
-
-<%= link_to raw("<i class='material-icons' style='margin-top:10px!important; margin-left:8px!important;'>backspace</i>"), user_account_movements_path(current_user,params[:account_id]), class: ' btn-primary btn_child', style:"bottom: 20%;height:80px!important; width:80px!important; border-radius:50%; bottom:5%" %>
+<%= link_to raw("<i class='material-icons' style='margin-top:10px!important; margin-left:8px!important;'>backspace</i>"), user_account_movements_path(current_user,params[:account_id]), class: ' btn-primary btn_child', style:"bottom:
+20%;height:80px!important; width:80px!important; border-radius:50%; bottom:5%" %>
 
 <script>
     $(document).ready(function () {
         $("#boton_agregar").click(function () {
             $("#iva-porc").toggle();
         });
-
         $("#boton_movements").click(function () {
             $("#movements").toggle();
         });
