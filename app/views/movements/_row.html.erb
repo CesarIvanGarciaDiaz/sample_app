@@ -3,13 +3,13 @@
     <% @temp_m = 0 %>
     <% @movements.each do |movement| %>
         <% @test = MovementParent.find_by(movement_id: movement.id)%>
-        <% if @test == nil or @test.iva == false %>
+        <% if @test.nil? or @test.iva == false or @test.parent == false%>
             <% @m = movement.deposit - movement.withdrawal %>
             <% @temp_m += @m %>
             <% @acumulativo = number_to_currency( @temp_m , locale: :en, separator: '.', delimiter: ',') %>
         <% else %>
             <% @acumulativo = "----" %>
-        <% end %>        
+        <% end %>
     <tr id="<%= movement.id %>">
         <td>
             <div id="add<%= movement.id %>" style="display: block;margin-right:9px;" class="add">
